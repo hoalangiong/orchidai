@@ -1,0 +1,1013 @@
+{
+  "app": {
+    "name": "Orchid AI",
+    "tagline": "您的兰花园",
+    "welcome": "欢迎来到 Orchid AI",
+    "description": "专业兰花园管理"
+  },
+  "auth": {
+    "welcome": "欢迎",
+    "loginDescription": "登录以保存您的兰花园数据",
+    "signInWithGoogle": "使用 Google 登录",
+    "zaloWarning": "Zalo 浏览器不支持 Google 登录",
+    "zaloInstruction": "请使用 Chrome 或 Safari 打开",
+    "openInBrowser": "在浏览器中打开",
+    "dataSecure": "您的数据安全存储",
+    "logout": "登出"
+  },
+  "nav": {
+    "home": "首页",
+    "dashboard": "概览",
+    "orchids": "兰花园",
+    "garden": "地图",
+    "weather": "天气",
+    "calendar": "日历",
+    "diseases": "病害",
+    "order": "订购",
+    "community": "社区",
+    "propagation": "繁殖",
+    "costs": "成本",
+    "sensors": "传感器",
+    "admin": "管理"
+  },
+  "dashboard": {
+    "title": "兰花园概览",
+    "subtitle": "实时更新",
+    "totalOrchids": "总植株数",
+    "zones": "{{count}} 个区域",
+    "needsCare": "需要护理",
+    "overdueCount": "{{count}} 个逾期",
+    "today": "今天",
+    "onSchedule": "按计划",
+    "healthStatus": "健康状况",
+    "healthy": "健康",
+    "warning": "需注意",
+    "sick": "生病",
+    "healthyPercent": "健康",
+    "financeThisMonth": "本月财务",
+    "expense": "支出",
+    "revenue": "收入",
+    "profit": "利润",
+    "totalAccumulated": "总累计",
+    "upcomingCare": "即将到来的护理计划",
+    "overdueDays": "逾期 {{days}} 天",
+    "daysLeft": "剩余 {{days}} 天",
+    "gardenMap": "花园地图",
+    "zonesDrawn": "已绘制 {{count}} 个区域",
+    "totalArea": "总面积",
+    "addOrchidPrompt": "添加兰花以查看统计"
+  },
+  "home": {
+    "welcomeTitle": "欢迎来到 Orchid AI",
+    "welcomeDescription": "专业管理您的兰花园",
+    "totalOrchids": "总植株数",
+    "needsWatering": "今日需浇水",
+    "needsFertilizer": "需施肥",
+    "needsAttention": "需注意",
+    "overdueCare": "护理逾期",
+    "dueToday": "今日到期",
+    "quickActions": "快速操作",
+    "addNew": "添加新植株",
+    "recordWatering": "记录浇水",
+    "recordFertilizer": "记录施肥",
+    "addNote": "添加护理笔记",
+    "recentActivity": "最近活动",
+    "noActivity": "暂无活动",
+    "getStarted": "添加您的第一株兰花！",
+    "orchidsBeingCared": "{{count}} 株正在护理中 🌿",
+    "needsCareToday": "{{count}} 株今日需要护理",
+    "careSchedule": "今日护理计划及逾期",
+    "watering": "浇水",
+    "fertilizing": "施肥",
+    "today": "今天",
+    "overdueDays": "逾期 {{days}} 天",
+    "viewMore": "查看更多 {{count}} 株",
+    "careCalendar": "护理日历",
+    "diseaseReference": "病害参考",
+    "recentOrchids": "最近的兰花",
+    "aiFeatures": {
+      "title": "AI 智能养兰",
+      "subtitle": "人工智能技术助力兰花健康",
+      "diagnosis": "照片诊断病害",
+      "weather": "天气护理建议",
+      "treatment": "详细治疗指南",
+      "insights": "花园数据分析",
+      "tryNow": "立即试用"
+    }
+  },
+  "diseases": {
+    "title": "病害与虫害",
+    "subtitle": "通过石斛兰叶片图像识别",
+    "diagnoseButton": "AI 诊断",
+    "backButton": "返回",
+    "diseaseTag": "病害",
+    "pestTag": "虫害",
+    "diseaseTab": "病害 ({{count}})",
+    "pestTab": "虫害 ({{count}})",
+    "relatedProducts": "购买治疗药物",
+    "buyButton": "购买",
+    "aiDiagnosis": "AI 病害诊断",
+    "aiDiagnosisDescription": "拍照立即分析",
+    "aiDiagnosisTitle": "AI 病害诊断",
+    "aiExpert": "石斛兰专家 · Claude Opus 4.7",
+    "uploadPrompt": "拍摄或选择患病兰花叶片照片",
+    "uploadInstruction": "近距离清晰拍摄患病区域以获得准确的 AI 诊断",
+    "changeImage": "点击更换图片",
+    "diagnoseNow": "立即诊断",
+    "analyzing": "AI 正在分析...",
+    "confidence": "置信度",
+    "symptoms": "观察到的症状",
+    "treatment": "治疗指南",
+    "prevention": "预防建议",
+    "diagnoseAnother": "诊断其他图片",
+    "disclaimer": "AI 结果仅供参考。请结合实际观察。",
+    "overloaded": "AI 正忙，请几秒后重试。",
+    "errorGeneric": "发生错误，请重试。",
+    "commonDiseases": "常见病害",
+    "commonPests": "常见虫害",
+    "backToList": "返回列表",
+    "causes": "原因",
+    "description": "描述",
+    "urgency": {
+      "high": "紧急处理",
+      "medium": "密切监测",
+      "low": "不紧急"
+    },
+    "sections": {
+      "symptoms": "观察到的症状",
+      "causes": "原因",
+      "treatment": "治疗方法",
+      "prevention": "预防措施"
+    },
+    "blackRot": {
+      "name": "黑腐病",
+      "symptoms": {
+        "0": "叶片上出现大块黑斑，迅速扩散",
+        "1": "病斑周围有明显的黄色边缘",
+        "2": "叶片腐烂变软，内部有水分",
+        "3": "可能蔓延到根部和假鳞茎"
+      },
+      "causes": {
+        "0": "腐霉菌或疫霉菌",
+        "1": "湿度过高，排水不良",
+        "2": "温度 25–30°C 加上大雨"
+      },
+      "treatment": {
+        "0": "完全切除病变部分，在健康部分留 2 厘米",
+        "1": "在切口处涂抹 Aliette 或 Ridomil Gold",
+        "2": "立即将病株与花园隔离",
+        "3": "减少浇水，增加通风"
+      },
+      "prevention": {
+        "0": "早上浇水，让叶片在傍晚前干燥",
+        "1": "确保花盆排水良好",
+        "2": "天气凉爽时不要让水积在叶片上"
+      }
+    },
+    "crownRot": {
+      "name": "冠腐病",
+      "symptoms": {
+        "0": "叶片从基部开始逐渐变黄枯萎",
+        "1": "根冠腐烂呈棕黑色，有臭味",
+        "2": "触碰时叶片容易脱落",
+        "3": "根部呈棕黑色，没有绿色尖端"
+      },
+      "causes": {
+        "0": "根冠和叶腋积水",
+        "1": "浇水过多，栽培基质排水不良",
+        "2": "通风不良，夜间湿度高"
+      },
+      "treatment": {
+        "0": "切除所有腐烂部分直到白色健康组织",
+        "1": "完全更换新的栽培基质",
+        "2": "将基部浸泡在 Aliette 3g/升溶液中 10 分钟",
+        "3": "晾干 2–3 天后再重新种植"
+      },
+      "prevention": {
+        "0": "绝对不要将水浇入石斛兰的叶心",
+        "1": "早上浇水，让植株在傍晚前完全干燥",
+        "2": "使用排水良好的基质（松树皮、木炭）"
+      }
+    },
+    "leafSpot": {
+      "name": "叶斑病 (尾孢菌)",
+      "symptoms": {
+        "0": "圆形褐色斑点，边缘有明显的黄色",
+        "1": "斑点中心颜色较深，有同心圆环",
+        "2": "病情严重时叶片变黄脱落",
+        "3": "潮湿天气时斑点扩散"
+      },
+      "causes": {
+        "0": "尾孢菌或叶点霉菌",
+        "1": "假单胞菌（水浸状斑点）",
+        "2": "高湿度，叶片积水"
+      },
+      "treatment": {
+        "0": "切除严重感染的叶片并在园外销毁",
+        "1": "喷洒 Daconil（百菌清）或代森锰锌",
+        "2": "隔离植株，增加通风",
+        "3": "7–10 天后重复喷洒"
+      },
+      "prevention": {
+        "0": "避免水积在叶片表面",
+        "1": "增加植株之间的间距",
+        "2": "雨季定期喷洒预防"
+      }
+    },
+    "blight": {
+      "name": "叶枯病",
+      "symptoms": {
+        "0": "从叶缘向内的大块褐色斑块",
+        "1": "病斑边缘呈水浸状黄色",
+        "2": "大面积叶片死亡干枯",
+        "3": "连续降雨时病害迅速蔓延"
+      },
+      "causes": {
+        "0": "灰霉菌或链格孢菌",
+        "1": "大雨，空气湿度 > 85%",
+        "2": "光照弱，通风不良"
+      },
+      "treatment": {
+        "0": "切除病叶，在园外销毁",
+        "1": "喷洒异菌脲（Rovral）或福美双",
+        "2": "增加通风，降低湿度",
+        "3": "喷洒 2–3 次，间隔 5–7 天"
+      },
+      "prevention": {
+        "0": "确保通风良好，尤其是雨季",
+        "1": "不要在傍晚浇水",
+        "2": "雨季前预防性喷洒代森锰锌"
+      }
+    },
+    "rust": {
+      "name": "锈病",
+      "symptoms": {
+        "0": "叶片上散布的小橙褐色斑点",
+        "1": "叶片背面有凸起的孢子堆",
+        "2": "孢子破裂成橙色粉末",
+        "3": "叶片变黄，植株能量下降"
+      },
+      "causes": {
+        "0": "柄锈菌",
+        "1": "高湿度，早晨有雾",
+        "2": "通风不良，温度 15–25°C"
+      },
+      "treatment": {
+        "0": "喷洒丙环唑（Tilt）或三唑酮",
+        "1": "收集并销毁落下的病叶",
+        "2": "喷洒硫磺悬浮液",
+        "3": "治疗 3 次，间隔 7 天"
+      },
+      "prevention": {
+        "0": "避免傍晚浇水",
+        "1": "增加兰花园通风",
+        "2": "定期检查叶片背面"
+      }
+    },
+    "yellowing": {
+      "name": "黄化病 / 营养缺乏",
+      "symptoms": {
+        "0": "叶片均匀或斑块状变黄",
+        "1": "叶脉保持绿色而叶片变黄",
+        "2": "叶片比正常小而薄",
+        "3": "植株生长新芽缓慢"
+      },
+      "causes": {
+        "0": "缺铁（Fe）、镁（Mg）或氮",
+        "1": "基质 pH 过高，锁定养分",
+        "2": "浇水过多或根部受损",
+        "3": "长期光照不足"
+      },
+      "treatment": {
+        "0": "补充微量元素（螯合铁、镁）",
+        "1": "检查并调整水的 pH（5.5–6.5）",
+        "2": "更换基质，修剪受损根部",
+        "3": "增加适当的光照"
+      },
+      "prevention": {
+        "0": "每 10–14 天施用平衡肥料",
+        "1": "使用 pH 5.5–6.5 的水",
+        "2": "每 1–2 年更换基质",
+        "3": "确保 50–70% 的散射光"
+      }
+    },
+    "virus": {
+      "name": "兰花花叶病毒（CyMV）",
+      "symptoms": {
+        "0": "浅绿和深绿条纹的花叶图案",
+        "1": "散布的坏死褐黑色斑点",
+        "2": "叶片变形、皱缩、扭曲",
+        "3": "花朵小、颜色淡、变形"
+      },
+      "causes": {
+        "0": "CyMV（兰花花叶病毒）",
+        "1": "通过切割工具、未洗手传播",
+        "2": "吸汁昆虫（蚜虫、螨虫）携带病毒",
+        "3": "购买受感染的植株"
+      },
+      "treatment": {
+        "0": "无法治愈 — 必须销毁受感染植株",
+        "1": "每株后用 70% 酒精消毒工具",
+        "2": "立即隔离，远离健康植株"
+      },
+      "prevention": {
+        "0": "从可靠来源购买植株，仔细检查",
+        "1": "使用前始终消毒切割工具",
+        "2": "控制花园中的吸汁昆虫",
+        "3": "新植株至少隔离 3–4 周"
+      }
+    },
+    "fusarium": {
+      "name": "镰刀菌枯萎病",
+      "symptoms": {
+        "0": "茎、基部特征性粉红紫色腐烂",
+        "1": "感染区域有粉红色菌丝",
+        "2": "植株从基部向上枯萎，尽管水分充足",
+        "3": "横切面显示褐色维管组织"
+      },
+      "causes": {
+        "0": "尖孢镰刀菌",
+        "1": "旧基质积累感染",
+        "2": "低 pH，持续高湿度",
+        "3": "换盆时根部伤口"
+      },
+      "treatment": {
+        "0": "切除感染部分至干净的白色组织",
+        "1": "浸泡在克菌丹或甲基托布津中",
+        "2": "更换所有基质，消毒花盆",
+        "3": "严格隔离"
+      },
+      "prevention": {
+        "0": "使用前消毒花盆和基质",
+        "1": "不要重复使用旧基质",
+        "2": "早上浇水，避免持续潮湿",
+        "3": "添加石灰调整基质 pH"
+      }
+    },
+    "anthracnose": {
+      "name": "炭疽病",
+      "symptoms": {
+        "0": "圆形黑色斑点，有清晰的同心环",
+        "1": "斑点中心有小橙色点（孢子）",
+        "2": "死亡叶组织干燥，容易穿孔",
+        "3": "病害常见于老叶"
+      },
+      "causes": {
+        "0": "胶孢炭疽菌",
+        "1": "温度 25–30°C，大雨",
+        "2": "浇水时水从土壤溅到叶片上"
+      },
+      "treatment": {
+        "0": "切除受感染叶片并销毁",
+        "1": "喷洒嘧菌酯（Amistar）或多菌灵",
+        "2": "预防性喷洒氢氧化铜（COC 85）",
+        "3": "重复 2–3 次，间隔 7 天"
+      },
+      "prevention": {
+        "0": "浇根部，避免水溅到叶片上",
+        "1": "清理老叶和旧基质",
+        "2": "雨季开始时预防性喷洒"
+      }
+    },
+    "bacterialRot": {
+      "name": "细菌软腐病",
+      "symptoms": {
+        "0": "浅褐色软腐，像煮熟的组织",
+        "1": "边缘周围有水浸状晕圈",
+        "2": "按压感染区域时有恶臭",
+        "3": "在 24–48 小时内迅速蔓延"
+      },
+      "causes": {
+        "0": "胡萝卜软腐欧文氏菌或假单胞菌",
+        "1": "修剪、虫害造成的伤口",
+        "2": "高温 + 高湿 + 通风不良",
+        "3": "水积在叶冠中"
+      },
+      "treatment": {
+        "0": "立即切除腐烂部分至健康组织",
+        "1": "涂抹硫酸铜或抗菌剂",
+        "2": "让切口完全干燥 1–2 天",
+        "3": "治疗后至少 3 天不要浇水"
+      },
+      "prevention": {
+        "0": "每次使用前消毒切割工具",
+        "1": "不要让水积在叶冠中",
+        "2": "在炎热潮湿天气中大力增加通风",
+        "3": "平衡施肥，避免过量氮肥"
+      }
+    }
+  },
+  "pests": {
+    "spiderMites": {
+      "name": "红蜘蛛",
+      "description": "微小的红色/黄色螨虫，吸食叶片背面汁液。在炎热干燥条件下活跃。",
+      "symptoms": {
+        "0": "叶片上密集的细小黄色斑点",
+        "1": "严重时叶片背面有细蛛网",
+        "2": "叶片逐渐变银白色然后干枯、卷曲和脱落",
+        "3": "植株矮小，生长缓慢"
+      },
+      "treatment": {
+        "0": "用强水流冲洗叶片背面",
+        "1": "使用阿维菌素（Vertimec）或三氯杀螨醇",
+        "2": "喷洒印楝油 2–3ml/升",
+        "3": "5–7 天后重复喷洒，因为螨虫卵抗药"
+      },
+      "prevention": {
+        "0": "保持花园周围 60–70% 的湿度",
+        "1": "定期向叶片背面喷雾",
+        "2": "定期用放大镜检查叶片"
+      }
+    },
+    "flowerFly": {
+      "name": "花蝇",
+      "description": "小型苍蝇在花蕾中产卵，幼虫在内部取食。在干季的石斛兰上常见。",
+      "symptoms": {
+        "0": "花蕾变黄，在开放前提早脱落",
+        "1": "开放时花瓣变形、扭曲",
+        "2": "花蕾内有小白色幼虫",
+        "3": "花枝很多但很少开放"
+      },
+      "causes": {
+        "0": "花蝇（Contarinia、Bactrocera）",
+        "1": "炎热潮湿的天气有利于繁殖",
+        "2": "兰花园靠近果树区域"
+      },
+      "treatment": {
+        "0": "切除并销毁所有受感染的花蕾",
+        "1": "喷洒氯氰菊酯或溴氰菊酯",
+        "2": "用细网罩覆盖整个花枝",
+        "3": "花蕾形成时喷洒 2 次，间隔 5 天"
+      },
+      "prevention": {
+        "0": "花蕾刚出现时立即覆盖花枝",
+        "1": "开花季节前预防性喷洒",
+        "2": "在花园周围放置黄色粘虫板",
+        "3": "每天检查花蕾"
+      }
+    },
+    "thrips": {
+      "name": "蓟马",
+      "description": "细长昆虫约 1mm，黄褐色。吸食叶片和花朵，留下特征性银色划痕。",
+      "symptoms": {
+        "0": "沿叶脉的银色划痕",
+        "1": "花朵有银色/褐色斑点，变形，提早脱落",
+        "2": "嫩叶卷曲，新芽变形",
+        "3": "检查叶片背面时看到微小的黄色昆虫"
+      },
+      "causes": {
+        "0": "西花蓟马或棕榈蓟马",
+        "1": "炎热干燥天气（旱季）爆发",
+        "2": "从新植株或杂草传播"
+      },
+      "treatment": {
+        "0": "喷洒多杀菌素（Entrust）或阿维菌素",
+        "1": "在花园中放置蓝色粘虫板",
+        "2": "切除严重受损的花朵和新芽",
+        "3": "5–7 天后重复喷洒，交替使用产品以避免抗性"
+      },
+      "prevention": {
+        "0": "永久悬挂蓝色粘虫板",
+        "1": "每天检查叶片背面和花朵内部",
+        "2": "保持高湿度以限制蓟马发育",
+        "3": "新植株至少隔离 2 周"
+      }
+    },
+    "mealybugs": {
+      "name": "粉蚧",
+      "description": "由于蜡质覆盖而呈白色棉状的昆虫，聚集在叶腋和茎上。",
+      "symptoms": {
+        "0": "叶腋、茎、根上有白色棉状团块",
+        "1": "叶片粘稠（粉蚧分泌的蜜露）",
+        "2": "叶片逐渐变黄枯萎",
+        "3": "蜜露上长出黑色煤烟霉"
+      },
+      "treatment": {
+        "0": "用浸有 70% 酒精的棉花擦拭每个团块",
+        "1": "喷洒吡虫啉（Confidor）或呋虫胺",
+        "2": "彻底喷洒印楝油 3ml/升",
+        "3": "治疗 3–4 次，间隔 1 周"
+      },
+      "prevention": {
+        "0": "在添加到花园之前仔细检查新植株",
+        "1": "定期清洁叶片和茎",
+        "2": "不要过量施氮肥，使植株多汁"
+      }
+    },
+    "scale": {
+      "name": "介壳虫",
+      "description": "硬褐色鳞片牢固附着在叶片和茎上，持续吸食汁液。",
+      "symptoms": {
+        "0": "叶片、茎上散布的圆形硬褐色凸起",
+        "1": "叶片变黄，植株逐渐变弱",
+        "2": "叶片表面有粘性物质",
+        "3": "植株生长缓慢，叶片缩小"
+      },
+      "treatment": {
+        "0": "用浸有园艺油的软刷擦洗",
+        "1": "喷洒毒死蜱或园艺油 99",
+        "2": "使用内吸性吡虫啉",
+        "3": "卵孵化后 2 周重复"
+      },
+      "prevention": {
+        "0": "新植株在添加到花园前隔离 2–3 周",
+        "1": "定期检查叶片背面",
+        "2": "每月用湿布擦拭叶片"
+      }
+    },
+    "snails": {
+      "name": "蜗牛和蛞蝓",
+      "description": "夜间和雨后活动。吃嫩叶、根和石斛兰新芽。",
+      "symptoms": {
+        "0": "叶片上有不规则的孔洞",
+        "1": "嫩芽和根被吃掉",
+        "2": "植株和土壤上有银色粘液痕迹",
+        "3": "植株基部附近有小蜗牛粪便"
+      },
+      "treatment": {
+        "0": "夜间或雨后手工捕捉",
+        "1": "在花盆周围撒蜗牛饵（聚乙醛）",
+        "2": "在基部周围撒石灰粉或稻壳灰",
+        "3": "在花盆附近设置啤酒陷阱"
+      },
+      "prevention": {
+        "0": "保持种植区域清洁，没有腐烂的叶片",
+        "1": "避免傍晚浇水使地面潮湿",
+        "2": "夜间检查架子下和花园地面"
+      }
+    }
+  },
+  "weather": {
+    "title": "天气与护理",
+    "subtitle": "石斛兰护理建议",
+    "loading": "加载天气中...",
+    "today": "今天",
+    "dayPrefix": "星期",
+    "tempMin": "最低 {{temp}}°C",
+    "careAdvice": "今日护理建议",
+    "fertilizerPlan": "施肥计划",
+    "days": {
+      "sun": "日",
+      "mon": "一",
+      "tue": "二",
+      "wed": "三",
+      "thu": "四",
+      "fri": "五",
+      "sat": "六",
+      "sunday": "星期日"
+    },
+    "stats": {
+      "rain": "降雨",
+      "humidity": "湿度",
+      "wind": "风速",
+      "uv": "紫外线"
+    },
+    "severity": {
+      "danger": "需特别注意",
+      "warning": "仔细监测",
+      "good": "条件良好"
+    },
+    "fertilizer": {
+      "shouldApply": "今日应施肥",
+      "skip": "今日不施肥",
+      "type": "肥料类型",
+      "ratio": "NPK 比例",
+      "dose": "用量",
+      "timing": "时间"
+    },
+    "errors": {
+      "loadFailed": "无法加载天气数据。请检查网络连接。"
+    }
+  },
+  "orchids": {
+    "myGarden": "我的兰花园",
+    "orchidCount": "{{count}} 株",
+    "addButton": "+ 添加植株",
+    "addNewOrchid": "添加新兰花",
+    "addOrchidButton": "添加兰花",
+    "addFirstButton": "添加第一株",
+    "emptyGarden": "花园为空",
+    "addFirstOrchid": "添加您的第一株兰花",
+    "needsCareNow": "⏰ 需要立即护理",
+    "today": "今天",
+    "overdueDays": "逾期 {{days}} 天",
+    "daysLeft": "剩余 {{days}} 天",
+    "takeOrSelectPhoto": "拍摄或选择兰花照片",
+    "tapToAddPhoto": "点击添加照片",
+    "selectSpecies": "-- 选择品种 --",
+    "status": {
+      "healthy": "健康",
+      "warning": "需注意",
+      "sick": "生病"
+    },
+    "species": {
+      "dendrobium": "石斛兰",
+      "phalaenopsis": "蝴蝶兰",
+      "cattleya": "卡特兰",
+      "oncidium": "文心兰",
+      "vanda": "万代兰",
+      "cymbidium": "蕙兰",
+      "paphiopedilum": "兜兰",
+      "other": "其他品种"
+    },
+    "fields": {
+      "name": "名称",
+      "nameRequired": "名称 *",
+      "species": "品种",
+      "speciesRequired": "品种 *",
+      "variety": "变种",
+      "location": "位置",
+      "locationRequired": "位置 *",
+      "area": "面积 (m²)",
+      "purchaseDate": "购买日期",
+      "healthStatus": "健康状况",
+      "wateringInterval": "浇水间隔（天）",
+      "fertilizingInterval": "施肥间隔（天）",
+      "notes": "备注"
+    },
+    "placeholders": {
+      "name": "例如：白色蝴蝶兰",
+      "location": "例如：2楼阳台",
+      "area": "例如：2.5",
+      "notes": "附加备注..."
+    },
+    "editOrchid": "编辑信息",
+    "orchidInfo": "兰花信息",
+    "wateringSchedule": "每 {{days}} 天浇水",
+    "fertilizingSchedule": "每 {{days}} 天施肥",
+    "lastWatered": "上次浇水",
+    "lastFertilized": "上次施肥",
+    "never": "从未",
+    "recordWatering": "记录浇水",
+    "recordFertilizing": "记录施肥",
+    "deleteOrchid": "删除此植株",
+    "photoGallery": "照片库",
+    "addPhoto": "+ 添加照片",
+    "noPhotos": "暂无照片",
+    "careLog": "📋 护理日志",
+    "addLog": "+ 添加日志",
+    "notePlaceholder": "备注（可选）",
+    "noLogs": "暂无日志",
+    "logTypes": {
+      "watering": "浇水",
+      "fertilizing": "施肥",
+      "pruning": "修剪",
+      "repotting": "换盆",
+      "treatment": "治疗",
+      "observation": "观察"
+    }
+  },
+  "garden": {
+    "title": "花园地图",
+    "zonesDrawn": "已绘制 {{count}} 个区域",
+    "drawZone": "绘制区域",
+    "tapFirstPoint": "👆 在地图上点击第一个点",
+    "tapContinue": "👆 继续点击... ({{count}} 个点，至少需要 3 个)",
+    "canSave": "✅ {{count}} 个点 — 可以保存或继续点击",
+    "undo": "撤销",
+    "done": "完成",
+    "nameZone": "命名区域",
+    "namePlaceholder": "例如：蝴蝶兰区、1号架...",
+    "area": "面积 (m²)",
+    "calculated": "计算得出",
+    "autoCalculated": "自动计算",
+    "manualInput": "手动输入...",
+    "notesPlaceholder": "备注（可选）",
+    "saveZone": "保存区域",
+    "locating": "正在定位...",
+    "points": "{{count}} 个点",
+    "locationSetup": {
+      "title": "设置花园位置",
+      "description": "我们需要您的花园位置以正确显示地图",
+      "useGPS": "使用当前位置",
+      "enterAddress": "输入地址",
+      "addressPlaceholder": "输入您的花园地址...",
+      "searching": "搜索中...",
+      "notFound": "未找到地址。请重试。",
+      "gpsError": "无法获取您的位置。请检查权限。",
+      "gpsPermissionDenied": "您需要授予应用位置权限。\n\n前往：设置 → 应用 → Orchid AI → 权限 → 启用'位置'",
+      "gpsDisabled": "GPS已禁用。请在设置 → 位置中启用GPS",
+      "gpsTimeout": "位置请求超时。请重试或使用地址输入。",
+      "confirm": "确认位置",
+      "changeLocation": "更改位置",
+      "foundLocation": "已找到",
+      "skip": "暂时跳过"
+    }
+  },
+  "costs": {
+    "title": "成本与收入",
+    "subtitle": "追踪兰花园利润",
+    "add": "添加",
+    "expense": "支出",
+    "revenue": "收入",
+    "profit": "利润",
+    "all": "全部",
+    "amountPlaceholder": "金额 (₫)",
+    "notePlaceholder": "备注（可选）",
+    "noData": "暂无数据",
+    "categories": {
+      "pesticide": "农药",
+      "fertilizer": "肥料",
+      "medium": "栽培基质",
+      "pots": "花盆/架子",
+      "plants": "购买植株",
+      "utilities": "水电",
+      "transport": "运输",
+      "flowerSales": "花卉销售",
+      "plantSales": "植株销售",
+      "division": "分株",
+      "careService": "护理服务",
+      "other": "其他"
+    }
+  },
+  "sensor": {
+    "title": "📡 花园传感器",
+    "subtitle": "NPK · pH · EC · 湿度 · 温度",
+    "connected": "已连接",
+    "notConnected": "未连接",
+    "noDataTitle": "尚未接收到数据",
+    "noDataDescription": "将您的 ESP32 连接到 Firebase 以开始监测",
+    "firebasePath": "Firebase RTDB 路径",
+    "jsonStructure": "需要发送的 JSON 结构",
+    "hardwareTitle": "所需硬件",
+    "hardware": {
+      "esp32": "ESP32 或 ESP8266",
+      "npk": "NPK RS485 传感器 + RS485-to-TTL 模块",
+      "phec": "pH + EC 传感器（模拟或 RS485）",
+      "dht22": "DHT22（温度 + 湿度）",
+      "moisture": "电容式土壤湿度传感器"
+    },
+    "lastUpdate": "🕐 更新于 {{time}}",
+    "alertCount": "🚨 {{count}} 个警报",
+    "warnCount": "⚠️ {{count}} 个警告",
+    "historyTitle": "📈 {{count}} 次读数历史",
+    "chartMinMax": "最小: {{min}} · 最大: {{max}} {{unit}}",
+    "chartOldest": "← 最旧",
+    "chartNewest": "最新 →",
+    "noChartData": "数据不足",
+    "metrics": {
+      "temp": "温度",
+      "humidity": "空气湿度",
+      "moisture": "土壤湿度",
+      "ph": "pH",
+      "ec": "EC",
+      "n": "氮 (N)",
+      "p": "磷 (P)",
+      "k": "钾 (K)"
+    },
+    "status": {
+      "good": "正常",
+      "warning": "需注意",
+      "danger": "警报"
+    },
+    "threshold": "最佳范围",
+    "aiTitle": "AI 护理顾问",
+    "aiSubtitle": "使用 Claude AI 分析传感器数据",
+    "aiAnalyze": "立即分析",
+    "aiReanalyze": "重新分析",
+    "aiStop": "停止",
+    "aiPrompt": "按下按钮进行 AI 分析和护理建议",
+    "aiAnalyzing": "AI 正在分析...",
+    "aiError": "分析错误"
+  },
+  "calendar": {
+    "title": "护理日历",
+    "todayTasks": "今日 {{count}} 项任务",
+    "addSchedule": "+ 添加计划",
+    "addCareSchedule": "添加护理计划",
+    "careType": "护理类型",
+    "orchidRequired": "兰花 *",
+    "selectOrchid": "-- 选择兰花 --",
+    "noOrchidsWarning": "暂无兰花 — 请先添加",
+    "scheduledDate": "计划日期",
+    "notes": "备注",
+    "notesPlaceholder": "例如：NPK 肥料 10ml/1L",
+    "saveSchedule": "保存计划",
+    "clearSelection": "清除选择",
+    "noLogs": "暂无日志",
+    "noLogsThisDay": "当日无日志",
+    "noSchedules": "无计划",
+    "unknownOrchid": "未知兰花",
+    "markDone": "✓ 完成",
+    "locale": "zh-CN",
+    "types": {
+      "watering": "浇水",
+      "fertilizing": "施肥",
+      "repotting": "换盆",
+      "pruning": "修剪",
+      "blooming": "开花",
+      "other": "其他"
+    },
+    "weekdays": {
+      "mon": "一",
+      "tue": "二",
+      "wed": "三",
+      "thu": "四",
+      "fri": "五",
+      "sat": "六",
+      "sun": "日"
+    },
+    "tabs": {
+      "today": "今天",
+      "upcoming": "即将到来",
+      "done": "已完成",
+      "logs": "日志"
+    }
+  },
+  "community": {
+    "title": "🏆 社区",
+    "subtitle": "分享您的兰花园",
+    "shareButton": "+ 分享",
+    "shareTitle": "分享您的兰花",
+    "selectPhoto": "选择照片",
+    "speciesOptional": "品种（可选）",
+    "captionPlaceholder": "写一段描述...",
+    "posting": "发布中...",
+    "postButton": "发布",
+    "likes": "点赞",
+    "comments": "评论",
+    "commentPlaceholder": "写评论...",
+    "noPosts": "暂无帖子",
+    "beFirst": "成为第一个分享的人！",
+    "species": {
+      "phalaenopsis": "蝴蝶兰",
+      "dendrobium": "石斛兰",
+      "cattleya": "卡特兰",
+      "oncidium": "文心兰",
+      "vanda": "万代兰",
+      "mokara": "莫卡拉兰",
+      "cymbidium": "蕙兰",
+      "rhynchostylis": "指甲兰",
+      "other": "其他"
+    },
+    "timeAgo": {
+      "justNow": "刚刚",
+      "minutesAgo": "{{count}} 分钟前",
+      "hoursAgo": "{{count}} 小时前",
+      "daysAgo": "{{count}} 天前"
+    }
+  },
+  "propagation": {
+    "title": "🌱 繁殖",
+    "subtitle": "计算繁殖潜力",
+    "methods": {
+      "split": {
+        "label": "分株",
+        "desc": "从母株分离子株"
+      },
+      "keiki": {
+        "label": "高芽",
+        "desc": "茎上自然生长的子株"
+      },
+      "stem": {
+        "label": "扦插",
+        "desc": "切茎段进行繁殖"
+      }
+    },
+    "split": {
+      "totalPseudobulbs": "现有假鳞茎总数",
+      "totalPlaceholder": "例如：12",
+      "minPerPlant": "每株最少假鳞茎数",
+      "canSplit": "株可分株",
+      "remainder": "剩余 {{count}} 个假鳞茎",
+      "bestTime": "最佳时间：开花后",
+      "useSterileTool": "使用消毒的锋利工具",
+      "notEnough": "尚不足",
+      "needMore": "还需 {{count}} 个假鳞茎才能分成 2 株",
+      "notesTitle": "分株注意事项",
+      "note1": "开花后分株，避开雨季",
+      "note2": "每个分株至少需要 3 个健康假鳞茎",
+      "note3": "在切口处涂抹杀菌剂",
+      "note4": "种植在新基质中，前 1-2 周少浇水"
+    },
+    "keiki": {
+      "count": "观察到的高芽数量",
+      "countPlaceholder": "例如：3",
+      "hasRoots": "高芽根长 ≥ 3cm？",
+      "hasRootsYes": "✅ 是",
+      "hasRootsNo": "⏳ 还没有",
+      "ready": "个高芽可分离",
+      "readyInstruction": "靠近母茎切下，立即种植在湿润基质中",
+      "waitMore": "再等等",
+      "waitInstruction": "{{count}} 个高芽还需 4-8 周根长达 ≥ 3cm",
+      "notesTitle": "高芽分离指南",
+      "note1": "等待高芽根长至少 3-5 厘米",
+      "note2": "用锋利工具切割，用酒精消毒",
+      "note3": "在切口处涂抹硫磺粉或杀菌剂",
+      "note4": "种植在树皮/水苔中，保持湿润和遮阴"
+    },
+    "stem": {
+      "length": "茎长（厘米）",
+      "lengthPlaceholder": "例如：60",
+      "nodeSpacing": "节间距（厘米）",
+      "cuttings": "段扦插",
+      "details": "{{nodes}} 个节 · 每段约 {{avgLength}}cm",
+      "tooShort": "茎太短",
+      "needLength": "至少需要 {{length}}cm 才能扦插 1 段",
+      "notesTitle": "扦插指南",
+      "note1": "常用于石斛兰，不适用于蝴蝶兰",
+      "note2": "每段需要 2-3 个节",
+      "note3": "平放在湿润的水苔或椰纤上",
+      "note4": "保持湿润，避免阳光直射 4-8 周"
+    }
+  },
+  "notification": {
+    "enableTitle": "开启护理提醒",
+    "enableDesc": "即使关闭应用也能收到通知",
+    "enable": "开启"
+  },
+  "shopPage": {
+    "title": "购买农药",
+    "subtitle": "来自hoalangiong.com的正品",
+    "noProducts": "暂无产品",
+    "comingSoon": "请稍后再来！"
+  },
+  "orderPage": {
+    "successTitle": "下单成功！",
+    "successMsg": "我们将尽快通过Zalo联系您确认。",
+    "transferInfo": "转账信息",
+    "amount": "金额",
+    "content": "备注",
+    "viewOrders": "查看订单",
+    "continueShopping": "继续购物",
+    "confirmOrder": "确认订单",
+    "products": "商品",
+    "totalPayment": "总付款",
+    "deliveryInfo": "收货信息",
+    "namePlaceholder": "收件人姓名 *",
+    "phonePlaceholder": "电话号码 *",
+    "selectProvince": "选择省/市 *",
+    "selectWard": "选择区/县 *",
+    "selectProvFirst": "请先选择省份",
+    "loadingWards": "加载中...",
+    "wardNotFound": "找不到？手动输入",
+    "wardManual": "输入区/县名称 *",
+    "wardBackToList": "← 返回列表",
+    "streetPlaceholder": "门牌号、街道 *",
+    "notePlaceholder": "备注（可选）",
+    "paymentMethod": "支付方式",
+    "cod": "🚚 货到付款",
+    "transfer": "🏦 银行转账",
+    "bank": "银行",
+    "accountNumber": "账号",
+    "accountOwner": "账户名",
+    "qrInstruction": "打开银行APP → 选择\"扫码\" → 扫描下方二维码",
+    "placing": "下单中...",
+    "placeOrder": "立即下单",
+    "myOrders": "我的订单",
+    "noOrders": "暂无订单",
+    "searchPlaceholder": "搜索商品...",
+    "askExpert": "免费咨询专家",
+    "zaloSupport": "Zalo咨询 · 快速回复",
+    "noProducts": "未找到商品",
+    "soldCount": "已售 {{count}}",
+    "freeShip": "免运费"
+  },
+  "orderStatus": {
+    "pending": "待确认",
+    "confirmed": "已确认",
+    "shipping": "配送中",
+    "done": "已完成",
+    "cancelled": "已取消",
+    "all": "全部"
+  },
+  "admin": {
+    "noAccess": "无访问权限",
+    "adminOnly": "此页面仅供管理员使用",
+    "orders": "订单",
+    "products": "产品",
+    "noOrders": "暂无订单",
+    "noProducts": "暂无产品",
+    "addProduct": "+ 添加产品",
+    "editProduct": "编辑产品",
+    "saving": "保存中...",
+    "update": "更新",
+    "fieldName": "产品名称 *",
+    "fieldImage": "图片链接",
+    "fieldPrice": "价格",
+    "fieldShopUrl": "TikTok Shop链接 *",
+    "fieldType": "类型",
+    "fieldDesc": "简短描述",
+    "fieldDiseases": "关联病害/害虫",
+    "placeholderPrice": "例: 35.000₫",
+    "placeholderType": "例: 杀菌剂, 杀虫剂...",
+    "placeholderDesc": "用途, 使用方法...",
+    "placeholderName": "例: Aliette 80WP 100g"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "viewAll": "查看全部"
+  }
+}

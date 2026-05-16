@@ -1,0 +1,1013 @@
+{
+  "app": {
+    "name": "Orchid AI",
+    "tagline": "Vườn lan của bạn",
+    "welcome": "Chào mừng đến Orchid AI",
+    "description": "Quản lý vườn lan chuyên nghiệp"
+  },
+  "auth": {
+    "welcome": "Chào mừng bạn",
+    "loginDescription": "Đăng nhập để lưu dữ liệu vườn lan",
+    "signInWithGoogle": "Đăng nhập với Google",
+    "zaloWarning": "Trình duyệt Zalo không hỗ trợ đăng nhập Google",
+    "zaloInstruction": "Vui lòng mở bằng Chrome hoặc Safari",
+    "openInBrowser": "Mở trong trình duyệt",
+    "dataSecure": "Dữ liệu của bạn được lưu trữ an toàn",
+    "logout": "Đăng xuất"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "dashboard": "Tổng quan",
+    "orchids": "Vườn lan",
+    "garden": "Bản đồ",
+    "weather": "Thời tiết",
+    "calendar": "Lịch",
+    "diseases": "Bệnh",
+    "order": "Đặt hàng",
+    "community": "Cộng đồng",
+    "propagation": "Nhân giống",
+    "costs": "Chi phí",
+    "sensors": "Cảm biến",
+    "admin": "Admin"
+  },
+  "dashboard": {
+    "title": "Tổng quan vườn lan",
+    "subtitle": "Cập nhật theo thời gian thực",
+    "totalOrchids": "Tổng số cây",
+    "zones": "{{count}} khu vực",
+    "needsCare": "Cần chăm sóc",
+    "overdueCount": "{{count}} quá hạn",
+    "today": "Hôm nay",
+    "onSchedule": "Đúng lịch",
+    "healthStatus": "Tình trạng sức khỏe",
+    "healthy": "Khỏe mạnh",
+    "warning": "Cần chú ý",
+    "sick": "Đang bệnh",
+    "healthyPercent": "khỏe mạnh",
+    "financeThisMonth": "Tài chính tháng này",
+    "expense": "Chi phí",
+    "revenue": "Doanh thu",
+    "profit": "Lợi nhuận",
+    "totalAccumulated": "Tổng tích lũy",
+    "upcomingCare": "Lịch chăm sóc sắp tới",
+    "overdueDays": "Quá {{days}} ngày",
+    "daysLeft": "Còn {{days}} ngày",
+    "gardenMap": "Bản đồ vườn",
+    "zonesDrawn": "{{count}} khu vực đã vẽ",
+    "totalArea": "Tổng diện tích",
+    "addOrchidPrompt": "Thêm cây lan để xem thống kê"
+  },
+  "home": {
+    "welcomeTitle": "Chào mừng đến Orchid AI",
+    "welcomeDescription": "Quản lý vườn lan của bạn một cách chuyên nghiệp",
+    "totalOrchids": "Tổng số cây",
+    "needsWatering": "Cần tưới hôm nay",
+    "needsFertilizer": "Cần bón phân",
+    "needsAttention": "Cần chú ý",
+    "overdueCare": "Quá hạn chăm sóc",
+    "dueToday": "Đến hạn hôm nay",
+    "quickActions": "Thao tác nhanh",
+    "addNew": "Thêm cây mới",
+    "recordWatering": "Ghi nhận tưới nước",
+    "recordFertilizer": "Ghi nhận bón phân",
+    "addNote": "Ghi chú chăm sóc",
+    "recentActivity": "Hoạt động gần đây",
+    "noActivity": "Chưa có hoạt động nào",
+    "getStarted": "Hãy thêm cây lan đầu tiên!",
+    "orchidsBeingCared": "{{count}} cây đang được chăm sóc 🌿",
+    "needsCareToday": "{{count}} cây cần chăm sóc hôm nay",
+    "careSchedule": "Lịch chăm sóc hôm nay & quá hạn",
+    "watering": "Tưới nước",
+    "fertilizing": "Bón phân",
+    "today": "Hôm nay",
+    "overdueDays": "Quá {{days}} ngày",
+    "viewMore": "Xem thêm {{count}} cây",
+    "careCalendar": "Lịch chăm sóc",
+    "diseaseReference": "Tra cứu bệnh",
+    "recentOrchids": "Cây gần đây",
+    "aiFeatures": {
+      "title": "Trí tuệ nhân tạo cho lan",
+      "subtitle": "Công nghệ AI giúp chăm sóc lan hiệu quả hơn",
+      "diagnosis": "Chẩn đoán bệnh qua ảnh chụp",
+      "weather": "Tư vấn chăm sóc theo thời tiết",
+      "treatment": "Hướng dẫn điều trị chi tiết",
+      "insights": "Phân tích dữ liệu vườn lan",
+      "tryNow": "Dùng thử ngay"
+    }
+  },
+  "weather": {
+    "title": "Thời tiết & Chăm sóc",
+    "subtitle": "Khuyến cáo cho Dendrobium (Hoàng Thảo)",
+    "loading": "Đang tải thời tiết...",
+    "today": "Hôm nay",
+    "dayPrefix": "Thứ",
+    "tempMin": "Thấp nhất {{temp}}°C",
+    "careAdvice": "Khuyến cáo chăm sóc hôm nay",
+    "fertilizerPlan": "Kế hoạch phân bón",
+    "days": {
+      "sun": "CN",
+      "mon": "T2",
+      "tue": "T3",
+      "wed": "T4",
+      "thu": "T5",
+      "fri": "T6",
+      "sat": "T7",
+      "sunday": "Chủ Nhật"
+    },
+    "stats": {
+      "rain": "Mưa",
+      "humidity": "Ẩm",
+      "wind": "Gió",
+      "uv": "UV"
+    },
+    "severity": {
+      "danger": "Cần chú ý đặc biệt",
+      "warning": "Theo dõi cẩn thận",
+      "good": "Điều kiện tốt"
+    },
+    "fertilizer": {
+      "shouldApply": "Nên bón phân hôm nay",
+      "skip": "Không bón phân hôm nay",
+      "type": "Loại phân",
+      "ratio": "Tỷ lệ NPK",
+      "dose": "Liều lượng",
+      "timing": "Thời điểm"
+    },
+    "errors": {
+      "loadFailed": "Không tải được dữ liệu thời tiết. Kiểm tra kết nối mạng."
+    }
+  },
+  "orchids": {
+    "myGarden": "Vườn lan của tôi",
+    "orchidCount": "{{count}} cây",
+    "addButton": "+ Thêm cây",
+    "addNewOrchid": "Thêm cây lan mới",
+    "addOrchidButton": "Thêm cây lan",
+    "addFirstButton": "Thêm cây đầu tiên",
+    "emptyGarden": "Vườn lan đang trống",
+    "addFirstOrchid": "Thêm cây lan đầu tiên của bạn",
+    "needsCareNow": "⏰ Cần chăm sóc ngay",
+    "today": "Hôm nay",
+    "overdueDays": "Quá {{days}} ngày",
+    "daysLeft": "Còn {{days}} ngày",
+    "takeOrSelectPhoto": "Chụp hoặc chọn ảnh cây lan",
+    "tapToAddPhoto": "Nhấn để thêm ảnh",
+    "selectSpecies": "-- Chọn loài --",
+    "status": {
+      "healthy": "Khỏe mạnh",
+      "warning": "Cần chú ý",
+      "sick": "Đang bệnh"
+    },
+    "species": {
+      "dendrobium": "Dendrobium (Hoàng Thảo)",
+      "phalaenopsis": "Phalaenopsis (Hồ Điệp)",
+      "cattleya": "Cattleya",
+      "oncidium": "Oncidium",
+      "vanda": "Vanda",
+      "cymbidium": "Cymbidium (Lan Huệ)",
+      "paphiopedilum": "Paphiopedilum (Hài)",
+      "other": "Loài khác"
+    },
+    "fields": {
+      "name": "Tên cây",
+      "nameRequired": "Tên cây *",
+      "species": "Loài",
+      "speciesRequired": "Loài *",
+      "variety": "Giống",
+      "location": "Vị trí",
+      "locationRequired": "Vị trí *",
+      "area": "Diện tích (m²)",
+      "purchaseDate": "Ngày mua",
+      "healthStatus": "Tình trạng sức khỏe",
+      "wateringInterval": "Chu kỳ tưới nước (ngày)",
+      "fertilizingInterval": "Chu kỳ bón phân (ngày)",
+      "notes": "Ghi chú"
+    },
+    "placeholders": {
+      "name": "VD: Lan Hồ Điệp trắng",
+      "location": "VD: Ban công tầng 2",
+      "area": "VD: 2.5",
+      "notes": "Ghi chú thêm..."
+    },
+    "editOrchid": "Chỉnh sửa thông tin",
+    "orchidInfo": "Thông tin cây lan",
+    "wateringSchedule": "Tưới nước mỗi {{days}} ngày",
+    "fertilizingSchedule": "Bón phân mỗi {{days}} ngày",
+    "lastWatered": "Tưới lần cuối",
+    "lastFertilized": "Bón phân lần cuối",
+    "never": "Chưa có",
+    "recordWatering": "Ghi nhận tưới nước",
+    "recordFertilizing": "Ghi nhận bón phân",
+    "deleteOrchid": "Xóa cây này",
+    "photoGallery": "Thư viện ảnh",
+    "addPhoto": "+ Thêm ảnh",
+    "noPhotos": "Chưa có ảnh nào",
+    "careLog": "📋 Nhật ký chăm sóc",
+    "addLog": "+ Ghi nhật ký",
+    "notePlaceholder": "Ghi chú (tùy chọn)",
+    "noLogs": "Chưa có nhật ký nào",
+    "logTypes": {
+      "watering": "Tưới nước",
+      "fertilizing": "Bón phân",
+      "pruning": "Tỉa cành",
+      "repotting": "Thay chậu",
+      "treatment": "Xử lý bệnh",
+      "observation": "Quan sát"
+    }
+  },
+  "garden": {
+    "title": "Bản đồ vườn lan",
+    "zonesDrawn": "{{count}} khu vực đã vẽ",
+    "drawZone": "Vẽ khu vực",
+    "tapFirstPoint": "👆 Chấm điểm đầu tiên trên bản đồ",
+    "tapContinue": "👆 Tiếp tục chấm... ({{count}} điểm, cần tối thiểu 3)",
+    "canSave": "✅ {{count}} điểm — có thể lưu hoặc tiếp tục chấm",
+    "undo": "Hoàn tác",
+    "done": "Xong",
+    "nameZone": "Đặt tên khu vực",
+    "namePlaceholder": "VD: Khu lan hồ điệp, Giàn số 1...",
+    "area": "Diện tích (m²)",
+    "calculated": "Tính được",
+    "autoCalculated": "tự tính",
+    "manualInput": "Nhập thủ công...",
+    "notesPlaceholder": "Ghi chú (tùy chọn)",
+    "saveZone": "Lưu khu vực",
+    "locating": "Đang tìm vị trí của bạn...",
+    "points": "{{count}} điểm",
+    "locationSetup": {
+      "title": "Thiết lập vị trí vườn lan",
+      "description": "Chúng tôi cần vị trí vườn lan của bạn để hiển thị bản đồ chính xác",
+      "useGPS": "Dùng vị trí hiện tại",
+      "enterAddress": "Nhập địa chỉ",
+      "addressPlaceholder": "Nhập địa chỉ vườn lan của bạn...",
+      "searching": "Đang tìm kiếm...",
+      "notFound": "Không tìm thấy địa chỉ. Vui lòng thử lại.",
+      "gpsError": "Không thể lấy vị trí của bạn. Vui lòng kiểm tra quyền truy cập.",
+      "gpsPermissionDenied": "Bạn cần cấp quyền truy cập vị trí cho ứng dụng.\n\nVào: Cài đặt → Ứng dụng → Orchid AI → Quyền → Bật 'Vị trí'",
+      "gpsDisabled": "GPS đang tắt. Vui lòng bật GPS trong Cài đặt → Vị trí",
+      "gpsTimeout": "Yêu cầu vị trí hết thời gian. Vui lòng thử lại hoặc nhập địa chỉ.",
+      "confirm": "Xác nhận vị trí",
+      "changeLocation": "Đổi vị trí",
+      "foundLocation": "Đã tìm thấy",
+      "skip": "Bỏ qua"
+    }
+  },
+  "costs": {
+    "title": "Chi phí & Doanh thu",
+    "subtitle": "Theo dõi lợi nhuận vườn lan",
+    "add": "Thêm",
+    "expense": "Chi phí",
+    "revenue": "Doanh thu",
+    "profit": "Lợi nhuận",
+    "all": "Tất cả",
+    "amountPlaceholder": "Số tiền (₫)",
+    "notePlaceholder": "Ghi chú (tùy chọn)",
+    "noData": "Chưa có dữ liệu",
+    "categories": {
+      "pesticide": "Thuốc BVTV",
+      "fertilizer": "Phân bón",
+      "medium": "Giá thể",
+      "pots": "Chậu/giàn",
+      "plants": "Mua cây",
+      "utilities": "Điện/nước",
+      "transport": "Vận chuyển",
+      "flowerSales": "Bán hoa",
+      "plantSales": "Bán cây",
+      "division": "Tách bụi",
+      "careService": "Dịch vụ chăm sóc",
+      "other": "Khác"
+    }
+  },
+  "sensor": {
+    "title": "📡 Cảm biến vườn lan",
+    "subtitle": "NPK · pH · EC · Độ ẩm · Nhiệt độ",
+    "connected": "Đang kết nối",
+    "notConnected": "Chưa kết nối",
+    "noDataTitle": "Chưa nhận được dữ liệu",
+    "noDataDescription": "Kết nối ESP32 của bạn với Firebase để bắt đầu theo dõi",
+    "firebasePath": "Đường dẫn Firebase RTDB",
+    "jsonStructure": "Cấu trúc JSON cần gửi",
+    "hardwareTitle": "Phần cứng cần có",
+    "hardware": {
+      "esp32": "ESP32 hoặc ESP8266",
+      "npk": "Cảm biến NPK RS485 + module RS485-to-TTL",
+      "phec": "Cảm biến pH + EC (analog hoặc RS485)",
+      "dht22": "DHT22 (nhiệt độ + độ ẩm KK)",
+      "moisture": "Cảm biến độ ẩm đất capacitive"
+    },
+    "lastUpdate": "🕐 Cập nhật {{time}}",
+    "alertCount": "🚨 {{count}} cảnh báo",
+    "warnCount": "⚠️ {{count}} cần chú ý",
+    "historyTitle": "📈 Lịch sử {{count}} lần đo",
+    "chartMinMax": "Min: {{min}} · Max: {{max}} {{unit}}",
+    "chartOldest": "← Cũ nhất",
+    "chartNewest": "Mới nhất →",
+    "noChartData": "Chưa đủ dữ liệu",
+    "metrics": {
+      "temp": "Nhiệt độ",
+      "humidity": "Độ ẩm KK",
+      "moisture": "Độ ẩm đất",
+      "ph": "pH",
+      "ec": "EC",
+      "n": "Nitơ (N)",
+      "p": "Lân (P)",
+      "k": "Kali (K)"
+    },
+    "status": {
+      "good": "Bình thường",
+      "warning": "Cần chú ý",
+      "danger": "Cảnh báo"
+    },
+    "threshold": "Ngưỡng tốt",
+    "aiTitle": "AI Tư vấn chăm sóc",
+    "aiSubtitle": "Phân tích dữ liệu cảm biến bằng Claude AI",
+    "aiAnalyze": "Phân tích ngay",
+    "aiReanalyze": "Phân tích lại",
+    "aiStop": "Dừng",
+    "aiPrompt": "Nhấn nút để AI phân tích và đưa ra lời khuyên chăm sóc",
+    "aiAnalyzing": "AI đang phân tích...",
+    "aiError": "Lỗi khi phân tích"
+  },
+  "community": {
+    "title": "🏆 Cộng đồng",
+    "subtitle": "Chia sẻ vườn lan của bạn",
+    "shareButton": "+ Chia sẻ",
+    "shareTitle": "Chia sẻ lan của bạn",
+    "selectPhoto": "Chọn ảnh cây lan",
+    "speciesOptional": "-- Loài lan (tùy chọn) --",
+    "captionPlaceholder": "Mô tả về cây lan của bạn...",
+    "posting": "Đang đăng...",
+    "postButton": "🌸 Đăng bài",
+    "likes": "Yêu thích",
+    "comments": "Bình luận",
+    "commentPlaceholder": "Viết bình luận...",
+    "noPosts": "Chưa có bài chia sẻ nào",
+    "beFirst": "Hãy là người đầu tiên chia sẻ!",
+    "species": {
+      "phalaenopsis": "Phalaenopsis (Hồ Điệp)",
+      "dendrobium": "Dendrobium (Hoàng Thảo)",
+      "cattleya": "Cattleya",
+      "oncidium": "Oncidium (Lan Vũ Nữ)",
+      "vanda": "Vanda",
+      "mokara": "Mokara",
+      "cymbidium": "Cymbidium (Địa Lan)",
+      "rhynchostylis": "Rhynchostylis (Nghinh Xuân)",
+      "other": "Khác"
+    },
+    "timeAgo": {
+      "justNow": "vừa xong",
+      "minutesAgo": "{{count}} phút trước",
+      "hoursAgo": "{{count}} giờ trước",
+      "daysAgo": "{{count}} ngày trước"
+    }
+  },
+  "calendar": {
+    "title": "Lịch chăm sóc",
+    "todayTasks": "{{count}} việc cần làm hôm nay",
+    "addSchedule": "+ Thêm lịch",
+    "addCareSchedule": "Thêm lịch chăm sóc",
+    "careType": "Loại chăm sóc",
+    "orchidRequired": "Cây lan *",
+    "selectOrchid": "-- Chọn cây --",
+    "noOrchidsWarning": "Chưa có cây nào — thêm cây trước",
+    "scheduledDate": "Ngày thực hiện",
+    "notes": "Ghi chú",
+    "notesPlaceholder": "VD: Pha phân NPK 10ml/1L",
+    "saveSchedule": "Lưu lịch",
+    "clearSelection": "Xóa chọn",
+    "noLogs": "Chưa có nhật ký nào",
+    "noLogsThisDay": "Không có nhật ký ngày này",
+    "noSchedules": "Không có lịch nào",
+    "unknownOrchid": "Cây không xác định",
+    "markDone": "✓ Xong",
+    "locale": "vi-VN",
+    "types": {
+      "watering": "Tưới nước",
+      "fertilizing": "Bón phân",
+      "repotting": "Thay chậu",
+      "pruning": "Cắt tỉa",
+      "blooming": "Ra hoa",
+      "other": "Khác"
+    },
+    "weekdays": {
+      "mon": "T2",
+      "tue": "T3",
+      "wed": "T4",
+      "thu": "T5",
+      "fri": "T6",
+      "sat": "T7",
+      "sun": "CN"
+    },
+    "tabs": {
+      "today": "Hôm nay",
+      "upcoming": "Sắp tới",
+      "done": "Đã xong",
+      "logs": "Nhật ký"
+    }
+  },
+  "propagation": {
+    "title": "🌱 Nhân giống",
+    "subtitle": "Tính số cây có thể nhân giống",
+    "methods": {
+      "split": {
+        "label": "Tách bụi",
+        "desc": "Tách các nhánh con từ cây mẹ"
+      },
+      "keiki": {
+        "label": "Keiki",
+        "desc": "Nhánh con mọc tự nhiên trên thân"
+      },
+      "stem": {
+        "label": "Giâm cành",
+        "desc": "Cắt đoạn thân để nhân giống"
+      }
+    },
+    "split": {
+      "totalPseudobulbs": "Tổng số giả hành hiện có",
+      "totalPlaceholder": "VD: 12",
+      "minPerPlant": "Số giả hành tối thiểu mỗi cây",
+      "canSplit": "cây có thể tách",
+      "remainder": "Còn dư {{count}} giả hành",
+      "bestTime": "Thời điểm tốt nhất: sau khi cây ra hoa",
+      "useSterileTool": "Dùng dao sắc đã khử trùng",
+      "notEnough": "Chưa đủ điều kiện",
+      "needMore": "Cần thêm {{count}} giả hành nữa để tách được 2 cây",
+      "notesTitle": "Lưu ý khi tách bụi",
+      "note1": "Tách sau khi cây ra hoa xong, tránh mùa mưa",
+      "note2": "Mỗi phần tách cần ít nhất 3 giả hành khỏe",
+      "note3": "Bôi thuốc chống nấm vào vết cắt",
+      "note4": "Trồng vào giá thể mới, tưới ít trong 1-2 tuần đầu"
+    },
+    "keiki": {
+      "count": "Số keiki quan sát được",
+      "countPlaceholder": "VD: 3",
+      "hasRoots": "Keiki đã có rễ dài ≥ 3cm?",
+      "hasRootsYes": "✅ Có rồi",
+      "hasRootsNo": "⏳ Chưa có",
+      "ready": "keiki sẵn sàng tách",
+      "readyInstruction": "Cắt sát thân mẹ, trồng ngay vào giá thể ẩm",
+      "waitMore": "Chờ thêm",
+      "waitInstruction": "{{count}} keiki cần thêm 4-8 tuần để rễ đạt ≥ 3cm",
+      "notesTitle": "Hướng dẫn tách Keiki",
+      "note1": "Đợi rễ keiki dài ít nhất 3–5 cm",
+      "note2": "Cắt bằng dao sắc, khử trùng bằng cồn",
+      "note3": "Bôi bột sulfur hoặc thuốc diệt nấm vào vết cắt",
+      "note4": "Trồng vào bark/dớn, giữ ẩm và bóng mát"
+    },
+    "stem": {
+      "length": "Chiều dài cành (cm)",
+      "lengthPlaceholder": "VD: 60",
+      "nodeSpacing": "Khoảng cách mắt mầm (cm)",
+      "cuttings": "đoạn cành giâm",
+      "details": "{{nodes}} mắt mầm · mỗi đoạn ~{{avgLength}}cm",
+      "tooShort": "Cành quá ngắn",
+      "needLength": "Cần ít nhất {{length}}cm để có 1 đoạn giâm",
+      "notesTitle": "Hướng dẫn giâm cành",
+      "note1": "Phổ biến với Dendrobium, không dùng cho Phalaenopsis",
+      "note2": "Mỗi đoạn cần 2–3 mắt mầm",
+      "note3": "Đặt nằm ngang trên lớp dớn hoặc xơ dừa ẩm",
+      "note4": "Giữ ẩm, tránh ánh nắng trực tiếp 4–8 tuần"
+    }
+  },
+  "diseases": {
+    "title": "Bệnh & sâu hại",
+    "subtitle": "Nhận biết qua hình ảnh lá Dendrobium",
+    "diagnoseButton": "Chẩn đoán AI",
+    "backButton": "Quay lại",
+    "diseaseTag": "Bệnh hại",
+    "pestTag": "Sâu hại",
+    "diseaseTab": "Bệnh ({{count}})",
+    "pestTab": "Sâu hại ({{count}})",
+    "relatedProducts": "Mua thuốc điều trị",
+    "buyButton": "Mua",
+    "aiDiagnosis": "Chẩn đoán bệnh bằng AI",
+    "aiDiagnosisDescription": "Chụp ảnh để phân tích ngay",
+    "aiDiagnosisTitle": "Chẩn đoán bệnh AI",
+    "aiExpert": "Chuyên gia Dendrobium · Claude Opus 4.7",
+    "uploadPrompt": "Chụp hoặc chọn ảnh lá lan bị bệnh",
+    "uploadInstruction": "Chụp gần, rõ vùng bị bệnh để AI chẩn đoán chính xác",
+    "changeImage": "Nhấn để đổi ảnh",
+    "diagnoseNow": "Chẩn đoán ngay",
+    "analyzing": "AI đang phân tích...",
+    "confidence": "Độ chắc chắn",
+    "symptoms": "Triệu chứng nhận thấy",
+    "treatment": "Hướng dẫn điều trị",
+    "prevention": "Phòng ngừa tái phát",
+    "diagnoseAnother": "Chẩn đoán ảnh khác",
+    "disclaimer": "Kết quả AI chỉ mang tính tham khảo. Nên kết hợp quan sát thực tế.",
+    "overloaded": "AI đang bận, vui lòng thử lại sau vài giây.",
+    "errorGeneric": "Có lỗi xảy ra, vui lòng thử lại.",
+    "commonDiseases": "Bệnh thường gặp",
+    "commonPests": "Sâu hại thường gặp",
+    "backToList": "Quay lại danh sách",
+    "causes": "Nguyên nhân",
+    "description": "Mô tả",
+    "urgency": {
+      "high": "Xử lý ngay",
+      "medium": "Theo dõi kỹ",
+      "low": "Không nguy cấp"
+    },
+    "sections": {
+      "symptoms": "Triệu chứng nhận biết",
+      "causes": "Nguyên nhân",
+      "treatment": "Cách điều trị",
+      "prevention": "Phòng ngừa"
+    },
+    "blackRot": {
+      "name": "Bệnh thối đen",
+      "symptoms": {
+        "0": "Vết đen lớn trên lá, lan nhanh ra xung quanh",
+        "1": "Viền vàng rõ bao quanh vết bệnh",
+        "2": "Lá thối mềm nhũn, có nước bên trong",
+        "3": "Có thể lan xuống rễ và giả hành"
+      },
+      "causes": {
+        "0": "Nấm Pythium hoặc Phytophthora",
+        "1": "Độ ẩm quá cao, thoát nước kém",
+        "2": "Nhiệt độ 25–30°C kết hợp mưa nhiều"
+      },
+      "treatment": {
+        "0": "Cắt bỏ hoàn toàn phần bệnh, chừa 2cm vào phần lành",
+        "1": "Bôi Aliette hoặc Ridomil Gold lên vết cắt",
+        "2": "Cách ly cây bệnh khỏi vườn ngay lập tức",
+        "3": "Giảm tưới nước, tăng thông gió"
+      },
+      "prevention": {
+        "0": "Tưới vào buổi sáng, để lá khô trước tối",
+        "1": "Đảm bảo chậu thoát nước tốt",
+        "2": "Không để nước đọng trên lá khi thời tiết mát"
+      }
+    },
+    "crownRot": {
+      "name": "Bệnh thối cổ rễ",
+      "symptoms": {
+        "0": "Lá vàng héo từ gốc lên dần",
+        "1": "Cổ rễ thối nâu đen, có mùi hôi",
+        "2": "Lá dễ rụng khi chạm vào",
+        "3": "Rễ nâu đen, không còn đầu xanh"
+      },
+      "causes": {
+        "0": "Nước đọng ở cổ rễ và kẽ lá",
+        "1": "Tưới quá nhiều, giá thể không thoát nước",
+        "2": "Thông gió kém, độ ẩm cao ban đêm"
+      },
+      "treatment": {
+        "0": "Cắt bỏ toàn bộ phần thối đến phần còn trắng",
+        "1": "Thay hoàn toàn giá thể mới",
+        "2": "Ngâm gốc vào Aliette 3g/lít trong 10 phút",
+        "3": "Để khô 2–3 ngày rồi mới trồng lại"
+      },
+      "prevention": {
+        "0": "Tuyệt đối không tưới nước vào tim lá Dendrobium",
+        "1": "Tưới sáng để cây khô hoàn toàn trước khi tối",
+        "2": "Dùng giá thể thoát nước tốt (vỏ thông, than gỗ)"
+      }
+    },
+    "leafSpot": {
+      "name": "Bệnh đốm lá (Cercospora)",
+      "symptoms": {
+        "0": "Đốm tròn nâu với viền vàng rõ ràng",
+        "1": "Tâm đốm sẫm, có vòng tròn đồng tâm",
+        "2": "Lá vàng và rụng khi bệnh nặng",
+        "3": "Đốm lan rộng khi thời tiết ẩm ướt"
+      },
+      "causes": {
+        "0": "Nấm Cercospora hoặc Phyllosticta",
+        "1": "Vi khuẩn Pseudomonas (đốm trong nước)",
+        "2": "Độ ẩm cao, nước đọng trên lá"
+      },
+      "treatment": {
+        "0": "Cắt bỏ lá bệnh nặng và tiêu hủy ngoài vườn",
+        "1": "Phun Daconil (Chlorothalonil) hoặc Mancozeb",
+        "2": "Cách ly cây, tăng thông gió",
+        "3": "Phun lại sau 7–10 ngày"
+      },
+      "prevention": {
+        "0": "Tránh để nước đọng trên mặt lá",
+        "1": "Tăng khoảng cách giữa các cây",
+        "2": "Phun phòng định kỳ mùa mưa"
+      }
+    },
+    "blight": {
+      "name": "Bệnh cháy lá",
+      "symptoms": {
+        "0": "Vết nâu lớn từ mép lá lan vào trong",
+        "1": "Mép vết bệnh màu vàng nước",
+        "2": "Lá khô chết từng mảng lớn",
+        "3": "Bệnh lây nhanh khi có mưa liên tục"
+      },
+      "causes": {
+        "0": "Nấm Botrytis hoặc Alternaria",
+        "1": "Mưa nhiều, độ ẩm không khí > 85%",
+        "2": "Ánh sáng yếu, thông thoáng kém"
+      },
+      "treatment": {
+        "0": "Cắt bỏ lá bệnh, tiêu hủy xa vườn",
+        "1": "Phun Iprodione (Rovral) hoặc Thiram",
+        "2": "Tăng thông thoáng, giảm độ ẩm",
+        "3": "Phun 2–3 lần, cách nhau 5–7 ngày"
+      },
+      "prevention": {
+        "0": "Đảm bảo thông gió tốt nhất là mùa mưa",
+        "1": "Không tưới vào buổi chiều tối",
+        "2": "Phun phòng Mancozeb trước mùa mưa"
+      }
+    },
+    "rust": {
+      "name": "Bệnh gỉ sắt lá",
+      "symptoms": {
+        "0": "Đốm nhỏ màu cam nâu rải rác trên lá",
+        "1": "Mặt dưới lá có ổ bào tử nhô lên",
+        "2": "Bào tử vỡ ra thành bột cam",
+        "3": "Lá vàng, năng lượng cây suy giảm"
+      },
+      "causes": {
+        "0": "Nấm Pucciniales (Phragmidium)",
+        "1": "Độ ẩm cao, sương mù buổi sáng",
+        "2": "Thông gió kém, nhiệt độ 15–25°C"
+      },
+      "treatment": {
+        "0": "Phun Propiconazole (Tilt) hoặc Triadimefon",
+        "1": "Thu gom lá bệnh rụng và tiêu hủy",
+        "2": "Phun lưu huỳnh dạng huyền phù",
+        "3": "Điều trị 3 lần cách nhau 7 ngày"
+      },
+      "prevention": {
+        "0": "Tránh tưới nước buổi tối",
+        "1": "Tăng thông gió cho vườn lan",
+        "2": "Kiểm tra mặt dưới lá thường xuyên"
+      }
+    },
+    "yellowing": {
+      "name": "Bệnh vàng lá sinh lý",
+      "symptoms": {
+        "0": "Lá chuyển vàng đồng đều hoặc từng mảng",
+        "1": "Gân lá vẫn xanh trong khi phiến lá vàng",
+        "2": "Lá nhỏ, mỏng hơn bình thường",
+        "3": "Cây chậm ra chồi mới"
+      },
+      "causes": {
+        "0": "Thiếu sắt (Fe), Magie (Mg) hoặc Nitơ",
+        "1": "pH giá thể quá cao làm khóa dinh dưỡng",
+        "2": "Tưới quá nhiều hoặc rễ bị tổn thương",
+        "3": "Thiếu ánh sáng kéo dài"
+      },
+      "treatment": {
+        "0": "Bón bổ sung phân vi lượng (chelate Fe, Mg)",
+        "1": "Kiểm tra và điều chỉnh pH nước tưới (5.5–6.5)",
+        "2": "Thay giá thể mới, cắt rễ hư",
+        "3": "Tăng cường ánh sáng phù hợp"
+      },
+      "prevention": {
+        "0": "Bón phân cân đối, định kỳ 10–14 ngày",
+        "1": "Dùng nước tưới pH 5.5–6.5",
+        "2": "Thay giá thể 1–2 năm/lần",
+        "3": "Đảm bảo ánh sáng khuếch tán 50–70%"
+      }
+    },
+    "virus": {
+      "name": "Bệnh khảm virus",
+      "symptoms": {
+        "0": "Lá có vân sọc xanh đậm nhạt xen kẽ (khảm)",
+        "1": "Đốm hoại tử nâu đen rải rác",
+        "2": "Lá biến dạng, nhăn, cong queo",
+        "3": "Hoa nhỏ, màu nhạt, biến dạng"
+      },
+      "causes": {
+        "0": "Virus CyMV (Cymbidium Mosaic Virus)",
+        "1": "Lây qua dao cắt, tay không vệ sinh",
+        "2": "Côn trùng chích hút (rệp, nhện) mang virus",
+        "3": "Mua cây giống nhiễm bệnh"
+      },
+      "treatment": {
+        "0": "KHÔNG có thuốc trị — phải tiêu hủy cây bệnh",
+        "1": "Khử trùng dụng cụ bằng cồn 70% sau mỗi cây",
+        "2": "Cách ly ngay, không để gần cây lành"
+      },
+      "prevention": {
+        "0": "Mua cây có nguồn gốc rõ ràng, kiểm tra kỹ",
+        "1": "Luôn khử trùng dao kéo trước khi cắt",
+        "2": "Kiểm soát côn trùng chích hút trong vườn",
+        "3": "Cách ly cây mới nhập tối thiểu 3–4 tuần"
+      }
+    },
+    "fusarium": {
+      "name": "Bệnh thối hồng Fusarium",
+      "symptoms": {
+        "0": "Vết thối màu hồng tím đặc trưng trên thân, gốc",
+        "1": "Tơ nấm hồng nhạt ở vùng bệnh",
+        "2": "Cây héo từ gốc lên dù đủ nước",
+        "3": "Cắt ngang thân thấy mạch nâu"
+      },
+      "causes": {
+        "0": "Nấm Fusarium oxysporum",
+        "1": "Giá thể cũ nhiễm bệnh tích lũy",
+        "2": "pH thấp, độ ẩm cao liên tục",
+        "3": "Vết thương trên rễ khi thay chậu"
+      },
+      "treatment": {
+        "0": "Cắt bỏ phần bệnh đến tận phần trắng sạch",
+        "1": "Nhúng vào Captan hoặc Thiophanate-methyl",
+        "2": "Thay toàn bộ giá thể, khử trùng chậu",
+        "3": "Cách ly tuyệt đối"
+      },
+      "prevention": {
+        "0": "Khử trùng chậu và giá thể trước khi dùng",
+        "1": "Không tái sử dụng giá thể cũ",
+        "2": "Tưới nước buổi sáng, tránh ẩm liên tục",
+        "3": "Bón vôi điều chỉnh pH giá thể"
+      }
+    },
+    "anthracnose": {
+      "name": "Bệnh than thư",
+      "symptoms": {
+        "0": "Đốm tròn đen với vòng đồng tâm rõ ràng",
+        "1": "Chấm cam nhỏ (bào tử) trong tâm đốm",
+        "2": "Mô lá chết khô, dễ thủng",
+        "3": "Bệnh xuất hiện nhiều ở lá già"
+      },
+      "causes": {
+        "0": "Nấm Colletotrichum gloeosporioides",
+        "1": "Nhiệt độ 25–30°C, mưa nhiều",
+        "2": "Nước bắn từ đất lên lá khi tưới"
+      },
+      "treatment": {
+        "0": "Cắt bỏ lá bệnh và tiêu hủy",
+        "1": "Phun Azoxystrobin (Amistar) hoặc Carbendazim",
+        "2": "Phun Copper hydroxide (COC 85) phòng ngừa",
+        "3": "Lặp lại 2–3 lần cách nhau 7 ngày"
+      },
+      "prevention": {
+        "0": "Tưới gốc, tránh nước bắn lên lá",
+        "1": "Vệ sinh lá già và giá thể cũ",
+        "2": "Phun phòng đầu mùa mưa"
+      }
+    },
+    "bacterialRot": {
+      "name": "Thối nhũn vi khuẩn",
+      "symptoms": {
+        "0": "Vết thối nâu nhạt, nhũn như bị luộc",
+        "1": "Viền có quầng nước thấm xung quanh",
+        "2": "Mùi hôi thối rõ khi ấn vào vết bệnh",
+        "3": "Lan rất nhanh trong 24–48 giờ"
+      },
+      "causes": {
+        "0": "Vi khuẩn Erwinia carotovora hoặc Pseudomonas",
+        "1": "Vết thương do cắt tỉa, sâu cắn",
+        "2": "Nhiệt độ cao + độ ẩm cao + thoáng kém",
+        "3": "Nước đọng trong tim lá"
+      },
+      "treatment": {
+        "0": "Cắt bỏ ngay phần thối đến tận mô lành",
+        "1": "Bôi Copper sulfate hoặc thuốc kháng khuẩn",
+        "2": "Để vết cắt khô hoàn toàn trong 1–2 ngày",
+        "3": "Không tưới cây ít nhất 3 ngày sau điều trị"
+      },
+      "prevention": {
+        "0": "Khử trùng dụng cụ cắt trước mỗi lần dùng",
+        "1": "Không để nước đọng trong tim lá",
+        "2": "Tăng thông gió mạnh trong mùa nóng ẩm",
+        "3": "Bón phân cân đối, không thừa đạm"
+      }
+    }
+  },
+  "pests": {
+    "spiderMites": {
+      "name": "Nhện đỏ",
+      "description": "Con nhỏ li ti màu đỏ/vàng, hút nhựa mặt dưới lá. Hoạt động mạnh khi nóng khô.",
+      "symptoms": {
+        "0": "Đốm vàng li ti dày đặc trên lá",
+        "1": "Mạng nhện mỏng mặt dưới lá khi bùng phát",
+        "2": "Lá bạc dần rồi khô, cong rụng",
+        "3": "Cây còi cọc, chậm phát triển"
+      },
+      "treatment": {
+        "0": "Phun nước mạnh rửa mặt dưới lá",
+        "1": "Dùng Abamectin (Vertimec) hoặc Dicofol",
+        "2": "Phun dầu neem 2–3ml/lít",
+        "3": "Phun lại sau 5–7 ngày do trứng nhện kháng thuốc"
+      },
+      "prevention": {
+        "0": "Duy trì độ ẩm 60–70% quanh vườn",
+        "1": "Phun sương mặt dưới lá thường xuyên",
+        "2": "Kiểm tra lá định kỳ bằng kính lúp"
+      }
+    },
+    "flowerFly": {
+      "name": "Ruồi chít hoa",
+      "description": "Ruồi nhỏ đẻ trứng vào nụ hoa, ấu trùng ăn phá bên trong. Phổ biến trên Dendrobium mùa khô.",
+      "symptoms": {
+        "0": "Nụ hoa vàng, rụng sớm khi chưa nở",
+        "1": "Cánh hoa biến dạng, méo mó khi nở",
+        "2": "Bên trong nụ có ấu trùng nhỏ trắng",
+        "3": "Cành hoa ra nhiều nhưng không nở được"
+      },
+      "causes": {
+        "0": "Ruồi đục hoa (Contarinia, Bactrocera)",
+        "1": "Thời tiết nóng ẩm tạo điều kiện sinh sản",
+        "2": "Vườn lan gần khu vực cây ăn trái"
+      },
+      "treatment": {
+        "0": "Cắt bỏ và tiêu hủy tất cả nụ bị hại",
+        "1": "Phun Cypermethrin hoặc Deltamethrin",
+        "2": "Bao lưới mùng mịn che toàn bộ cành hoa",
+        "3": "Phun 2 lần cách nhau 5 ngày khi cây ra nụ"
+      },
+      "prevention": {
+        "0": "Bao lưới cành hoa ngay khi nụ mới nhú",
+        "1": "Phun thuốc phòng trước mùa ra hoa",
+        "2": "Đặt bẫy dính vàng xung quanh vườn",
+        "3": "Kiểm tra nụ hoa hàng ngày"
+      }
+    },
+    "thrips": {
+      "name": "Bọ trĩ",
+      "description": "Côn trùng thon dài ~1mm, màu vàng nâu. Chích hút lá và hoa, để lại vết xước bạc đặc trưng.",
+      "symptoms": {
+        "0": "Vết xước bạc dọc theo chiều gân lá",
+        "1": "Hoa đốm bạc/nâu, biến dạng, rụng sớm",
+        "2": "Lá non cuộn lại, chồi bị dị hình",
+        "3": "Thấy con nhỏ li ti màu vàng khi lật mặt dưới lá"
+      },
+      "causes": {
+        "0": "Bọ trĩ Frankliniella occidentalis hoặc Thrips palmi",
+        "1": "Thời tiết nóng khô (mùa khô) bùng phát mạnh",
+        "2": "Lây lan từ cây mới nhập hoặc cỏ dại"
+      },
+      "treatment": {
+        "0": "Phun Spinosad (Entrust) hoặc Abamectin",
+        "1": "Đặt bẫy dính màu xanh dương trong vườn",
+        "2": "Cắt bỏ hoa và chồi bị hại nặng",
+        "3": "Phun lại sau 5–7 ngày, xen kẽ thuốc tránh kháng"
+      },
+      "prevention": {
+        "0": "Treo bẫy dính xanh dương thường trực",
+        "1": "Kiểm tra mặt dưới lá và trong hoa mỗi ngày",
+        "2": "Duy trì độ ẩm cao, hạn chế bọ trĩ phát triển",
+        "3": "Cách ly cây mới nhập ít nhất 2 tuần"
+      }
+    },
+    "mealybugs": {
+      "name": "Rệp sáp",
+      "description": "Côn trùng trắng như bông do lớp sáp bao phủ, bám kín kẽ lá và thân.",
+      "symptoms": {
+        "0": "Cục trắng bông bám kẽ lá, thân, rễ",
+        "1": "Lá dính nhờn (mật ngọt rệp tiết ra)",
+        "2": "Lá vàng héo dần",
+        "3": "Nấm đen (muội than) mọc trên chất nhờn"
+      },
+      "treatment": {
+        "0": "Dùng bông tẩm cồn 70% lau từng cục rệp",
+        "1": "Phun Imidacloprid (Confidor) hoặc Dinotefuran",
+        "2": "Phun dầu neem 3ml/lít phủ đều",
+        "3": "Điều trị 3–4 lần cách nhau 1 tuần"
+      },
+      "prevention": {
+        "0": "Kiểm tra kỹ cây mới trước khi nhập vườn",
+        "1": "Vệ sinh lá và thân cây thường xuyên",
+        "2": "Không bón đạm quá mức làm cây mọng nước"
+      }
+    },
+    "scale": {
+      "name": "Rệp vảy (Rệp mai)",
+      "description": "Vảy cứng màu nâu bám chặt vào lá và thân, hút nhựa cây liên tục.",
+      "symptoms": {
+        "0": "Cục tròn nâu cứng rải rác trên lá, thân",
+        "1": "Lá vàng, cây yếu dần",
+        "2": "Chất nhờn trên bề mặt lá",
+        "3": "Cây chậm lớn, lá nhỏ lại"
+      },
+      "treatment": {
+        "0": "Chà bằng bàn chải mềm tẩm dầu khoáng",
+        "1": "Phun Chlorpyrifos hoặc dầu khoáng 99",
+        "2": "Dùng thuốc hệ thống Imidacloprid",
+        "3": "Lặp lại sau 2 tuần khi trứng nở"
+      },
+      "prevention": {
+        "0": "Cách ly cây mới 2–3 tuần trước khi nhập vườn",
+        "1": "Kiểm tra mặt dưới lá định kỳ",
+        "2": "Lau lá sạch bằng khăn ẩm mỗi tháng"
+      }
+    },
+    "snails": {
+      "name": "Ốc sên & Sên trần",
+      "description": "Hoạt động ban đêm và sau mưa. Ăn lá non, rễ, và chồi non Dendrobium.",
+      "symptoms": {
+        "0": "Lỗ thủng bất thường trên lá",
+        "1": "Chồi non và rễ bị ăn mất",
+        "2": "Vệt nhầy bạc ánh trên cây và đất",
+        "3": "Phân ốc nhỏ gần gốc cây"
+      },
+      "treatment": {
+        "0": "Bắt tay vào ban đêm hoặc sau mưa",
+        "1": "Rắc mồi ốc sên (Metaldehyde) quanh chậu",
+        "2": "Rắc vôi bột hoặc tro trấu quanh gốc",
+        "3": "Đặt bẫy bia loãng gần chậu"
+      },
+      "prevention": {
+        "0": "Giữ khu trồng sạch sẽ, không có lá mục",
+        "1": "Tránh tưới buổi tối làm ẩm nền",
+        "2": "Kiểm tra gầm kệ và nền vườn ban đêm"
+      }
+    }
+  },
+  "notification": {
+    "enableTitle": "Bật nhắc nhở chăm sóc",
+    "enableDesc": "Nhận thông báo ngay cả khi đóng app",
+    "enable": "Bật"
+  },
+  "shopPage": {
+    "title": "Mua thuốc BVTV",
+    "subtitle": "Sản phẩm chính hãng từ hoalangiong.com",
+    "noProducts": "Chưa có sản phẩm",
+    "comingSoon": "Quay lại sau nhé!"
+  },
+  "orderPage": {
+    "successTitle": "Đặt hàng thành công!",
+    "successMsg": "Chúng tôi sẽ liên hệ xác nhận qua Zalo sớm nhất.",
+    "transferInfo": "Thông tin chuyển khoản",
+    "amount": "Số tiền",
+    "content": "Nội dung",
+    "viewOrders": "Xem đơn hàng",
+    "continueShopping": "Tiếp tục mua",
+    "confirmOrder": "Xác nhận đơn hàng",
+    "products": "Sản phẩm",
+    "totalPayment": "Tổng thanh toán",
+    "deliveryInfo": "Thông tin nhận hàng",
+    "namePlaceholder": "Họ tên người nhận *",
+    "phonePlaceholder": "Số điện thoại *",
+    "selectProvince": "Chọn Tỉnh/Thành phố *",
+    "selectWard": "Chọn Phường/Xã *",
+    "selectProvFirst": "Chọn tỉnh trước",
+    "loadingWards": "Đang tải...",
+    "wardNotFound": "Không tìm thấy? Nhập tay",
+    "wardManual": "Nhập tên Phường/Xã *",
+    "wardBackToList": "← Quay lại chọn từ danh sách",
+    "streetPlaceholder": "Số nhà, tên đường *",
+    "notePlaceholder": "Ghi chú (tùy chọn)",
+    "paymentMethod": "Phương thức thanh toán",
+    "cod": "🚚 COD",
+    "transfer": "🏦 Chuyển khoản",
+    "bank": "Ngân hàng",
+    "accountNumber": "Số tài khoản",
+    "accountOwner": "Chủ tài khoản",
+    "qrInstruction": "Mở app ngân hàng → chọn \"Quét QR\" → quét mã bên dưới",
+    "placing": "Đang đặt hàng...",
+    "placeOrder": "Đặt hàng ngay",
+    "myOrders": "Đơn hàng của tôi",
+    "noOrders": "Chưa có đơn hàng nào",
+    "searchPlaceholder": "Tìm sản phẩm...",
+    "askExpert": "Hỏi chuyên gia miễn phí",
+    "zaloSupport": "Tư vấn Zalo · Phản hồi nhanh",
+    "noProducts": "Không tìm thấy sản phẩm",
+    "soldCount": "Đã bán {{count}}",
+    "freeShip": "Free ship"
+  },
+  "orderStatus": {
+    "pending": "Chờ xác nhận",
+    "confirmed": "Đã xác nhận",
+    "shipping": "Đang giao",
+    "done": "Hoàn thành",
+    "cancelled": "Đã hủy",
+    "all": "Tất cả"
+  },
+  "admin": {
+    "noAccess": "Không có quyền truy cập",
+    "adminOnly": "Trang này chỉ dành cho quản trị viên",
+    "orders": "Đơn hàng",
+    "products": "Sản phẩm",
+    "noOrders": "Chưa có đơn hàng nào",
+    "noProducts": "Chưa có sản phẩm nào",
+    "addProduct": "+ Thêm sản phẩm",
+    "editProduct": "Sửa sản phẩm",
+    "saving": "Đang lưu...",
+    "update": "Cập nhật",
+    "fieldName": "Tên sản phẩm *",
+    "fieldImage": "Link ảnh",
+    "fieldPrice": "Giá",
+    "fieldShopUrl": "Link TikTok Shop *",
+    "fieldType": "Loại thuốc",
+    "fieldDesc": "Mô tả ngắn",
+    "fieldDiseases": "Gắn với bệnh/sâu hại",
+    "placeholderPrice": "VD: 35.000₫",
+    "placeholderType": "VD: Trừ nấm, Trừ sâu, Vi lượng...",
+    "placeholderDesc": "Công dụng, cách dùng...",
+    "placeholderName": "VD: Aliette 80WP 100g"
+  },
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Có lỗi xảy ra",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "next": "Tiếp theo",
+    "previous": "Trước",
+    "search": "Tìm kiếm",
+    "filter": "Lọc",
+    "sort": "Sắp xếp",
+    "viewAll": "Xem tất cả"
+  }
+}

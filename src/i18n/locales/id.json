@@ -1,0 +1,1013 @@
+{
+  "app": {
+    "name": "Orchid AI",
+    "tagline": "Taman anggrek Anda",
+    "welcome": "Selamat datang di Orchid AI",
+    "description": "Manajemen taman anggrek profesional"
+  },
+  "auth": {
+    "welcome": "Selamat datang",
+    "loginDescription": "Masuk untuk menyimpan data taman anggrek Anda",
+    "signInWithGoogle": "Masuk dengan Google",
+    "zaloWarning": "Browser Zalo tidak mendukung login Google",
+    "zaloInstruction": "Silakan buka dengan Chrome atau Safari",
+    "openInBrowser": "Buka di browser",
+    "dataSecure": "Data Anda disimpan dengan aman",
+    "logout": "Keluar"
+  },
+  "nav": {
+    "home": "Beranda",
+    "dashboard": "Dasbor",
+    "orchids": "Anggrek",
+    "garden": "Peta",
+    "weather": "Cuaca",
+    "calendar": "Kalender",
+    "diseases": "Penyakit",
+    "order": "Pesan",
+    "community": "Komunitas",
+    "propagation": "Perbanyakan",
+    "costs": "Biaya",
+    "sensors": "Sensor",
+    "admin": "Admin"
+  },
+  "dashboard": {
+    "title": "Ringkasan Taman Anggrek",
+    "subtitle": "Pembaruan real-time",
+    "totalOrchids": "Total tanaman",
+    "zones": "{{count}} zona",
+    "needsCare": "Perlu perawatan",
+    "overdueCount": "{{count}} terlambat",
+    "today": "Hari ini",
+    "onSchedule": "Sesuai jadwal",
+    "healthStatus": "Status kesehatan",
+    "healthy": "Sehat",
+    "warning": "Perlu perhatian",
+    "sick": "Sakit",
+    "healthyPercent": "sehat",
+    "financeThisMonth": "Keuangan bulan ini",
+    "expense": "Pengeluaran",
+    "revenue": "Pendapatan",
+    "profit": "Keuntungan",
+    "totalAccumulated": "Total akumulasi",
+    "upcomingCare": "Jadwal perawatan mendatang",
+    "overdueDays": "Terlambat {{days}} hari",
+    "daysLeft": "{{days}} hari tersisa",
+    "gardenMap": "Peta taman",
+    "zonesDrawn": "{{count}} zona digambar",
+    "totalArea": "Total area",
+    "addOrchidPrompt": "Tambahkan anggrek untuk melihat statistik"
+  },
+  "home": {
+    "welcomeTitle": "Selamat datang di Orchid AI",
+    "welcomeDescription": "Kelola taman anggrek Anda secara profesional",
+    "totalOrchids": "Total tanaman",
+    "needsWatering": "Perlu disiram hari ini",
+    "needsFertilizer": "Perlu pupuk",
+    "needsAttention": "Perlu perhatian",
+    "overdueCare": "Perawatan terlambat",
+    "dueToday": "Jatuh tempo hari ini",
+    "quickActions": "Aksi cepat",
+    "addNew": "Tambah tanaman baru",
+    "recordWatering": "Catat penyiraman",
+    "recordFertilizer": "Catat pemupukan",
+    "addNote": "Tambah catatan perawatan",
+    "recentActivity": "Aktivitas terkini",
+    "noActivity": "Belum ada aktivitas",
+    "getStarted": "Tambahkan anggrek pertama Anda!",
+    "orchidsBeingCared": "{{count}} tanaman sedang dirawat 🌿",
+    "needsCareToday": "{{count}} tanaman perlu perawatan hari ini",
+    "careSchedule": "Jadwal perawatan hari ini & terlambat",
+    "watering": "Penyiraman",
+    "fertilizing": "Pemupukan",
+    "today": "Hari ini",
+    "overdueDays": "Terlambat {{days}} hari",
+    "viewMore": "Lihat {{count}} lagi",
+    "careCalendar": "Kalender perawatan",
+    "diseaseReference": "Referensi penyakit",
+    "recentOrchids": "Anggrek terkini",
+    "aiFeatures": {
+      "title": "AI untuk Anggrek",
+      "subtitle": "Teknologi cerdas untuk kesehatan anggrek lebih baik",
+      "diagnosis": "Diagnosis penyakit dari foto",
+      "weather": "Saran perawatan berdasarkan cuaca",
+      "treatment": "Panduan perawatan terperinci",
+      "insights": "Analitik data taman",
+      "tryNow": "Coba sekarang"
+    }
+  },
+  "diseases": {
+    "title": "Penyakit & Hama",
+    "subtitle": "Identifikasi melalui gambar daun Dendrobium",
+    "diagnoseButton": "Diagnosis AI",
+    "backButton": "Kembali",
+    "diseaseTag": "Penyakit",
+    "pestTag": "Hama",
+    "diseaseTab": "Penyakit ({{count}})",
+    "pestTab": "Hama ({{count}})",
+    "relatedProducts": "Beli obat perawatan",
+    "buyButton": "Beli",
+    "aiDiagnosis": "Diagnosis Penyakit AI",
+    "aiDiagnosisDescription": "Ambil foto untuk analisis",
+    "aiDiagnosisTitle": "Diagnosis Penyakit AI",
+    "aiExpert": "Ahli Dendrobium · Claude Opus 4.7",
+    "uploadPrompt": "Ambil atau pilih foto daun anggrek yang sakit",
+    "uploadInstruction": "Ambil foto dekat dan jelas dari area yang terkena untuk diagnosis AI yang akurat",
+    "changeImage": "Ketuk untuk mengganti gambar",
+    "diagnoseNow": "Diagnosis sekarang",
+    "analyzing": "AI sedang menganalisis...",
+    "confidence": "Kepercayaan",
+    "symptoms": "Gejala yang diamati",
+    "treatment": "Panduan pengobatan",
+    "prevention": "Tips pencegahan",
+    "diagnoseAnother": "Diagnosis gambar lain",
+    "disclaimer": "Hasil AI hanya untuk referensi. Kombinasikan dengan pengamatan aktual.",
+    "overloaded": "AI sedang sibuk, coba lagi dalam beberapa detik.",
+    "errorGeneric": "Terjadi kesalahan, silakan coba lagi.",
+    "commonDiseases": "Penyakit umum",
+    "commonPests": "Hama umum",
+    "backToList": "Kembali ke daftar",
+    "causes": "Penyebab",
+    "description": "Deskripsi",
+    "urgency": {
+      "high": "Tindakan mendesak",
+      "medium": "Pantau dengan cermat",
+      "low": "Tidak mendesak"
+    },
+    "sections": {
+      "symptoms": "Gejala yang diamati",
+      "causes": "Penyebab",
+      "treatment": "Cara pengobatan",
+      "prevention": "Pencegahan"
+    },
+    "blackRot": {
+      "name": "Busuk Hitam",
+      "symptoms": {
+        "0": "Bercak hitam besar pada daun, menyebar dengan cepat",
+        "1": "Tepi kuning jelas mengelilingi area yang terinfeksi",
+        "2": "Daun membusuk lembek, berair di dalam",
+        "3": "Dapat menyebar ke akar dan pseudobulb"
+      },
+      "causes": {
+        "0": "Jamur Pythium atau Phytophthora",
+        "1": "Kelembaban terlalu tinggi, drainase buruk",
+        "2": "Suhu 25–30°C dikombinasikan dengan hujan deras"
+      },
+      "treatment": {
+        "0": "Potong bagian yang sakit sepenuhnya, sisakan 2cm di bagian sehat",
+        "1": "Oleskan Aliette atau Ridomil Gold pada potongan",
+        "2": "Isolasi tanaman yang sakit dari kebun segera",
+        "3": "Kurangi penyiraman, tingkatkan ventilasi"
+      },
+      "prevention": {
+        "0": "Siram di pagi hari, biarkan daun kering sebelum sore",
+        "1": "Pastikan pot memiliki drainase yang baik",
+        "2": "Jangan biarkan air menggenang di daun saat cuaca dingin"
+      }
+    },
+    "crownRot": {
+      "name": "Busuk Mahkota",
+      "symptoms": {
+        "0": "Daun menguning layu dari pangkal ke atas secara bertahap",
+        "1": "Mahkota akar membusuk coklat hitam, berbau busuk",
+        "2": "Daun mudah rontok saat disentuh",
+        "3": "Akar coklat hitam, tidak ada ujung hijau"
+      },
+      "causes": {
+        "0": "Air menggenang di mahkota akar dan ketiak daun",
+        "1": "Penyiraman berlebihan, media tanam tidak mengalir",
+        "2": "Ventilasi buruk, kelembaban tinggi di malam hari"
+      },
+      "treatment": {
+        "0": "Potong semua bagian yang membusuk hingga bagian putih yang sehat",
+        "1": "Ganti semua media tanam dengan yang baru",
+        "2": "Rendam pangkal dalam larutan Aliette 3g/liter selama 10 menit",
+        "3": "Keringkan 2–3 hari sebelum menanam kembali"
+      },
+      "prevention": {
+        "0": "Jangan sekali-kali menyiram air ke jantung daun Dendrobium",
+        "1": "Siram pagi agar tanaman kering sepenuhnya sebelum sore",
+        "2": "Gunakan media yang mengalir baik (kulit pinus, arang kayu)"
+      }
+    },
+    "leafSpot": {
+      "name": "Bercak Daun (Cercospora)",
+      "symptoms": {
+        "0": "Bercak bulat coklat dengan tepi kuning yang jelas",
+        "1": "Pusat bercak gelap, memiliki cincin konsentris",
+        "2": "Daun menguning dan rontok saat penyakit parah",
+        "3": "Bercak menyebar saat cuaca lembab"
+      },
+      "causes": {
+        "0": "Jamur Cercospora atau Phyllosticta",
+        "1": "Bakteri Pseudomonas (bercak berair)",
+        "2": "Kelembaban tinggi, air menggenang di daun"
+      },
+      "treatment": {
+        "0": "Potong daun yang terinfeksi parah dan hancurkan di luar kebun",
+        "1": "Semprot Daconil (Chlorothalonil) atau Mancozeb",
+        "2": "Isolasi tanaman, tingkatkan ventilasi",
+        "3": "Semprot ulang setelah 7–10 hari"
+      },
+      "prevention": {
+        "0": "Hindari air menggenang di permukaan daun",
+        "1": "Tingkatkan jarak antar tanaman",
+        "2": "Semprot pencegahan secara berkala di musim hujan"
+      }
+    },
+    "blight": {
+      "name": "Hawar Daun",
+      "symptoms": {
+        "0": "Bercak coklat besar dari tepi daun ke dalam",
+        "1": "Tepi bercak berwarna kuning berair",
+        "2": "Area besar daun mati dan kering",
+        "3": "Penyakit menyebar cepat saat hujan terus-menerus"
+      },
+      "causes": {
+        "0": "Jamur Botrytis atau Alternaria",
+        "1": "Hujan deras, kelembaban udara > 85%",
+        "2": "Cahaya lemah, sirkulasi udara buruk"
+      },
+      "treatment": {
+        "0": "Potong daun yang terinfeksi, hancurkan jauh dari kebun",
+        "1": "Semprot Iprodione (Rovral) atau Thiram",
+        "2": "Tingkatkan ventilasi, kurangi kelembaban",
+        "3": "Semprot 2–3 kali, jarak 5–7 hari"
+      },
+      "prevention": {
+        "0": "Pastikan ventilasi baik terutama di musim hujan",
+        "1": "Jangan menyiram di sore/malam hari",
+        "2": "Semprot Mancozeb pencegahan sebelum musim hujan"
+      }
+    },
+    "rust": {
+      "name": "Karat Daun",
+      "symptoms": {
+        "0": "Bintik kecil oranye-coklat tersebar di daun",
+        "1": "Pustula spora menonjol di bawah daun",
+        "2": "Spora pecah menjadi bubuk oranye",
+        "3": "Daun menguning, energi tanaman menurun"
+      },
+      "causes": {
+        "0": "Jamur Pucciniales (Phragmidium)",
+        "1": "Kelembaban tinggi, kabut pagi",
+        "2": "Ventilasi buruk, suhu 15–25°C"
+      },
+      "treatment": {
+        "0": "Semprot Propiconazole (Tilt) atau Triadimefon",
+        "1": "Kumpulkan dan hancurkan daun yang terinfeksi jatuh",
+        "2": "Semprot suspensi sulfur",
+        "3": "Obati 3 kali, jarak 7 hari"
+      },
+      "prevention": {
+        "0": "Hindari menyiram di malam hari",
+        "1": "Tingkatkan ventilasi kebun anggrek",
+        "2": "Periksa bagian bawah daun secara teratur"
+      }
+    },
+    "yellowing": {
+      "name": "Klorosis / Kekurangan Nutrisi",
+      "symptoms": {
+        "0": "Daun menguning secara merata atau berbercak",
+        "1": "Urat daun tetap hijau sementara helai menguning",
+        "2": "Daun lebih kecil, lebih tipis dari normal",
+        "3": "Tanaman lambat menghasilkan pertumbuhan baru"
+      },
+      "causes": {
+        "0": "Kekurangan Besi (Fe), Magnesium (Mg) atau Nitrogen",
+        "1": "pH media terlalu tinggi, mengunci nutrisi",
+        "2": "Penyiraman berlebihan atau kerusakan akar",
+        "3": "Cahaya tidak cukup berkepanjangan"
+      },
+      "treatment": {
+        "0": "Suplemen dengan mikronutrien (chelate Fe, Mg)",
+        "1": "Periksa dan sesuaikan pH air (5.5–6.5)",
+        "2": "Ganti media, pangkas akar yang rusak",
+        "3": "Tingkatkan pencahayaan yang sesuai"
+      },
+      "prevention": {
+        "0": "Pupuk seimbang setiap 10–14 hari",
+        "1": "Gunakan air pH 5.5–6.5",
+        "2": "Ganti media setiap 1–2 tahun",
+        "3": "Pastikan cahaya tersebar 50–70%"
+      }
+    },
+    "virus": {
+      "name": "Virus Mosaik Anggrek (CyMV)",
+      "symptoms": {
+        "0": "Pola mosaik garis-garis hijau terang dan gelap",
+        "1": "Bintik nekrotik coklat-hitam tersebar",
+        "2": "Daun cacat, keriput, bengkok",
+        "3": "Bunga kecil, pucat, cacat"
+      },
+      "causes": {
+        "0": "CyMV (Cymbidium Mosaic Virus)",
+        "1": "Menyebar melalui alat pemotong, tangan yang tidak dicuci",
+        "2": "Serangga penghisap (kutu daun, tungau) membawa virus",
+        "3": "Membeli tanaman yang terinfeksi"
+      },
+      "treatment": {
+        "0": "TIDAK ADA obat — harus hancurkan tanaman yang terinfeksi",
+        "1": "Sterilkan alat dengan alkohol 70% setelah setiap tanaman",
+        "2": "Isolasi segera, jauhkan dari tanaman sehat"
+      },
+      "prevention": {
+        "0": "Beli tanaman dari sumber terpercaya, periksa dengan cermat",
+        "1": "Selalu sterilkan alat pemotong sebelum digunakan",
+        "2": "Kontrol serangga penghisap di kebun",
+        "3": "Karantina tanaman baru minimal 3–4 minggu"
+      }
+    },
+    "fusarium": {
+      "name": "Layu Fusarium",
+      "symptoms": {
+        "0": "Busuk merah muda-ungu khas pada batang, pangkal",
+        "1": "Benang jamur merah muda di area yang terinfeksi",
+        "2": "Tanaman layu dari pangkal ke atas meskipun air cukup",
+        "3": "Potongan melintang menunjukkan jaringan pembuluh coklat"
+      },
+      "causes": {
+        "0": "Jamur Fusarium oxysporum",
+        "1": "Media lama dengan infeksi terakumulasi",
+        "2": "pH rendah, kelembaban tinggi terus-menerus",
+        "3": "Luka akar saat mengganti pot"
+      },
+      "treatment": {
+        "0": "Potong infeksi hingga jaringan putih bersih",
+        "1": "Celupkan dalam Captan atau Thiophanate-methyl",
+        "2": "Ganti semua media, sterilkan pot",
+        "3": "Isolasi ketat"
+      },
+      "prevention": {
+        "0": "Sterilkan pot dan media sebelum digunakan",
+        "1": "Jangan gunakan kembali media lama",
+        "2": "Siram di pagi hari, hindari kelembaban terus-menerus",
+        "3": "Tambahkan kapur untuk menyesuaikan pH media"
+      }
+    },
+    "anthracnose": {
+      "name": "Antraknosa",
+      "symptoms": {
+        "0": "Bintik hitam bulat dengan cincin konsentris jelas",
+        "1": "Titik oranye kecil (spora) di pusat bintik",
+        "2": "Jaringan daun mati kering, mudah berlubang",
+        "3": "Penyakit umum pada daun tua"
+      },
+      "causes": {
+        "0": "Jamur Colletotrichum gloeosporioides",
+        "1": "Suhu 25–30°C, hujan deras",
+        "2": "Air memercik dari tanah ke daun saat menyiram"
+      },
+      "treatment": {
+        "0": "Potong daun yang terinfeksi dan hancurkan",
+        "1": "Semprot Azoxystrobin (Amistar) atau Carbendazim",
+        "2": "Semprot Copper hydroxide (COC 85) pencegahan",
+        "3": "Ulangi 2–3 kali, jarak 7 hari"
+      },
+      "prevention": {
+        "0": "Siram di pangkal, hindari percikan ke daun",
+        "1": "Bersihkan daun tua dan media lama",
+        "2": "Semprot pencegahan di awal musim hujan"
+      }
+    },
+    "bacterialRot": {
+      "name": "Busuk Lunak Bakteri",
+      "symptoms": {
+        "0": "Busuk coklat muda lembek seperti jaringan yang direbus",
+        "1": "Halo berair di sekitar tepi",
+        "2": "Bau busuk saat menekan area yang terinfeksi",
+        "3": "Menyebar sangat cepat dalam 24–48 jam"
+      },
+      "causes": {
+        "0": "Bakteri Erwinia carotovora atau Pseudomonas",
+        "1": "Luka dari pemangkasan, kerusakan serangga",
+        "2": "Suhu tinggi + kelembaban tinggi + ventilasi buruk",
+        "3": "Air menggenang di mahkota daun"
+      },
+      "treatment": {
+        "0": "Segera potong busuk hingga jaringan sehat",
+        "1": "Oleskan Copper sulfate atau agen antibakteri",
+        "2": "Biarkan potongan kering sepenuhnya selama 1–2 hari",
+        "3": "Jangan menyiram tanaman setidaknya 3 hari setelah perawatan"
+      },
+      "prevention": {
+        "0": "Sterilkan alat pemotong sebelum setiap penggunaan",
+        "1": "Jangan biarkan air menggenang di mahkota daun",
+        "2": "Tingkatkan ventilasi kuat dalam cuaca panas lembab",
+        "3": "Pupuk seimbang, hindari kelebihan nitrogen"
+      }
+    }
+  },
+  "pests": {
+    "spiderMites": {
+      "name": "Tungau Laba-laba",
+      "description": "Tungau kecil merah/kuning yang menghisap getah dari bawah daun. Aktif dalam kondisi panas kering.",
+      "symptoms": {
+        "0": "Bintik kuning kecil padat pada daun",
+        "1": "Jaring halus di bawah daun saat wabah parah",
+        "2": "Daun menjadi keperakan lalu kering, keriting dan rontok",
+        "3": "Tanaman kerdil, pertumbuhan lambat"
+      },
+      "treatment": {
+        "0": "Semprot air kuat untuk mencuci bawah daun",
+        "1": "Gunakan Abamectin (Vertimec) atau Dicofol",
+        "2": "Semprot minyak neem 2–3ml/liter",
+        "3": "Ulangi setelah 5–7 hari karena telur tungau tahan obat"
+      },
+      "prevention": {
+        "0": "Pertahankan kelembaban 60–70% di sekitar kebun",
+        "1": "Kabut bawah daun secara teratur",
+        "2": "Periksa daun secara berkala dengan kaca pembesar"
+      }
+    },
+    "flowerFly": {
+      "name": "Lalat Bunga",
+      "description": "Lalat kecil bertelur di kuncup bunga, larva memakan bagian dalam. Umum pada Dendrobium di musim kemarau.",
+      "symptoms": {
+        "0": "Kuncup bunga menguning, rontok sebelum mekar",
+        "1": "Kelopak cacat, terdistorsi saat mekar",
+        "2": "Larva putih kecil di dalam kuncup",
+        "3": "Banyak tangkai bunga tetapi sedikit yang mekar"
+      },
+      "causes": {
+        "0": "Lalat bunga (Contarinia, Bactrocera)",
+        "1": "Cuaca panas lembab mendukung reproduksi",
+        "2": "Kebun anggrek dekat area pohon buah"
+      },
+      "treatment": {
+        "0": "Potong dan hancurkan semua kuncup yang terinfeksi",
+        "1": "Semprot Cypermethrin atau Deltamethrin",
+        "2": "Tutup seluruh tangkai bunga dengan jaring halus",
+        "3": "Semprot 2 kali, jarak 5 hari saat kuncup terbentuk"
+      },
+      "prevention": {
+        "0": "Tutup tangkai bunga segera setelah kuncup muncul",
+        "1": "Semprot pencegahan sebelum musim berbunga",
+        "2": "Tempatkan perangkap lengket kuning di sekitar kebun",
+        "3": "Periksa kuncup bunga setiap hari"
+      }
+    },
+    "thrips": {
+      "name": "Thrips (Frankliniella)",
+      "description": "Serangga ramping ~1mm, kuning-coklat. Menghisap daun dan bunga, meninggalkan bekas goresan keperakan khas.",
+      "symptoms": {
+        "0": "Bekas goresan keperakan sepanjang urat daun",
+        "1": "Bunga dengan bintik perak/coklat, cacat, rontok dini",
+        "2": "Daun muda keriting, tunas cacat",
+        "3": "Lihat serangga kuning kecil saat memeriksa bagian bawah daun"
+      },
+      "causes": {
+        "0": "Frankliniella occidentalis atau Thrips palmi",
+        "1": "Cuaca panas kering (musim kemarau) menyebabkan wabah",
+        "2": "Menyebar dari tanaman baru atau gulma"
+      },
+      "treatment": {
+        "0": "Semprot Spinosad (Entrust) atau Abamectin",
+        "1": "Tempatkan perangkap lengket biru di kebun",
+        "2": "Buang bunga dan tunas yang rusak parah",
+        "3": "Ulangi setelah 5–7 hari, ganti produk untuk menghindari resistensi"
+      },
+      "prevention": {
+        "0": "Gantung perangkap lengket biru secara permanen",
+        "1": "Periksa bagian bawah daun dan dalam bunga setiap hari",
+        "2": "Pertahankan kelembaban tinggi untuk membatasi perkembangan thrips",
+        "3": "Karantina tanaman baru setidaknya 2 minggu"
+      }
+    },
+    "mealybugs": {
+      "name": "Kutu Putih",
+      "description": "Serangga putih seperti kapas karena lapisan lilin, berkerumun di ketiak daun dan batang.",
+      "symptoms": {
+        "0": "Massa putih seperti kapas di ketiak daun, batang, akar",
+        "1": "Daun lengket (embun madu yang disekresikan kutu putih)",
+        "2": "Daun menguning dan layu secara bertahap",
+        "3": "Jamur jelaga hitam tumbuh pada embun madu"
+      },
+      "treatment": {
+        "0": "Lap setiap kelompok dengan kapas yang direndam alkohol 70%",
+        "1": "Semprot Imidacloprid (Confidor) atau Dinotefuran",
+        "2": "Semprot minyak neem 3ml/liter secara menyeluruh",
+        "3": "Obati 3–4 kali, jarak 1 minggu"
+      },
+      "prevention": {
+        "0": "Periksa tanaman baru dengan cermat sebelum menambahkan ke kebun",
+        "1": "Bersihkan daun dan batang secara teratur",
+        "2": "Jangan berlebihan memupuk dengan nitrogen, membuat tanaman berair"
+      }
+    },
+    "scale": {
+      "name": "Kutu Sisik",
+      "description": "Sisik keras coklat menempel kuat pada daun dan batang, terus menghisap getah.",
+      "symptoms": {
+        "0": "Benjolan keras coklat bulat tersebar di daun, batang",
+        "1": "Daun menguning, tanaman melemah secara bertahap",
+        "2": "Zat lengket di permukaan daun",
+        "3": "Tanaman tumbuh lambat, daun menyusut"
+      },
+      "treatment": {
+        "0": "Gosok dengan sikat lembut yang direndam minyak hortikultura",
+        "1": "Semprot Chlorpyrifos atau minyak hortikultura 99",
+        "2": "Gunakan Imidacloprid sistemik",
+        "3": "Ulangi setelah 2 minggu saat telur menetas"
+      },
+      "prevention": {
+        "0": "Karantina tanaman baru 2–3 minggu sebelum menambahkan ke kebun",
+        "1": "Periksa bagian bawah daun secara teratur",
+        "2": "Lap daun bersih dengan kain lembab setiap bulan"
+      }
+    },
+    "snails": {
+      "name": "Siput & Bekicot",
+      "description": "Aktif di malam hari dan setelah hujan. Memakan daun muda, akar, dan tunas Dendrobium.",
+      "symptoms": {
+        "0": "Lubang tidak beraturan di daun",
+        "1": "Tunas muda dan akar dimakan",
+        "2": "Jejak lendir keperakan di tanaman dan tanah",
+        "3": "Kotoran siput kecil dekat pangkal tanaman"
+      },
+      "treatment": {
+        "0": "Ambil dengan tangan di malam hari atau setelah hujan",
+        "1": "Taburkan umpan siput (Metaldehyde) di sekitar pot",
+        "2": "Taburkan bubuk kapur atau abu sekam di sekitar pangkal",
+        "3": "Pasang perangkap bir di dekat pot"
+      },
+      "prevention": {
+        "0": "Jaga area tanam tetap bersih, tidak ada daun membusuk",
+        "1": "Hindari penyiraman malam yang membasahi tanah",
+        "2": "Periksa di bawah rak dan lantai kebun di malam hari"
+      }
+    }
+  },
+  "weather": {
+    "title": "Cuaca & Perawatan",
+    "subtitle": "Rekomendasi untuk Dendrobium",
+    "loading": "Memuat cuaca...",
+    "today": "Hari ini",
+    "dayPrefix": "Hari",
+    "tempMin": "Terendah {{temp}}°C",
+    "careAdvice": "Rekomendasi perawatan hari ini",
+    "fertilizerPlan": "Rencana pemupukan",
+    "days": {
+      "sun": "Min",
+      "mon": "Sen",
+      "tue": "Sel",
+      "wed": "Rab",
+      "thu": "Kam",
+      "fri": "Jum",
+      "sat": "Sab",
+      "sunday": "Minggu"
+    },
+    "stats": {
+      "rain": "Hujan",
+      "humidity": "Lembab",
+      "wind": "Angin",
+      "uv": "UV"
+    },
+    "severity": {
+      "danger": "Perhatian khusus diperlukan",
+      "warning": "Pantau dengan hati-hati",
+      "good": "Kondisi baik"
+    },
+    "fertilizer": {
+      "shouldApply": "Sebaiknya pupuk hari ini",
+      "skip": "Lewati pupuk hari ini",
+      "type": "Jenis pupuk",
+      "ratio": "Rasio NPK",
+      "dose": "Dosis",
+      "timing": "Waktu"
+    },
+    "errors": {
+      "loadFailed": "Tidak dapat memuat data cuaca. Periksa koneksi jaringan."
+    }
+  },
+  "orchids": {
+    "myGarden": "Taman Anggrek Saya",
+    "orchidCount": "{{count}} tanaman",
+    "addButton": "+ Tambah tanaman",
+    "addNewOrchid": "Tambah anggrek baru",
+    "addOrchidButton": "Tambah anggrek",
+    "addFirstButton": "Tambah tanaman pertama",
+    "emptyGarden": "Taman kosong",
+    "addFirstOrchid": "Tambahkan anggrek pertama Anda",
+    "needsCareNow": "⏰ Perlu perawatan sekarang",
+    "today": "Hari ini",
+    "overdueDays": "Terlambat {{days}} hari",
+    "daysLeft": "{{days}} hari tersisa",
+    "takeOrSelectPhoto": "Ambil atau pilih foto anggrek",
+    "tapToAddPhoto": "Ketuk untuk menambah foto",
+    "selectSpecies": "-- Pilih spesies --",
+    "status": {
+      "healthy": "Sehat",
+      "warning": "Perlu perhatian",
+      "sick": "Sakit"
+    },
+    "species": {
+      "dendrobium": "Dendrobium",
+      "phalaenopsis": "Phalaenopsis",
+      "cattleya": "Cattleya",
+      "oncidium": "Oncidium",
+      "vanda": "Vanda",
+      "cymbidium": "Cymbidium",
+      "paphiopedilum": "Paphiopedilum",
+      "other": "Spesies lain"
+    },
+    "fields": {
+      "name": "Nama",
+      "nameRequired": "Nama *",
+      "species": "Spesies",
+      "speciesRequired": "Spesies *",
+      "variety": "Varietas",
+      "location": "Lokasi",
+      "locationRequired": "Lokasi *",
+      "area": "Area (m²)",
+      "purchaseDate": "Tanggal pembelian",
+      "healthStatus": "Status kesehatan",
+      "wateringInterval": "Interval penyiraman (hari)",
+      "fertilizingInterval": "Interval pemupukan (hari)",
+      "notes": "Catatan"
+    },
+    "placeholders": {
+      "name": "mis., Phalaenopsis Putih",
+      "location": "mis., Balkon lantai 2",
+      "area": "mis., 2.5",
+      "notes": "Catatan tambahan..."
+    },
+    "editOrchid": "Edit informasi",
+    "orchidInfo": "Informasi anggrek",
+    "wateringSchedule": "Siram setiap {{days}} hari",
+    "fertilizingSchedule": "Pupuk setiap {{days}} hari",
+    "lastWatered": "Terakhir disiram",
+    "lastFertilized": "Terakhir dipupuk",
+    "never": "Belum pernah",
+    "recordWatering": "Catat penyiraman",
+    "recordFertilizing": "Catat pemupukan",
+    "deleteOrchid": "Hapus tanaman ini",
+    "photoGallery": "Galeri foto",
+    "addPhoto": "+ Tambah foto",
+    "noPhotos": "Belum ada foto",
+    "careLog": "📋 Log perawatan",
+    "addLog": "+ Tambah log",
+    "notePlaceholder": "Catatan (opsional)",
+    "noLogs": "Belum ada log",
+    "logTypes": {
+      "watering": "Penyiraman",
+      "fertilizing": "Pemupukan",
+      "pruning": "Pemangkasan",
+      "repotting": "Ganti pot",
+      "treatment": "Perawatan",
+      "observation": "Observasi"
+    }
+  },
+  "garden": {
+    "title": "Peta taman",
+    "zonesDrawn": "{{count}} zona digambar",
+    "drawZone": "Gambar zona",
+    "tapFirstPoint": "👆 Ketuk titik pertama di peta",
+    "tapContinue": "👆 Lanjutkan mengetuk... ({{count}} titik, minimal 3)",
+    "canSave": "✅ {{count}} titik — bisa simpan atau lanjut mengetuk",
+    "undo": "Batalkan",
+    "done": "Selesai",
+    "nameZone": "Beri nama zona",
+    "namePlaceholder": "mis., Area Phalaenopsis, Rak #1...",
+    "area": "Area (m²)",
+    "calculated": "Terhitung",
+    "autoCalculated": "otomatis",
+    "manualInput": "Input manual...",
+    "notesPlaceholder": "Catatan (opsional)",
+    "saveZone": "Simpan zona",
+    "locating": "Mencari lokasi Anda...",
+    "points": "{{count}} titik",
+    "locationSetup": {
+      "title": "Atur Lokasi Kebun",
+      "description": "Kami memerlukan lokasi kebun Anda untuk menampilkan peta dengan benar",
+      "useGPS": "Gunakan Lokasi Saat Ini",
+      "enterAddress": "Masukkan Alamat",
+      "addressPlaceholder": "Masukkan alamat kebun Anda...",
+      "searching": "Mencari...",
+      "notFound": "Alamat tidak ditemukan. Silakan coba lagi.",
+      "gpsError": "Tidak dapat mendapatkan lokasi Anda. Silakan periksa izin.",
+      "gpsPermissionDenied": "Anda perlu memberikan izin lokasi ke aplikasi.\n\nBuka: Pengaturan → Aplikasi → Orchid AI → Izin → Aktifkan 'Lokasi'",
+      "gpsDisabled": "GPS dinonaktifkan. Silakan aktifkan GPS di Pengaturan → Lokasi",
+      "gpsTimeout": "Permintaan lokasi habis waktu. Silakan coba lagi atau gunakan input alamat.",
+      "confirm": "Konfirmasi Lokasi",
+      "changeLocation": "Ubah Lokasi",
+      "foundLocation": "Ditemukan",
+      "skip": "Lewati untuk sekarang"
+    }
+  },
+  "costs": {
+    "title": "Biaya & Pendapatan",
+    "subtitle": "Lacak keuntungan taman anggrek",
+    "add": "Tambah",
+    "expense": "Pengeluaran",
+    "revenue": "Pendapatan",
+    "profit": "Keuntungan",
+    "all": "Semua",
+    "amountPlaceholder": "Jumlah (₫)",
+    "notePlaceholder": "Catatan (opsional)",
+    "noData": "Belum ada data",
+    "categories": {
+      "pesticide": "Pestisida",
+      "fertilizer": "Pupuk",
+      "medium": "Media tanam",
+      "pots": "Pot/rak",
+      "plants": "Beli tanaman",
+      "utilities": "Listrik/air",
+      "transport": "Transportasi",
+      "flowerSales": "Penjualan bunga",
+      "plantSales": "Penjualan tanaman",
+      "division": "Pemisahan",
+      "careService": "Layanan perawatan",
+      "other": "Lainnya"
+    }
+  },
+  "sensor": {
+    "title": "📡 Sensor Kebun",
+    "subtitle": "NPK · pH · EC · Kelembaban · Suhu",
+    "connected": "Terhubung",
+    "notConnected": "Tidak terhubung",
+    "noDataTitle": "Belum menerima data",
+    "noDataDescription": "Hubungkan ESP32 Anda ke Firebase untuk mulai memantau",
+    "firebasePath": "Jalur Firebase RTDB",
+    "jsonStructure": "Struktur JSON yang Dikirim",
+    "hardwareTitle": "Perangkat Keras yang Diperlukan",
+    "hardware": {
+      "esp32": "ESP32 atau ESP8266",
+      "npk": "Sensor NPK RS485 + modul RS485-to-TTL",
+      "phec": "Sensor pH + EC (analog atau RS485)",
+      "dht22": "DHT22 (suhu + kelembaban)",
+      "moisture": "Sensor kelembaban tanah kapasitif"
+    },
+    "lastUpdate": "🕐 Diperbarui {{time}}",
+    "alertCount": "🚨 {{count}} peringatan",
+    "warnCount": "⚠️ {{count}} perhatian",
+    "historyTitle": "📈 Riwayat {{count}} pembacaan",
+    "chartMinMax": "Min: {{min}} · Maks: {{max}} {{unit}}",
+    "chartOldest": "← Terlama",
+    "chartNewest": "Terbaru →",
+    "noChartData": "Data tidak cukup",
+    "metrics": {
+      "temp": "Suhu",
+      "humidity": "Kelembaban Udara",
+      "moisture": "Kelembaban Tanah",
+      "ph": "pH",
+      "ec": "EC",
+      "n": "Nitrogen (N)",
+      "p": "Fosfor (P)",
+      "k": "Kalium (K)"
+    },
+    "status": {
+      "good": "Normal",
+      "warning": "Perlu perhatian",
+      "danger": "Peringatan"
+    },
+    "threshold": "Rentang optimal",
+    "aiTitle": "Penasihat Perawatan AI",
+    "aiSubtitle": "Analisis data sensor dengan Claude AI",
+    "aiAnalyze": "Analisis sekarang",
+    "aiReanalyze": "Analisis ulang",
+    "aiStop": "Berhenti",
+    "aiPrompt": "Tekan tombol untuk analisis AI dan rekomendasi perawatan",
+    "aiAnalyzing": "AI sedang menganalisis...",
+    "aiError": "Kesalahan analisis"
+  },
+  "calendar": {
+    "title": "Kalender Perawatan",
+    "todayTasks": "{{count}} tugas hari ini",
+    "addSchedule": "+ Tambah jadwal",
+    "addCareSchedule": "Tambah jadwal perawatan",
+    "careType": "Jenis perawatan",
+    "orchidRequired": "Anggrek *",
+    "selectOrchid": "-- Pilih anggrek --",
+    "noOrchidsWarning": "Belum ada anggrek — tambahkan dulu",
+    "scheduledDate": "Tanggal terjadwal",
+    "notes": "Catatan",
+    "notesPlaceholder": "mis., Pupuk NPK 10ml/1L",
+    "saveSchedule": "Simpan jadwal",
+    "clearSelection": "Hapus pilihan",
+    "noLogs": "Belum ada log",
+    "noLogsThisDay": "Tidak ada log untuk hari ini",
+    "noSchedules": "Tidak ada jadwal",
+    "unknownOrchid": "Anggrek tidak dikenal",
+    "markDone": "✓ Selesai",
+    "locale": "id-ID",
+    "types": {
+      "watering": "Penyiraman",
+      "fertilizing": "Pemupukan",
+      "repotting": "Ganti pot",
+      "pruning": "Pemangkasan",
+      "blooming": "Berbunga",
+      "other": "Lainnya"
+    },
+    "weekdays": {
+      "mon": "Sen",
+      "tue": "Sel",
+      "wed": "Rab",
+      "thu": "Kam",
+      "fri": "Jum",
+      "sat": "Sab",
+      "sun": "Min"
+    },
+    "tabs": {
+      "today": "Hari ini",
+      "upcoming": "Mendatang",
+      "done": "Selesai",
+      "logs": "Log"
+    }
+  },
+  "community": {
+    "title": "🏆 Komunitas",
+    "subtitle": "Bagikan taman anggrek Anda",
+    "shareButton": "+ Bagikan",
+    "shareTitle": "Bagikan anggrek Anda",
+    "selectPhoto": "Pilih foto",
+    "speciesOptional": "Spesies (opsional)",
+    "captionPlaceholder": "Tulis keterangan...",
+    "posting": "Memposting...",
+    "postButton": "Posting",
+    "likes": "suka",
+    "comments": "komentar",
+    "commentPlaceholder": "Tulis komentar...",
+    "noPosts": "Belum ada postingan",
+    "beFirst": "Jadilah yang pertama berbagi!",
+    "species": {
+      "phalaenopsis": "Phalaenopsis",
+      "dendrobium": "Dendrobium",
+      "cattleya": "Cattleya",
+      "oncidium": "Oncidium",
+      "vanda": "Vanda",
+      "mokara": "Mokara",
+      "cymbidium": "Cymbidium",
+      "rhynchostylis": "Rhynchostylis",
+      "other": "Lainnya"
+    },
+    "timeAgo": {
+      "justNow": "baru saja",
+      "minutesAgo": "{{count}} menit lalu",
+      "hoursAgo": "{{count}} jam lalu",
+      "daysAgo": "{{count}} hari lalu"
+    }
+  },
+  "propagation": {
+    "title": "🌱 Perbanyakan",
+    "subtitle": "Hitung potensi perbanyakan",
+    "methods": {
+      "split": {
+        "label": "Pemisahan",
+        "desc": "Pisahkan anakan dari tanaman induk"
+      },
+      "keiki": {
+        "label": "Keiki",
+        "desc": "Anakan alami yang tumbuh di batang"
+      },
+      "stem": {
+        "label": "Stek Batang",
+        "desc": "Potong bagian batang untuk perbanyakan"
+      }
+    },
+    "split": {
+      "totalPseudobulbs": "Total pseudobulb yang tersedia",
+      "totalPlaceholder": "mis., 12",
+      "minPerPlant": "Pseudobulb minimum per tanaman",
+      "canSplit": "tanaman dapat dipisahkan",
+      "remainder": "{{count}} pseudobulb tersisa",
+      "bestTime": "Waktu terbaik: setelah berbunga",
+      "useSterileTool": "Gunakan alat tajam yang steril",
+      "notEnough": "Belum cukup",
+      "needMore": "Perlu {{count}} pseudobulb lagi untuk memisahkan menjadi 2 tanaman",
+      "notesTitle": "Catatan pemisahan",
+      "note1": "Pisahkan setelah berbunga, hindari musim hujan",
+      "note2": "Setiap pemisahan memerlukan minimal 3 pseudobulb sehat",
+      "note3": "Oleskan fungisida pada potongan",
+      "note4": "Tanam di media segar, siram sedikit selama 1-2 minggu"
+    },
+    "keiki": {
+      "count": "Jumlah keiki yang diamati",
+      "countPlaceholder": "mis., 3",
+      "hasRoots": "Keiki memiliki akar ≥ 3cm?",
+      "hasRootsYes": "✅ Ya",
+      "hasRootsNo": "⏳ Belum",
+      "ready": "keiki siap dipisahkan",
+      "readyInstruction": "Potong dekat batang induk, tanam di media lembab",
+      "waitMore": "Tunggu lebih lama",
+      "waitInstruction": "{{count}} keiki perlu 4-8 minggu lagi untuk akar ≥ 3cm",
+      "notesTitle": "Panduan pemisahan keiki",
+      "note1": "Tunggu akar keiki mencapai minimal 3–5 cm",
+      "note2": "Potong dengan alat tajam, sterilkan dengan alkohol",
+      "note3": "Oleskan bubuk sulfur atau fungisida pada potongan",
+      "note4": "Tanam di kulit kayu/lumut, jaga lembab dan teduh"
+    },
+    "stem": {
+      "length": "Panjang batang (cm)",
+      "lengthPlaceholder": "mis., 60",
+      "nodeSpacing": "Jarak ruas (cm)",
+      "cuttings": "stek batang",
+      "details": "{{nodes}} ruas · ~{{avgLength}}cm per stek",
+      "tooShort": "Batang terlalu pendek",
+      "needLength": "Perlu minimal {{length}}cm untuk 1 stek",
+      "notesTitle": "Panduan stek batang",
+      "note1": "Umum untuk Dendrobium, tidak untuk Phalaenopsis",
+      "note2": "Setiap stek memerlukan 2–3 ruas",
+      "note3": "Letakkan horizontal di lumut atau serat kelapa lembab",
+      "note4": "Jaga lembab, hindari sinar matahari langsung selama 4–8 minggu"
+    }
+  },
+  "notification": {
+    "enableTitle": "Aktifkan pengingat perawatan",
+    "enableDesc": "Terima notifikasi meski aplikasi ditutup",
+    "enable": "Aktifkan"
+  },
+  "shopPage": {
+    "title": "Beli Pestisida",
+    "subtitle": "Produk asli dari hoalangiong.com",
+    "noProducts": "Belum ada produk",
+    "comingSoon": "Cek lagi nanti!"
+  },
+  "orderPage": {
+    "successTitle": "Pesanan berhasil!",
+    "successMsg": "Kami akan menghubungi Anda untuk konfirmasi melalui Zalo.",
+    "transferInfo": "Info transfer bank",
+    "amount": "Jumlah",
+    "content": "Keterangan",
+    "viewOrders": "Lihat pesanan",
+    "continueShopping": "Lanjut belanja",
+    "confirmOrder": "Konfirmasi pesanan",
+    "products": "Produk",
+    "totalPayment": "Total pembayaran",
+    "deliveryInfo": "Info pengiriman",
+    "namePlaceholder": "Nama penerima *",
+    "phonePlaceholder": "Nomor telepon *",
+    "selectProvince": "Pilih Provinsi/Kota *",
+    "selectWard": "Pilih Kecamatan *",
+    "selectProvFirst": "Pilih provinsi dulu",
+    "loadingWards": "Memuat...",
+    "wardNotFound": "Tidak ditemukan? Isi manual",
+    "wardManual": "Masukkan nama Kecamatan *",
+    "wardBackToList": "← Kembali ke daftar",
+    "streetPlaceholder": "Nomor rumah, nama jalan *",
+    "notePlaceholder": "Catatan (opsional)",
+    "paymentMethod": "Metode pembayaran",
+    "cod": "🚚 COD",
+    "transfer": "🏦 Transfer bank",
+    "bank": "Bank",
+    "accountNumber": "Nomor rekening",
+    "accountOwner": "Nama pemilik",
+    "qrInstruction": "Buka aplikasi bank → pilih \"Scan QR\" → scan kode di bawah",
+    "placing": "Memproses pesanan...",
+    "placeOrder": "Pesan sekarang",
+    "myOrders": "Pesanan saya",
+    "noOrders": "Belum ada pesanan",
+    "searchPlaceholder": "Cari produk...",
+    "askExpert": "Tanya ahli gratis",
+    "zaloSupport": "Konsultasi Zalo · Respons cepat",
+    "noProducts": "Produk tidak ditemukan",
+    "soldCount": "Terjual {{count}}",
+    "freeShip": "Gratis ongkir"
+  },
+  "orderStatus": {
+    "pending": "Menunggu konfirmasi",
+    "confirmed": "Dikonfirmasi",
+    "shipping": "Dikirim",
+    "done": "Selesai",
+    "cancelled": "Dibatalkan",
+    "all": "Semua"
+  },
+  "admin": {
+    "noAccess": "Akses ditolak",
+    "adminOnly": "Halaman ini hanya untuk administrator",
+    "orders": "Pesanan",
+    "products": "Produk",
+    "noOrders": "Belum ada pesanan",
+    "noProducts": "Belum ada produk",
+    "addProduct": "+ Tambah produk",
+    "editProduct": "Edit produk",
+    "saving": "Menyimpan...",
+    "update": "Perbarui",
+    "fieldName": "Nama produk *",
+    "fieldImage": "URL gambar",
+    "fieldPrice": "Harga",
+    "fieldShopUrl": "URL TikTok Shop *",
+    "fieldType": "Jenis",
+    "fieldDesc": "Deskripsi singkat",
+    "fieldDiseases": "Tautkan ke penyakit/hama",
+    "placeholderPrice": "mis. 35.000₫",
+    "placeholderType": "mis. Fungisida, Insektisida...",
+    "placeholderDesc": "Kegunaan, cara pakai...",
+    "placeholderName": "mis. Aliette 80WP 100g"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "close": "Tutup",
+    "back": "Kembali",
+    "next": "Berikutnya",
+    "previous": "Sebelumnya",
+    "search": "Cari",
+    "filter": "Filter",
+    "sort": "Urutkan",
+    "viewAll": "Lihat semua"
+  }
+}
