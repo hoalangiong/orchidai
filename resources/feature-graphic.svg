@@ -1,0 +1,120 @@
+<svg width="1024" height="500" viewBox="0 0 1024 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d2b0a"/>
+      <stop offset="50%" style="stop-color:#1a4a14"/>
+      <stop offset="100%" style="stop-color:#0d2b0a"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="25%" cy="50%" r="40%">
+      <stop offset="0%" style="stop-color:#7ed321;stop-opacity:0.25"/>
+      <stop offset="100%" style="stop-color:#0d2b0a;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="75%" cy="50%" r="40%">
+      <stop offset="0%" style="stop-color:#5db53c;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#0d2b0a;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="textglow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="500" fill="url(#bg)"/>
+  <rect width="1024" height="500" fill="url(#glow1)"/>
+  <rect width="1024" height="500" fill="url(#glow2)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="80" cy="80" r="120" fill="none" stroke="#7ed321" stroke-width="1" opacity="0.1"/>
+  <circle cx="80" cy="80" r="80" fill="none" stroke="#7ed321" stroke-width="1" opacity="0.15"/>
+  <circle cx="944" cy="420" r="150" fill="none" stroke="#5db53c" stroke-width="1" opacity="0.1"/>
+  <circle cx="944" cy="420" r="100" fill="none" stroke="#5db53c" stroke-width="1" opacity="0.12"/>
+
+  <!-- Leaf decorations left -->
+  <ellipse cx="30" cy="200" rx="60" ry="20" fill="#7ed321" opacity="0.08" transform="rotate(-30 30 200)"/>
+  <ellipse cx="50" cy="300" rx="80" ry="18" fill="#5db53c" opacity="0.06" transform="rotate(20 50 300)"/>
+
+  <!-- Leaf decorations right -->
+  <ellipse cx="994" cy="150" rx="70" ry="18" fill="#7ed321" opacity="0.08" transform="rotate(40 994 150)"/>
+  <ellipse cx="980" cy="350" rx="90" ry="20" fill="#5db53c" opacity="0.06" transform="rotate(-25 980 350)"/>
+
+  <!-- HLG Logo - left side -->
+  <g transform="translate(200, 250) scale(1.4)" filter="url(#shadow)">
+    <!-- H letter - Green -->
+    <g transform="translate(-140, 0)">
+      <path d="M -35,-80 L -35,80 L -15,80 L -15,85 L 5,85 L 5,80 L 15,80 L 15,-80 L 5,-80 L 5,-85 L -15,-85 L -15,-80 Z"
+            fill="#7ed321" stroke="#5a9e18" stroke-width="1.5"/>
+      <path d="M -15,-10 L -15,10 L 55,10 L 55,-10 Z"
+            fill="#7ed321" stroke="#5a9e18" stroke-width="1.5"/>
+      <path d="M 45,-80 L 45,80 L 55,80 L 55,85 L 75,85 L 75,80 L 85,80 L 85,-80 L 75,-80 L 75,-85 L 55,-85 L 55,-80 Z"
+            fill="#7ed321" stroke="#5a9e18" stroke-width="1.5"/>
+      <path d="M -35,-80 L -35,80 L -30,75 L -30,-75 Z" fill="#5a9e18" opacity="0.5"/>
+      <path d="M 85,-80 L 85,80 L 80,75 L 80,-75 Z" fill="#2d4f0c" opacity="0.5"/>
+    </g>
+    <!-- L letter - Silver/White -->
+    <g transform="translate(0, 0)">
+      <path d="M -15,-80 L -15,60 L 5,60 L 5,65 L 65,65 L 65,80 L 75,80 L 75,55 L 5,55 L 5,-80 L -5,-80 L -5,-85 L -15,-85 Z"
+            fill="#e8e8e8" stroke="#b0b0b0" stroke-width="1.5"/>
+      <path d="M -15,-80 L -15,60 L -10,55 L -10,-75 Z" fill="#ffffff" opacity="0.6"/>
+      <path d="M 5,55 L 75,55 L 70,50 L 5,50 Z" fill="#c0c0c0" opacity="0.5"/>
+    </g>
+    <!-- G letter - Silver/White with green accent -->
+    <g transform="translate(140, 0)">
+      <path d="M -60,-80 Q -85,-80 -85,-55 L -85,55 Q -85,80 -60,80 L 40,80 Q 65,80 65,55 L 65,0 L 15,0 L 15,20 L 45,20 L 45,55 Q 45,60 40,60 L -60,60 Q -65,60 -65,55 L -65,-55 Q -65,-60 -60,-60 L 40,-60 Q 45,-60 45,-55 L 45,-30 L 65,-30 L 65,-55 Q 65,-80 40,-80 Z"
+            fill="#e8e8e8" stroke="#b0b0b0" stroke-width="1.5"/>
+      <path d="M 15,0 L 15,20 L 45,20 L 45,0 Z" fill="#7ed321" opacity="0.4"/>
+      <path d="M -85,-55 L -85,55 Q -85,80 -60,80 L -55,75 Q -75,75 -75,55 L -75,-55 Q -75,-75 -55,-75 L -60,-80 Q -85,-80 -85,-55 Z"
+            fill="#ffffff" opacity="0.6"/>
+    </g>
+  </g>
+
+  <!-- Divider line -->
+  <line x1="430" y1="120" x2="430" y2="380" stroke="#7ed321" stroke-width="1" opacity="0.3"/>
+
+  <!-- App name and tagline - right side -->
+  <g transform="translate(540, 0)">
+    <!-- Orchid AI text -->
+    <text x="0" y="210" font-family="Arial, sans-serif" font-size="72" font-weight="900"
+          fill="#ffffff" letter-spacing="2" filter="url(#textglow)">Orchid AI</text>
+
+    <!-- Green underline -->
+    <rect x="0" y="222" width="320" height="4" rx="2" fill="#7ed321" opacity="0.8"/>
+
+    <!-- Tagline Vietnamese -->
+    <text x="0" y="270" font-family="Arial, sans-serif" font-size="22" font-weight="400"
+          fill="#a8dc98" letter-spacing="0.5">Quản lý vườn lan chuyên nghiệp</text>
+
+    <!-- Tagline English -->
+    <text x="0" y="302" font-family="Arial, sans-serif" font-size="18" font-weight="300"
+          fill="#6aaa50" letter-spacing="0.5">Professional Orchid Garden Management</text>
+
+    <!-- Feature badges -->
+    <g transform="translate(0, 330)">
+      <!-- Badge 1 -->
+      <rect x="0" y="0" width="130" height="36" rx="18" fill="#7ed321" opacity="0.15" stroke="#7ed321" stroke-width="1" opacity="0.4"/>
+      <text x="65" y="23" font-family="Arial, sans-serif" font-size="13" font-weight="600"
+            fill="#a8dc98" text-anchor="middle">🤖 AI Diagnosis</text>
+
+      <!-- Badge 2 -->
+      <rect x="145" y="0" width="130" height="36" rx="18" fill="#7ed321" opacity="0.15" stroke="#7ed321" stroke-width="1" opacity="0.4"/>
+      <text x="210" y="23" font-family="Arial, sans-serif" font-size="13" font-weight="600"
+            fill="#a8dc98" text-anchor="middle">🌤️ Weather</text>
+
+      <!-- Badge 3 -->
+      <rect x="290" y="0" width="130" height="36" rx="18" fill="#7ed321" opacity="0.15" stroke="#7ed321" stroke-width="1" opacity="0.4"/>
+      <text x="355" y="23" font-family="Arial, sans-serif" font-size="13" font-weight="600"
+            fill="#a8dc98" text-anchor="middle">📅 Care Schedule</text>
+    </g>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="470" width="1024" height="30" fill="#7ed321" opacity="0.08"/>
+  <text x="512" y="490" font-family="Arial, sans-serif" font-size="13" font-weight="400"
+        fill="#6aaa50" text-anchor="middle" letter-spacing="2">hoalangiong.com</text>
+
+  <!-- Border -->
+  <rect width="1024" height="500" fill="none" stroke="#7ed321" stroke-width="2" opacity="0.2"/>
+</svg>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "456597052380",
+    "firebase_url": "https://orchids-44f86-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "orchids-44f86",
+    "storage_bucket": "orchids-44f86.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456597052380:android:11285d5bd155e67e1ccd19",
+        "android_client_info": {
+          "package_name": "com.orchidfarm.ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456597052380-ad4ervfqqf8gl8vruhngrk6rfpl4sjs6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orchidfarm.ai",
+            "certificate_hash": "92f86e562736104a6e4cff02e99b5caea7645e61"
+          }
+        },
+        {
+          "client_id": "456597052380-hj9p770bkaut6hsj57ai8upfg3cbikn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCChu79uvLB6j8hvpA-u9YYQ4a1q8fcNuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456597052380-hj9p770bkaut6hsj57ai8upfg3cbikn4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

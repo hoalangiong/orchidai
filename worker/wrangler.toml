@@ -1,0 +1,7 @@
+name = "orchid-diagnose"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+account_id = "6ceb31a6ab9b755a896fff45b39cff46"
+
+[vars]
+ALLOWED_ORIGIN = "https://hoalangiong.tino.page"

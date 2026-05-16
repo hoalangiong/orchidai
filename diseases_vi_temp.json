@@ -1,0 +1,77 @@
+{
+  "leafSpot": {
+    "name": "Bệnh đốm lá (Cercospora)",
+    "symptoms": {
+      "0": "Đốm tròn nâu với viền vàng rõ ràng",
+      "1": "Tâm đốm sẫm, có vòng tròn đồng tâm",
+      "2": "Lá vàng và rụng khi bệnh nặng",
+      "3": "Đốm lan rộng khi thời tiết ẩm ướt"
+    },
+    "causes": {
+      "0": "Nấm Cercospora hoặc Phyllosticta",
+      "1": "Vi khuẩn Pseudomonas (đốm trong nước)",
+      "2": "Độ ẩm cao, nước đọng trên lá"
+    },
+    "treatment": {
+      "0": "Cắt bỏ lá bệnh nặng và tiêu hủy ngoài vườn",
+      "1": "Phun Daconil (Chlorothalonil) hoặc Mancozeb",
+      "2": "Cách ly cây, tăng thông gió",
+      "3": "Phun lại sau 7–10 ngày"
+    },
+    "prevention": {
+      "0": "Tránh để nước đọng trên mặt lá",
+      "1": "Tăng khoảng cách giữa các cây",
+      "2": "Phun phòng định kỳ mùa mưa"
+    }
+  },
+  "blight": {
+    "name": "Bệnh cháy lá",
+    "symptoms": {
+      "0": "Vết nâu lớn từ mép lá lan vào trong",
+      "1": "Mép vết bệnh màu vàng nước",
+      "2": "Lá khô chết từng mảng lớn",
+      "3": "Bệnh lây nhanh khi có mưa liên tục"
+    },
+    "causes": {
+      "0": "Nấm Botrytis hoặc Alternaria",
+      "1": "Mưa nhiều, độ ẩm không khí > 85%",
+      "2": "Ánh sáng yếu, thông thoáng kém"
+    },
+    "treatment": {
+      "0": "Cắt bỏ lá bệnh, tiêu hủy xa vườn",
+      "1": "Phun Iprodione (Rovral) hoặc Thiram",
+      "2": "Tăng thông thoáng, giảm độ ẩm",
+      "3": "Phun 2–3 lần, cách nhau 5–7 ngày"
+    },
+    "prevention": {
+      "0": "Đảm bảo thông gió tốt nhất là mùa mưa",
+      "1": "Không tưới vào buổi chiều tối",
+      "2": "Phun phòng Mancozeb trước mùa mưa"
+    }
+  },
+  "rust": {
+    "name": "Bệnh gỉ sắt lá",
+    "symptoms": {
+      "0": "Đốm nhỏ màu cam nâu rải rác trên lá",
+      "1": "Mặt dưới lá có ổ bào tử nhô lên",
+      "2": "Bào tử vỡ ra thành bột cam",
+      "3": "Lá vàng, năng lượng cây suy giảm"
+    },
+    "causes": {
+      "0": "Nấm Pucciniales (Phragmidium)",
+      "1": "Độ ẩm cao, sương mù buổi sáng",
+      "2": "Thông gió kém, nhiệt độ 15–25°C"
+    },
+    "treatment": {
+      "0": "Phun Propiconazole (Tilt) hoặc Triadimefon",
+      "1": "Thu gom lá bệnh rụng và tiêu hủy",
+      "2": "Phun lưu huỳnh dạng huyền phù",
+      "3": "Điều trị 3 lần cách nhau 7 ngày"
+    },
+    "prevention": {
+      "0": "Tránh tưới nước buổi tối",
+      "1": "Tăng thông gió cho vườn lan",
+      "2": "Kiểm tra mặt dưới lá thường xuyên"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="192dp"
+    android:height="192dp"
+    android:viewportWidth="192"
+    android:viewportHeight="192">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#5db53c"
+        android:pathData="M96,0 A96,96 0 1,1 96,192 A96,96 0 1,1 96,0 Z"/>
+
+    <!-- Orchid flower petals -->
+    <!-- Top petal -->
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M96,40 Q80,50 80,70 Q80,85 96,90 Q112,85 112,70 Q112,50 96,40 Z"/>
+
+    <!-- Left petal -->
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M60,80 Q50,90 55,105 Q65,115 80,110 Q85,95 75,85 Q70,80 60,80 Z"/>
+
+    <!-- Right petal -->
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M132,80 Q142,90 137,105 Q127,115 112,110 Q107,95 117,85 Q122,80 132,80 Z"/>
+
+    <!-- Bottom left petal -->
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M70,110 Q60,120 65,135 Q75,145 90,140 Q95,125 85,115 Q80,110 70,110 Z"/>
+
+    <!-- Bottom right petal -->
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M122,110 Q132,120 127,135 Q117,145 102,140 Q97,125 107,115 Q112,110 122,110 Z"/>
+
+    <!-- Center lip (labellum) -->
+    <path
+        android:fillColor="#ffd700"
+        android:pathData="M96,95 Q85,100 80,115 Q80,130 96,140 Q112,130 112,115 Q107,100 96,95 Z"/>
+
+    <!-- Stem -->
+    <path
+        android:fillColor="#4a9d2e"
+        android:pathData="M96,140 L96,170 Q96,175 92,175 L100,175 Q96,175 96,170 Z"
+        android:strokeWidth="4"
+        android:strokeColor="#4a9d2e"/>
+</vector>
