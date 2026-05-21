@@ -50,7 +50,7 @@ export default function DashboardPage() {
   const overdueCount = reminders.filter(r => r.daysOverdue > 0).length;
   const dueTodayCount = reminders.filter(r => r.daysOverdue === 0).length;
 
-  const totalArea = useMemo(() => zones.reduce((s, z) => s + (z.area ?? 0), 0), [zones]);
+  const totalQuantity = useMemo(() => zones.reduce((s, z) => s + (z.quantity ?? 0), 0), [zones]);
 
   return (
     <div className="space-y-4">
@@ -160,9 +160,9 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <p className="text-xs text-gray-500">{t('dashboard.zonesDrawn', { count: zones.length })}</p>
-              {totalArea > 0 && (
+              {totalQuantity > 0 && (
                 <p className="text-sm font-semibold text-gray-800">
-                  {t('dashboard.totalArea')}: {totalArea >= 10000 ? `${(totalArea / 10000).toFixed(2)} ha` : `${totalArea.toFixed(1)} m²`}
+                  Tổng số cây: {totalQuantity}
                 </p>
               )}
             </div>

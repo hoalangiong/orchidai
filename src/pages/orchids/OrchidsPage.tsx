@@ -1,10 +1,23 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { MapContainer, TileLayer, Polygon } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { useOrchids } from '../../hooks/useOrchids';
 import { useCareLog } from '../../hooks/useCareLog';
 import { useOrchidImages } from '../../hooks/useOrchidImages';
 import { Orchid, CareLog } from '../../types/index';
 import { useSmartReminders } from '../../hooks/useSmartReminders';
+import { useGarden } from '../../hooks/useGarden';
+import { useUserProfile } from '../../hooks/useUserProfile';
+import GridOverlay, { CellDetailPanel } from '../../components/garden/GardenGrid';
+
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
 
 function getStatusConfig(t: any): Record<Orchid['healthStatus'], { label: string; color: string; dot: string }> {
   return {
@@ -56,9 +69,10 @@ function nextDueLabel(last: string | undefined, interval: number | undefined, t:
 }
 
 type EditForm = {
-  name: string; species: string; location: string; area: number; variety: string;
+  name: string; species: string; location: string; quantity: number; variety: string;
   purchaseDate: string; notes: string; healthStatus: Orchid['healthStatus'];
   imageUrl: string; wateringInterval: number; fertilizingInterval: number;
+  price: number;
 };
 
 function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: () => void; onDelete: () => void }) {
@@ -78,7 +92,7 @@ function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: ()
     name: orchid.name,
     species: orchid.species,
     location: orchid.location,
-    area: orchid.area ?? 0,
+    quantity: orchid.quantity ?? 0,
     variety: orchid.variety ?? '',
     purchaseDate: orchid.purchaseDate,
     notes: orchid.notes ?? '',
@@ -86,6 +100,7 @@ function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: ()
     imageUrl: orchid.imageUrl ?? '',
     wateringInterval: orchid.wateringInterval ?? 2,
     fertilizingInterval: orchid.fertilizingInterval ?? 14,
+    price: orchid.price ?? 0,
   });
   const editFileRef = useRef<HTMLInputElement>(null);
   const galleryFileRef = useRef<HTMLInputElement>(null);
@@ -127,7 +142,7 @@ function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: ()
       name: editForm.name,
       species: editForm.species,
       location: editForm.location,
-      area: editForm.area,
+      quantity: editForm.quantity,
       variety: editForm.variety || undefined,
       purchaseDate: editForm.purchaseDate,
       notes: editForm.notes || undefined,
@@ -135,6 +150,7 @@ function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: ()
       imageUrl: editForm.imageUrl || undefined,
       wateringInterval: editForm.wateringInterval,
       fertilizingInterval: editForm.fertilizingInterval,
+      price: editForm.price || undefined,
     });
     setShowEdit(false);
   };
@@ -188,8 +204,8 @@ function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: ()
           <Field label={t('orchids.fields.location')}>
             <input required value={editForm.location} onChange={e => setEditForm(f => ({ ...f, location: e.target.value }))} className="input" />
           </Field>
-          <Field label={t('orchids.fields.area')}>
-            <input type="number" min="0" step="0.1" value={editForm.area || ''} onChange={e => setEditForm(f => ({ ...f, area: parseFloat(e.target.value) || 0 }))} className="input" />
+          <Field label="Số lượng cây">
+            <input type="number" min="0" step="1" value={editForm.quantity || ''} onChange={e => setEditForm(f => ({ ...f, quantity: parseInt(e.target.value) || 0 }))} placeholder="VD: 5" className="input" />
           </Field>
           <Field label={t('orchids.fields.purchaseDate')}>
             <input type="date" value={editForm.purchaseDate} onChange={e => setEditForm(f => ({ ...f, purchaseDate: e.target.value }))} className="input" />
@@ -211,6 +227,9 @@ function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: ()
           </Field>
           <Field label={t('orchids.fields.fertilizingInterval')}>
             <input type="number" min="1" max="90" value={editForm.fertilizingInterval} onChange={e => setEditForm(f => ({ ...f, fertilizingInterval: parseInt(e.target.value) || 14 }))} className="input" />
+          </Field>
+          <Field label="Giá (đ)">
+            <input type="number" min="0" step="1000" value={editForm.price || ''} onChange={e => setEditForm(f => ({ ...f, price: parseFloat(e.target.value) || 0 }))} placeholder="VD: 150000" className="input" />
           </Field>
           <Field label={t('orchids.fields.notes')}>
             <textarea value={editForm.notes} onChange={e => setEditForm(f => ({ ...f, notes: e.target.value }))} rows={2} className="input resize-none" />
@@ -411,20 +430,103 @@ function OrchidDetail({ orchid, onBack, onDelete }: { orchid: Orchid; onBack: ()
   );
 }
 
+interface CellInfo {
+  zoneId: string;
+  row: number;
+  col: number;
+  orchid?: Orchid;
+}
+
+function GardenMapTab({ orchids, updateOrchid }: { orchids: Orchid[]; updateOrchid: (id: string, data: Partial<Orchid>) => Promise<void> }) {
+  const { profile } = useUserProfile();
+  const initialCenter = profile?.gardenLocation || { lat: 10.8231, lng: 106.6297 };
+  const { zones } = useGarden(initialCenter);
+  const [selectedCell, setSelectedCell] = useState<CellInfo | null>(null);
+
+  const handleCellClick = useCallback((cell: CellInfo) => {
+    setSelectedCell(cell);
+  }, []);
+
+  const handleAssign = async (orchidId: string) => {
+    if (!selectedCell) return;
+    await updateOrchid(orchidId, {
+      gardenPosition: { zoneId: selectedCell.zoneId, row: selectedCell.row, col: selectedCell.col },
+    });
+    setSelectedCell(null);
+  };
+
+  const handleUnassign = async () => {
+    if (!selectedCell?.orchid) return;
+    await updateOrchid(selectedCell.orchid.id, { gardenPosition: undefined });
+    setSelectedCell(null);
+  };
+
+  const handleToggleSold = async () => {
+    if (!selectedCell?.orchid) return;
+    await updateOrchid(selectedCell.orchid.id, { sold: !selectedCell.orchid.sold });
+    setSelectedCell(null);
+  };
+
+  if (zones.length === 0) {
+    return (
+      <div className="flex flex-col items-center py-16 text-center">
+        <span className="text-5xl mb-4">🗺️</span>
+        <p className="text-gray-500 font-medium">Chưa có khu vườn nào</p>
+        <p className="text-gray-400 text-sm mt-1">Vào trang Vườn để vẽ khu vực trồng lan</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-md" style={{ height: 'calc(100vh - 14rem)' }}>
+      <MapContainer center={[initialCenter.lat, initialCenter.lng]} zoom={17} style={{ height: '100%', width: '100%' }} zoomControl={false}>
+        <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" attribution="Tiles © Esri" maxZoom={19} />
+        <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" attribution="" maxZoom={19} opacity={0.6} />
+        {zones.map(zone => (
+          <Polygon
+            key={zone.id}
+            positions={zone.points.map(p => [p.lat, p.lng])}
+            pathOptions={{ color: zone.color, fillColor: zone.color, fillOpacity: 0.1, weight: 2 }}
+          />
+        ))}
+        <GridOverlay zones={zones} orchids={orchids} onCellClick={handleCellClick} />
+      </MapContainer>
+
+      {selectedCell && (() => {
+        const zone = zones.find(z => z.id === selectedCell.zoneId);
+        if (!zone) return null;
+        return (
+          <CellDetailPanel
+            cell={selectedCell}
+            zone={zone}
+            orchids={orchids}
+            onClose={() => setSelectedCell(null)}
+            onAssign={handleAssign}
+            onUnassign={handleUnassign}
+            onToggleSold={handleToggleSold}
+          />
+        );
+      })()}
+    </div>
+  );
+}
+
 export default function OrchidsPage() {
   const { t } = useTranslation();
-  const { orchids, addOrchid, deleteOrchid } = useOrchids();
+  const { orchids, addOrchid, deleteOrchid, updateOrchid } = useOrchids();
+  const [tab, setTab] = useState<'list' | 'map'>('list');
   const [showForm, setShowForm] = useState(false);
   const [selectedOrchid, setSelectedOrchid] = useState<Orchid | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
-    name: '', species: '', location: '', area: 0, variety: '',
+    name: '', species: '', location: '', quantity: 0, variety: '',
     purchaseDate: new Date().toISOString().split('T')[0],
     notes: '', healthStatus: 'healthy' as Orchid['healthStatus'],
     imageUrl: '',
     wateringInterval: 2,
     fertilizingInterval: 14,
+    price: 0,
   });
   const reminders = useSmartReminders(orchids);
   const STATUS_CONFIG = getStatusConfig(t);
@@ -445,7 +547,7 @@ export default function OrchidsPage() {
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     addOrchid(form);
-    setForm({ name: '', species: '', location: '', area: 0, variety: '', purchaseDate: new Date().toISOString().split('T')[0], notes: '', healthStatus: 'healthy', imageUrl: '', wateringInterval: 2, fertilizingInterval: 14 });
+    setForm({ name: '', species: '', location: '', quantity: 0, variety: '', purchaseDate: new Date().toISOString().split('T')[0], notes: '', healthStatus: 'healthy', imageUrl: '', wateringInterval: 2, fertilizingInterval: 14, price: 0 });
     setImagePreview('');
     setShowForm(false);
   };
@@ -498,8 +600,8 @@ export default function OrchidsPage() {
         <Field label={t('orchids.fields.locationRequired')}>
           <input required value={form.location} onChange={e => setForm(p => ({ ...p, location: e.target.value }))} placeholder={t('orchids.placeholders.location')} className="input" />
         </Field>
-        <Field label={t('orchids.fields.area')}>
-          <input type="number" min="0" step="0.1" value={form.area || ''} onChange={e => setForm(p => ({ ...p, area: parseFloat(e.target.value) || 0 }))} placeholder={t('orchids.placeholders.area')} className="input" />
+        <Field label="Số lượng cây">
+          <input type="number" min="0" step="1" value={form.quantity || ''} onChange={e => setForm(p => ({ ...p, quantity: parseInt(e.target.value) || 0 }))} placeholder="VD: 5" className="input" />
         </Field>
         <Field label={t('orchids.fields.healthStatus')}>
           <div className="flex gap-2">
@@ -519,6 +621,9 @@ export default function OrchidsPage() {
         <Field label={t('orchids.fields.fertilizingInterval')}>
           <input type="number" min="1" max="90" value={form.fertilizingInterval} onChange={e => setForm(p => ({ ...p, fertilizingInterval: parseInt(e.target.value) || 14 }))} className="input" />
         </Field>
+        <Field label="Giá (đ)">
+          <input type="number" min="0" step="1000" value={form.price || ''} onChange={e => setForm(p => ({ ...p, price: parseFloat(e.target.value) || 0 }))} placeholder="VD: 150000" className="input" />
+        </Field>
         <Field label={t('orchids.fields.notes')}>
           <textarea value={form.notes} onChange={e => setForm(p => ({ ...p, notes: e.target.value }))} rows={2} placeholder={t('orchids.placeholders.notes')} className="input resize-none" />
         </Field>
@@ -532,80 +637,104 @@ export default function OrchidsPage() {
 
   return (
     <div className="space-y-4">
+      {/* Tab switcher */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold text-gray-900">{t('orchids.myGarden')}</h1>
-          <p className="text-sm text-gray-400">{t('orchids.orchidCount', { count: orchids.length })}</p>
-        </div>
-        <button onClick={() => setShowForm(true)} className="bg-gradient-to-r from-green-600 to-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm">
-          {t('orchids.addButton')}
-        </button>
-      </div>
-
-      {reminders.length > 0 && (
-        <div className="bg-orange-50 border border-orange-200 rounded-2xl p-3 space-y-2">
-          <p className="text-xs font-bold text-orange-700">{t('orchids.needsCareNow')}</p>
-          {reminders.map((r, i) => (
-            <div key={i} className="flex items-center justify-between text-xs">
-              <span>{r.type === 'watering' ? '💧' : '🌱'} {r.orchidName}</span>
-              <span className="text-orange-600 font-semibold">
-                {r.daysOverdue === 0 ? t('orchids.today') : t('orchids.overdueDays', { days: r.daysOverdue })}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {orchids.length > 0 && (
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {(Object.entries(STATUS_CONFIG) as [Orchid['healthStatus'], typeof STATUS_CONFIG['healthy']][]).map(([key, cfg]) => {
-            const count = orchids.filter(o => o.healthStatus === key).length;
-            if (count === 0) return null;
-            return (
-              <span key={key} className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${cfg.color}`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
-                {cfg.label}: {count}
-              </span>
-            );
-          })}
-        </div>
-      )}
-
-      {orchids.length === 0 ? (
-        <div className="flex flex-col items-center py-20 text-center">
-          <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mb-4">
-            <span className="text-5xl">🌺</span>
-          </div>
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">{t('orchids.emptyGarden')}</h3>
-          <p className="text-gray-400 text-sm mb-6">{t('orchids.addFirstOrchid')}</p>
-          <button onClick={() => setShowForm(true)} className="bg-gradient-to-r from-green-600 to-emerald-500 text-white px-8 py-3 rounded-2xl font-semibold shadow-md">
-            {t('orchids.addFirstButton')}
+        <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
+          <button
+            onClick={() => setTab('list')}
+            className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${tab === 'list' ? 'bg-white text-green-600 shadow-sm' : 'text-gray-500'}`}
+          >
+            📋 Danh sách
+          </button>
+          <button
+            onClick={() => setTab('map')}
+            className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${tab === 'map' ? 'bg-white text-green-600 shadow-sm' : 'text-gray-500'}`}
+          >
+            🗺️ Sơ đồ vườn
           </button>
         </div>
+        {tab === 'list' && (
+          <button onClick={() => setShowForm(true)} className="bg-gradient-to-r from-green-600 to-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm">
+            {t('orchids.addButton')}
+          </button>
+        )}
+      </div>
+
+      {tab === 'map' ? (
+        <GardenMapTab orchids={orchids} updateOrchid={updateOrchid} />
       ) : (
-        <div className="grid grid-cols-2 gap-3">
-          {orchids.map(orchid => {
-            const cfg = STATUS_CONFIG[orchid.healthStatus];
-            return (
-              <div key={orchid.id} onClick={() => setSelectedOrchid(orchid)} className="bg-white rounded-2xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow">
-                <div className="h-36 bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center relative">
-                  {orchid.imageUrl
-                    ? <img src={orchid.imageUrl} className="w-full h-full object-cover" alt={orchid.name} />
-                    : <span className="text-5xl">🌺</span>
-                  }
-                  <div className="absolute top-2 right-2">
-                    <span className={`w-2.5 h-2.5 rounded-full ${cfg.dot} block shadow`} />
-                  </div>
+        <>
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">{t('orchids.myGarden')}</h1>
+            <p className="text-sm text-gray-400">{t('orchids.orchidCount', { count: orchids.length })}</p>
+          </div>
+
+          {reminders.length > 0 && (
+            <div className="bg-orange-50 border border-orange-200 rounded-2xl p-3 space-y-2">
+              <p className="text-xs font-bold text-orange-700">{t('orchids.needsCareNow')}</p>
+              {reminders.map((r, i) => (
+                <div key={i} className="flex items-center justify-between text-xs">
+                  <span>{r.type === 'watering' ? '💧' : '🌱'} {r.orchidName}</span>
+                  <span className="text-orange-600 font-semibold">
+                    {r.daysOverdue === 0 ? t('orchids.today') : t('orchids.overdueDays', { days: r.daysOverdue })}
+                  </span>
                 </div>
-                <div className="p-3">
-                  <h3 className="font-semibold text-gray-900 text-sm truncate">{orchid.name}</h3>
-                  <p className="text-xs text-gray-400 truncate">{orchid.species}</p>
-                  <p className="text-xs text-gray-300 mt-1 truncate">📍 {orchid.location}</p>
-                </div>
+              ))}
+            </div>
+          )}
+
+          {orchids.length > 0 && (
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {(Object.entries(STATUS_CONFIG) as [Orchid['healthStatus'], typeof STATUS_CONFIG['healthy']][]).map(([key, cfg]) => {
+                const count = orchids.filter(o => o.healthStatus === key).length;
+                if (count === 0) return null;
+                return (
+                  <span key={key} className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${cfg.color}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
+                    {cfg.label}: {count}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
+          {orchids.length === 0 ? (
+            <div className="flex flex-col items-center py-20 text-center">
+              <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mb-4">
+                <span className="text-5xl">🌺</span>
               </div>
-            );
-          })}
-        </div>
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">{t('orchids.emptyGarden')}</h3>
+              <p className="text-gray-400 text-sm mb-6">{t('orchids.addFirstOrchid')}</p>
+              <button onClick={() => setShowForm(true)} className="bg-gradient-to-r from-green-600 to-emerald-500 text-white px-8 py-3 rounded-2xl font-semibold shadow-md">
+                {t('orchids.addFirstButton')}
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-3">
+              {orchids.map(orchid => {
+                const cfg = STATUS_CONFIG[orchid.healthStatus];
+                return (
+                  <div key={orchid.id} onClick={() => setSelectedOrchid(orchid)} className="bg-white rounded-2xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow">
+                    <div className="h-36 bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center relative">
+                      {orchid.imageUrl
+                        ? <img src={orchid.imageUrl} className="w-full h-full object-cover" alt={orchid.name} />
+                        : <span className="text-5xl">🌺</span>
+                      }
+                      <div className="absolute top-2 right-2">
+                        <span className={`w-2.5 h-2.5 rounded-full ${cfg.dot} block shadow`} />
+                      </div>
+                    </div>
+                    <div className="p-3">
+                      <h3 className="font-semibold text-gray-900 text-sm truncate">{orchid.name}</h3>
+                      <p className="text-xs text-gray-400 truncate">{orchid.species}</p>
+                      <p className="text-xs text-gray-300 mt-1 truncate">📍 {orchid.location}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </>
       )}
     </div>
   );

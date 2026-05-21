@@ -11,7 +11,9 @@ export interface GardenZone {
   color: string;
   points: LatLng[];
   notes?: string;
-  area?: number; // m²
+  quantity?: number;
+  gridRows?: number;
+  gridCols?: number;
 }
 
 // Tính diện tích polygon từ tọa độ địa lý (Shoelace + chuyển sang m²)
@@ -49,12 +51,12 @@ export function useGarden(_initialCenter?: LatLng) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(zones));
   }, [zones]);
 
-  const addZone = (name: string, points: LatLng[], notes?: string, area?: number) => {
+  const addZone = (name: string, points: LatLng[], notes?: string, quantity?: number) => {
     const color = ZONE_COLORS[zones.length % ZONE_COLORS.length];
     const newZone: GardenZone = {
       id: Date.now().toString(),
       name, color, points, notes,
-      area: area ?? calcArea(points),
+      quantity,
     };
     setZones(prev => [...prev, newZone]);
     return newZone;
@@ -64,7 +66,7 @@ export function useGarden(_initialCenter?: LatLng) {
     setZones(prev => prev.filter(z => z.id !== id));
   };
 
-  const updateZone = (id: string, updates: Partial<Pick<GardenZone, 'name' | 'notes'>>) => {
+  const updateZone = (id: string, updates: Partial<Pick<GardenZone, 'name' | 'notes' | 'gridRows' | 'gridCols'>>) => {
     setZones(prev => prev.map(z => z.id === id ? { ...z, ...updates } : z));
   };
 

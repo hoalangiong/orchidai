@@ -1,19 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { MapContainer, TileLayer, Polygon, Marker, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useTranslation } from 'react-i18next';
-import { useGarden, LatLng, GardenZone, calcArea } from '../../hooks/useGarden';
+import { useGarden, LatLng, GardenZone } from '../../hooks/useGarden';
 import { useUserProfile } from '../../hooks/useUserProfile';
+import { useOrchids } from '../../hooks/useOrchids';
 import LocationSetupModal from '../../components/garden/LocationSetupModal';
+import GridOverlay, { CellDetailPanel } from '../../components/garden/GardenGrid';
+import type { Orchid } from '../../types/index';
 
-function formatArea(m2: number): string {
-  if (m2 >= 10000) return `${(m2 / 10000).toFixed(2)} ha`;
-  if (m2 >= 1) return `${m2.toFixed(1)} m²`;
-  return `${(m2 * 10000).toFixed(0)} cm²`;
-}
-
-// Fix leaflet default icon
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -30,7 +26,6 @@ function createDotIcon(color: string) {
   });
 }
 
-// Component lắng nghe click trên map
 function MapClickHandler({ onMapClick, drawing }: { onMapClick: (latlng: LatLng) => void; drawing: boolean }) {
   useMapEvents({
     click(e) {
@@ -40,33 +35,40 @@ function MapClickHandler({ onMapClick, drawing }: { onMapClick: (latlng: LatLng)
   return null;
 }
 
+interface CellInfo {
+  zoneId: string;
+  row: number;
+  col: number;
+  orchid?: Orchid;
+}
+
 export default function GardenPage() {
   const { t } = useTranslation();
   const { profile, loading: profileLoading, updateGardenLocation, hasGardenLocation } = useUserProfile();
   const [showLocationSetup, setShowLocationSetup] = useState(false);
+  const { orchids, updateOrchid } = useOrchids();
 
-  // Initialize mapCenter from profile or default
   const initialCenter = profile?.gardenLocation || { lat: 10.8231, lng: 106.6297 };
-  const { zones, addZone, deleteZone } = useGarden(initialCenter);
+  const { zones, addZone, deleteZone, updateZone } = useGarden(initialCenter);
 
   const [drawing, setDrawing] = useState(false);
   const [draftPoints, setDraftPoints] = useState<LatLng[]>([]);
   const [zoneName, setZoneName] = useState('');
   const [zoneNotes, setZoneNotes] = useState('');
-  const [zoneAreaInput, setZoneAreaInput] = useState('');
+  const [zoneQuantityInput, setZoneQuantityInput] = useState('');
+  const [zoneRows, setZoneRows] = useState(4);
+  const [zoneCols, setZoneCols] = useState(4);
   const [selectedZone, setSelectedZone] = useState<GardenZone | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [selectedCell, setSelectedCell] = useState<CellInfo | null>(null);
+  const [showGridConfig, setShowGridConfig] = useState<string | null>(null); // zoneId
   const nameInputRef = useRef<HTMLInputElement>(null);
 
-  // Check if location setup is needed
   useEffect(() => {
     if (!profileLoading && !hasGardenLocation()) {
       setShowLocationSetup(true);
     }
   }, [profileLoading, hasGardenLocation]);
-
-  // Diện tích tính được từ polygon đang vẽ
-  const calculatedArea = draftPoints.length >= 3 ? calcArea(draftPoints) : 0;
 
   const handleMapClick = (latlng: LatLng) => {
     setDraftPoints(prev => [...prev, latlng]);
@@ -77,10 +79,6 @@ export default function GardenPage() {
     setShowLocationSetup(false);
   };
 
-  const handleSkipLocationSetup = () => {
-    setShowLocationSetup(false);
-  };
-
   const startDrawing = () => {
     setDraftPoints([]);
     setZoneName('');
@@ -88,18 +86,14 @@ export default function GardenPage() {
     setDrawing(true);
     setShowForm(false);
     setSelectedZone(null);
-  };
-
-  const undoLastPoint = () => {
-    setDraftPoints(prev => prev.slice(0, -1));
+    setSelectedCell(null);
   };
 
   const finishDrawing = () => {
     if (draftPoints.length < 3) return;
     setDrawing(false);
     setShowForm(true);
-    // Pre-fill diện tích tính được
-    setZoneAreaInput(calculatedArea > 0 ? calculatedArea.toFixed(1) : '');
+    setZoneQuantityInput('');
     setTimeout(() => nameInputRef.current?.focus(), 100);
   };
 
@@ -107,26 +101,57 @@ export default function GardenPage() {
     setDrawing(false);
     setDraftPoints([]);
     setShowForm(false);
-    setZoneAreaInput('');
+    setZoneQuantityInput('');
   };
 
   const saveZone = () => {
     if (!zoneName.trim() || draftPoints.length < 3) return;
-    const manualArea = parseFloat(zoneAreaInput);
-    const area = !isNaN(manualArea) && manualArea > 0 ? manualArea : calculatedArea;
-    addZone(zoneName.trim(), draftPoints, zoneNotes.trim() || undefined, area);
+    const quantity = parseInt(zoneQuantityInput);
+    addZone(zoneName.trim(), draftPoints, zoneNotes.trim() || undefined, !isNaN(quantity) && quantity > 0 ? quantity : undefined);
     setDraftPoints([]);
     setZoneName('');
     setZoneNotes('');
-    setZoneAreaInput('');
+    setZoneQuantityInput('');
     setShowForm(false);
+  };
+
+  const handleCellClick = useCallback((cell: CellInfo) => {
+    setSelectedCell(cell);
+  }, []);
+
+  const handleAssign = async (orchidId: string) => {
+    if (!selectedCell) return;
+    await updateOrchid(orchidId, {
+      gardenPosition: { zoneId: selectedCell.zoneId, row: selectedCell.row, col: selectedCell.col },
+    });
+    setSelectedCell(null);
+  };
+
+  const handleUnassign = async () => {
+    if (!selectedCell?.orchid) return;
+    await updateOrchid(selectedCell.orchid.id, { gardenPosition: undefined });
+    setSelectedCell(null);
+  };
+
+  const handleToggleSold = async () => {
+    if (!selectedCell?.orchid) return;
+    await updateOrchid(selectedCell.orchid.id, { sold: !selectedCell.orchid.sold });
+    setSelectedCell(null);
+  };
+
+  // Stats per zone
+  const zoneStats = (zoneId: string) => {
+    const inZone = orchids.filter(o => o.gardenPosition?.zoneId === zoneId);
+    return { total: inZone.length, sold: inZone.filter(o => o.sold).length };
   };
 
   const draftColor = '#22c55e';
 
   if (showLocationSetup) {
-    return <LocationSetupModal onLocationSet={handleLocationSet} onSkip={handleSkipLocationSetup} />;
+    return <LocationSetupModal onLocationSet={handleLocationSet} onSkip={() => setShowLocationSetup(false)} />;
   }
+
+  const configZone = showGridConfig ? zones.find(z => z.id === showGridConfig) : null;
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)]">
@@ -149,18 +174,16 @@ export default function GardenPage() {
       {/* Drawing instructions */}
       {drawing && (
         <div className="mb-2 shrink-0 bg-green-50 border border-green-200 rounded-xl p-3 flex items-center justify-between gap-2">
-          <div>
-            <p className="text-sm font-semibold text-green-700">
-              {draftPoints.length === 0
-                ? t('garden.tapFirstPoint')
-                : draftPoints.length < 3
-                ? t('garden.tapContinue', { count: draftPoints.length })
-                : t('garden.canSave', { count: draftPoints.length })}
-            </p>
-          </div>
+          <p className="text-sm font-semibold text-green-700">
+            {draftPoints.length === 0
+              ? t('garden.tapFirstPoint')
+              : draftPoints.length < 3
+              ? t('garden.tapContinue', { count: draftPoints.length })
+              : t('garden.canSave', { count: draftPoints.length })}
+          </p>
           <div className="flex gap-1.5 shrink-0">
             {draftPoints.length > 0 && (
-              <button onClick={undoLastPoint} className="bg-white border border-gray-200 text-gray-600 px-2.5 py-1.5 rounded-lg text-xs font-medium">
+              <button onClick={() => setDraftPoints(p => p.slice(0, -1))} className="bg-white border border-gray-200 text-gray-600 px-2.5 py-1.5 rounded-lg text-xs font-medium">
                 ↩ {t('garden.undo')}
               </button>
             )}
@@ -180,46 +203,61 @@ export default function GardenPage() {
       {showForm && (
         <div className="mb-2 shrink-0 bg-white border border-green-100 rounded-xl p-4 shadow-sm space-y-3">
           <h3 className="font-bold text-gray-900 text-sm">{t('garden.nameZone')}</h3>
-          <input
-            ref={nameInputRef}
-            value={zoneName}
-            onChange={e => setZoneName(e.target.value)}
-            placeholder={t('garden.namePlaceholder')}
-            className="input"
-          />
+          <input ref={nameInputRef} value={zoneName} onChange={e => setZoneName(e.target.value)} placeholder={t('garden.namePlaceholder')} className="input" />
           <div>
-            <label className="text-xs text-gray-500 font-medium mb-1 block">
-              {t('garden.area')}
-              {calculatedArea > 0 && (
-                <span className="ml-2 text-green-600 font-semibold">
-                  📐 {t('garden.calculated')}: {formatArea(calculatedArea)}
-                </span>
-              )}
-            </label>
-            <input
-              type="number"
-              min="0"
-              step="0.1"
-              value={zoneAreaInput}
-              onChange={e => setZoneAreaInput(e.target.value)}
-              placeholder={calculatedArea > 0 ? `${calculatedArea.toFixed(1)} (${t('garden.autoCalculated')})` : t('garden.manualInput')}
-              className="input"
-            />
+            <label className="text-xs text-gray-500 font-medium mb-1 block">Số lượng cây (tùy chọn)</label>
+            <input type="number" min="0" step="1" value={zoneQuantityInput} onChange={e => setZoneQuantityInput(e.target.value)} placeholder="VD: 50" className="input" />
           </div>
-          <input
-            value={zoneNotes}
-            onChange={e => setZoneNotes(e.target.value)}
-            placeholder={t('garden.notesPlaceholder')}
-            className="input"
-          />
+          <div className="flex gap-2">
+            <div className="flex-1">
+              <label className="text-xs text-gray-500 font-medium mb-1 block">Số hàng</label>
+              <input type="number" min="1" max="20" value={zoneRows} onChange={e => setZoneRows(parseInt(e.target.value) || 4)} className="input" />
+            </div>
+            <div className="flex-1">
+              <label className="text-xs text-gray-500 font-medium mb-1 block">Số cột</label>
+              <input type="number" min="1" max="20" value={zoneCols} onChange={e => setZoneCols(parseInt(e.target.value) || 4)} className="input" />
+            </div>
+          </div>
+          <input value={zoneNotes} onChange={e => setZoneNotes(e.target.value)} placeholder={t('garden.notesPlaceholder')} className="input" />
           <div className="flex gap-2">
             <button onClick={cancelDrawing} className="flex-1 border border-gray-200 rounded-xl py-2 text-sm text-gray-600">{t('common.cancel')}</button>
-            <button
-              onClick={saveZone}
-              disabled={!zoneName.trim()}
-              className="flex-1 bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-50"
-            >
+            <button onClick={saveZone} disabled={!zoneName.trim()} className="flex-1 bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-xl py-2 text-sm font-semibold disabled:opacity-50">
               {t('garden.saveZone')}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Grid config modal */}
+      {configZone && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40">
+          <div className="bg-white rounded-t-2xl w-full max-w-md p-5 space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-gray-900">Cấu hình lưới: {configZone.name}</h3>
+              <button onClick={() => setShowGridConfig(null)} className="text-gray-400 text-xl">✕</button>
+            </div>
+            <div className="flex gap-3">
+              <div className="flex-1">
+                <label className="text-xs text-gray-500 font-medium mb-1 block">Số hàng</label>
+                <input
+                  type="number" min="1" max="20"
+                  defaultValue={configZone.gridRows ?? 4}
+                  onChange={e => updateZone(configZone.id, { gridRows: parseInt(e.target.value) || 4 })}
+                  className="input"
+                />
+              </div>
+              <div className="flex-1">
+                <label className="text-xs text-gray-500 font-medium mb-1 block">Số cột</label>
+                <input
+                  type="number" min="1" max="20"
+                  defaultValue={configZone.gridCols ?? 4}
+                  onChange={e => updateZone(configZone.id, { gridCols: parseInt(e.target.value) || 4 })}
+                  className="input"
+                />
+              </div>
+            </div>
+            <button onClick={() => setShowGridConfig(null)} className="w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-xl py-2.5 font-semibold">
+              Xong
             </button>
           </div>
         </div>
@@ -227,83 +265,86 @@ export default function GardenPage() {
 
       {/* Map */}
       <div className="flex-1 rounded-2xl overflow-hidden shadow-md border border-gray-100 relative">
-        <MapContainer
-          center={[initialCenter.lat, initialCenter.lng]}
-          zoom={17}
-          style={{ height: '100%', width: '100%' }}
-          zoomControl={false}
-        >
-          {/* Esri Satellite tile */}
-          <TileLayer
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-            attribution="Tiles © Esri"
-            maxZoom={19}
-          />
-          {/* Street labels overlay */}
-          <TileLayer
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
-            attribution=""
-            maxZoom={19}
-            opacity={0.6}
-          />
+        <MapContainer center={[initialCenter.lat, initialCenter.lng]} zoom={17} style={{ height: '100%', width: '100%' }} zoomControl={false}>
+          <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" attribution="Tiles © Esri" maxZoom={19} />
+          <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" attribution="" maxZoom={19} opacity={0.6} />
 
           <MapClickHandler onMapClick={handleMapClick} drawing={drawing} />
 
-          {/* Saved zones */}
           {zones.map(zone => (
             <Polygon
               key={zone.id}
               positions={zone.points.map(p => [p.lat, p.lng])}
-              pathOptions={{
-                color: zone.color,
-                fillColor: zone.color,
-                fillOpacity: 0.25,
-                weight: 2,
-              }}
-              eventHandlers={{ click: () => setSelectedZone(zone) }}
+              pathOptions={{ color: zone.color, fillColor: zone.color, fillOpacity: 0.1, weight: 2 }}
+              eventHandlers={{ click: () => !drawing && setSelectedZone(zone) }}
             />
           ))}
 
-          {/* Draft polygon */}
           {draftPoints.length >= 2 && (
-            <Polygon
-              positions={draftPoints.map(p => [p.lat, p.lng])}
-              pathOptions={{ color: draftColor, fillColor: draftColor, fillOpacity: 0.2, weight: 2, dashArray: '6 4' }}
-            />
+            <Polygon positions={draftPoints.map(p => [p.lat, p.lng])} pathOptions={{ color: draftColor, fillColor: draftColor, fillOpacity: 0.2, weight: 2, dashArray: '6 4' }} />
           )}
-
-          {/* Draft markers */}
           {draftPoints.map((pt, i) => (
             <Marker key={i} position={[pt.lat, pt.lng]} icon={createDotIcon(draftColor)} />
           ))}
+
+          {!drawing && (
+            <GridOverlay zones={zones} orchids={orchids} onCellClick={handleCellClick} />
+          )}
         </MapContainer>
+
+        {/* Cell detail panel */}
+        {selectedCell && (() => {
+          const zone = zones.find(z => z.id === selectedCell.zoneId);
+          if (!zone) return null;
+          return (
+            <CellDetailPanel
+              cell={selectedCell}
+              zone={zone}
+              orchids={orchids}
+              onClose={() => setSelectedCell(null)}
+              onAssign={handleAssign}
+              onUnassign={handleUnassign}
+              onToggleSold={handleToggleSold}
+            />
+          );
+        })()}
       </div>
 
       {/* Zone list */}
       {zones.length > 0 && !drawing && !showForm && (
         <div className="mt-3 shrink-0 space-y-1.5 max-h-36 overflow-y-auto">
-          {zones.map(zone => (
-            <div
-              key={zone.id}
-              className={`flex items-center gap-3 bg-white rounded-xl px-3 py-2.5 shadow-sm border transition-all cursor-pointer ${selectedZone?.id === zone.id ? 'border-green-400' : 'border-gray-100'}`}
-              onClick={() => setSelectedZone(selectedZone?.id === zone.id ? null : zone)}
-            >
-              <div className="w-4 h-4 rounded-sm shrink-0" style={{ backgroundColor: zone.color }} />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-gray-800 truncate">{zone.name}</p>
-                {zone.notes && <p className="text-xs text-gray-400 truncate">{zone.notes}</p>}
-                <p className="text-xs text-gray-400">
-                  {zone.area ? `📐 ${formatArea(zone.area)}` : t('garden.points', { count: zone.points.length })}
-                </p>
-              </div>
-              <button
-                onClick={e => { e.stopPropagation(); deleteZone(zone.id); if (selectedZone?.id === zone.id) setSelectedZone(null); }}
-                className="text-red-300 hover:text-red-500 text-lg px-1"
+          {zones.map(zone => {
+            const stats = zoneStats(zone.id);
+            return (
+              <div
+                key={zone.id}
+                className={`flex items-center gap-3 bg-white rounded-xl px-3 py-2.5 shadow-sm border transition-all cursor-pointer ${selectedZone?.id === zone.id ? 'border-green-400' : 'border-gray-100'}`}
+                onClick={() => setSelectedZone(selectedZone?.id === zone.id ? null : zone)}
               >
-                ×
-              </button>
-            </div>
-          ))}
+                <div className="w-4 h-4 rounded-sm shrink-0" style={{ backgroundColor: zone.color }} />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-gray-800 truncate">{zone.name}</p>
+                  <p className="text-xs text-gray-400">
+                    {zone.quantity ? `🌱 ${zone.quantity} cây` : t('garden.points', { count: zone.points.length })}
+                    {stats.total > 0 && ` · 🌺 ${stats.total - stats.sold} còn · 🏷️ ${stats.sold} đã bán`}
+                  </p>
+                </div>
+                <button
+                  onClick={e => { e.stopPropagation(); setShowGridConfig(zone.id); }}
+                  className="text-gray-400 hover:text-green-600 text-sm px-1"
+                  title="Cấu hình lưới"
+                >
+                  ⚙️
+                </button>
+                <button
+                  onClick={e => { e.stopPropagation(); deleteZone(zone.id); if (selectedZone?.id === zone.id) setSelectedZone(null); }}
+                  className="text-red-300 hover:text-red-500 text-lg px-1"
+                >
+                  ×
+                </button>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
