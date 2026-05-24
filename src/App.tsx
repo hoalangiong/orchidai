@@ -17,6 +17,7 @@ import CostsPage from './pages/costs/CostsPage';
 import CommunityPage from './pages/community/CommunityPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import SensorPage from './pages/sensor/SensorPage';
+import SecurityPage from './pages/security/SecurityPage';
 import PrivacyPolicyPage from './pages/privacy/PrivacyPolicyPage';
 
 function AppRoutes() {
@@ -55,6 +56,7 @@ function AppRoutes() {
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/sensors" element={<SensorPage />} />
+        <Route path="/security" element={<SecurityPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
       </Routes>

@@ -6,12 +6,20 @@ import { messagingPromise, db } from '../lib/firebase';
 import { useAuth } from '../contexts/AuthContext';
 
 const VAPID_KEY = import.meta.env.VITE_VAPID_KEY as string;
+const BASE = import.meta.env.BASE_URL || '/';
 
 async function saveFcmToken(uid: string) {
   const messaging = await messagingPromise;
   if (!messaging) return;
   try {
-    const token = await getToken(messaging, { vapidKey: VAPID_KEY });
+    const swReg = await navigator.serviceWorker.register(
+      `${BASE}firebase-messaging-sw.js`,
+      { scope: BASE }
+    );
+    const token = await getToken(messaging, {
+      vapidKey: VAPID_KEY,
+      serviceWorkerRegistration: swReg,
+    });
     if (token) {
       await setDoc(doc(db, 'users', uid, 'fcm', 'token'), {
         token,

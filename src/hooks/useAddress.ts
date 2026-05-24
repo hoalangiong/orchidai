@@ -31,11 +31,9 @@ export function useAddress() {
   useEffect(() => {
     if (!province) { setWards([]); setWard(null); return; }
     setLoadingWards(true);
-    console.log('Fetching wards for province:', province.code, province.name);
     fetch(`${BASE}/p/${province.code}?depth=2`)
       .then(r => r.json())
       .then(async (d) => {
-        console.log('API response:', d);
         const districts = d.districts ?? [];
         const allWards: Region[] = [];
 
@@ -56,7 +54,6 @@ export function useAddress() {
           }
         }
 
-        console.log('Total wards found:', allWards.length);
         setWards(allWards);
         setLoadingWards(false);
       })

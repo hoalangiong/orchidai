@@ -106,6 +106,32 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Security & Health Banner */}
+      <Link to="/security" className="block relative rounded-3xl overflow-hidden shadow-xl active:scale-95 transition-transform"
+        style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e40af 100%)' }}>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+        <div className="relative p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-3xl">🛡️</span>
+            <div>
+              <h3 className="text-white font-bold text-base leading-tight">{t('home.securityFeatures.title')}</h3>
+              <p className="text-blue-200 text-xs">{t('home.securityFeatures.subtitle')}</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <SecurityFeature icon="👤" text={t('home.securityFeatures.presence')} />
+            <SecurityFeature icon="🫁" text={t('home.securityFeatures.breathing')} />
+            <SecurityFeature icon="❤️" text={t('home.securityFeatures.heart')} />
+            <SecurityFeature icon="🚨" text={t('home.securityFeatures.fall')} />
+          </div>
+          <div className="mt-3 flex items-center justify-between">
+            <p className="text-blue-200 text-xs">{t('home.securityFeatures.powered')}</p>
+            <span className="text-white text-xs font-bold">{t('home.securityFeatures.explore')} →</span>
+          </div>
+        </div>
+      </Link>
+
       {/* Quick actions */}
       <div>
         <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">{t('home.quickActions')}</h3>
@@ -142,6 +168,15 @@ export default function HomePage() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function SecurityFeature({ icon, text }: { icon: string; text: string }) {
+  return (
+    <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-1.5">
+      <span className="text-base">{icon}</span>
+      <span className="text-white text-xs font-medium">{text}</span>
     </div>
   );
 }

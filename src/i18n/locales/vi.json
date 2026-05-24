@@ -28,6 +28,7 @@
     "propagation": "Nhân giống",
     "costs": "Chi phí",
     "sensors": "Cảm biến",
+    "security": "An ninh",
     "admin": "Admin"
   },
   "dashboard": {
@@ -93,6 +94,16 @@
       "treatment": "Hướng dẫn điều trị chi tiết",
       "insights": "Phân tích dữ liệu vườn lan",
       "tryNow": "Dùng thử ngay"
+    },
+    "securityFeatures": {
+      "title": "An ninh & Sức khỏe vườn lan",
+      "subtitle": "Giám sát 24/7 qua sóng WiFi — không cần camera",
+      "presence": "Phát hiện người vào vườn",
+      "breathing": "Theo dõi nhịp thở",
+      "heart": "Nhịp tim (tham khảo)",
+      "fall": "Cảnh báo ngã tức thì",
+      "powered": "Công nghệ WiFi CSI · ESP32-S3",
+      "explore": "Khám phá ngay"
     }
   },
   "weather": {
@@ -327,6 +338,105 @@
     "aiPrompt": "Nhấn nút để AI phân tích và đưa ra lời khuyên chăm sóc",
     "aiAnalyzing": "AI đang phân tích...",
     "aiError": "Lỗi khi phân tích"
+  },
+  "security": {
+    "title": "🛡️ An ninh & Sức khỏe",
+    "subtitle": "Phát hiện người · Nhịp thở · Nhịp tim · Cảnh báo ngã",
+    "connected": "Đang kết nối",
+    "notConnected": "Chưa kết nối",
+    "noDataTitle": "Chưa nhận được dữ liệu",
+    "noDataDescription": "Kết nối ESP32-S3 (RuView) với Firebase để bắt đầu",
+    "uid": {
+      "title": "User ID của bạn",
+      "description": "Copy UID này vào cổng cài đặt WiFi của thiết bị ESP32-S3",
+      "copy": "Copy",
+      "hint": "Khi cắm điện ESP32-S3 lần đầu → kết nối WiFi 'OrchidRuView-Setup' → dán UID vào ô User UID"
+    },
+    "firebasePath": "Đường dẫn Firebase RTDB",
+    "jsonStructure": "Cấu trúc JSON cần gửi",
+    "hardwareTitle": "Phần cứng cần có",
+    "hardware": {
+      "esp32s3": "ESP32-S3 DevKit (hỗ trợ WiFi CSI)",
+      "ruview": "Firmware RuView CSI (đã flash sẵn)",
+      "wifi": "WiFi 2.4GHz cùng mạng với router",
+      "power": "Nguồn 5V/2A (sạc điện thoại được)"
+    },
+    "presence": {
+      "label": "Trạng thái vùng quét",
+      "detected": "Có người",
+      "empty": "Không có người",
+      "count": "{{count}} người trong vùng"
+    },
+    "zones": {
+      "title": "Phân vùng phát hiện",
+      "zone1": "Cổng vào",
+      "zone2": "Khu trồng",
+      "zone3": "Kho",
+      "occupied": "Có người",
+      "empty": "Trống"
+    },
+    "doppler": {
+      "title": "Phổ Doppler · Chuyển động",
+      "still": "Đứng yên",
+      "slow": "Đi chậm",
+      "fast": "Chạy nhanh"
+    },
+    "heatmap": {
+      "title": "Bản đồ nhiệt · Vị trí người",
+      "label": "WiFi CSI Heatmap",
+      "low": "Thấp",
+      "high": "Cao"
+    },
+    "sleep": {
+      "title": "Theo dõi giấc ngủ",
+      "noData": "Chưa có dữ liệu giấc ngủ",
+      "sleeping": "Đang ngủ",
+      "awake": "Thức",
+      "status": "Trạng thái",
+      "apnea": "Ngưng thở",
+      "quality": {
+        "label": "Chất lượng",
+        "good": "Tốt",
+        "fair": "Trung bình",
+        "poor": "Kém"
+      }
+    },
+    "vitals": {
+      "breathing": "Nhịp thở",
+      "breathingUnit": "lần/phút",
+      "heart": "Nhịp tim",
+      "heartUnit": "bpm",
+      "heartDisclaimer": "Sai số ±10bpm · Không thay thế thiết bị y tế",
+      "measuring": "Đang đo...",
+      "idle": "Chờ có người"
+    },
+    "fall": {
+      "title": "PHÁT HIỆN NGÃ",
+      "description": "Cảnh báo lúc {{time}}. Kiểm tra ngay!"
+    },
+    "signal": {
+      "label": "Chất lượng tín hiệu CSI"
+    },
+    "events": {
+      "enter": "Có người vào vườn",
+      "leave": "Đã rời khỏi vườn",
+      "fall": "Phát hiện ngã"
+    },
+    "timeline": {
+      "title": "📋 Hoạt động 24h ({{count}} sự kiện)",
+      "subtitle": "Lịch sử ra vào và cảnh báo",
+      "empty": "Chưa có hoạt động trong 24h qua"
+    },
+    "time": {
+      "secondsAgo": "{{count}} giây trước",
+      "minutesAgo": "{{count}} phút trước",
+      "hoursAgo": "{{count}} giờ trước",
+      "daysAgo": "{{count}} ngày trước"
+    },
+    "disclaimer": {
+      "title": "Lưu ý độ chính xác",
+      "body": "Công nghệ WiFi CSI dùng nghiên cứu, không phải thiết bị y tế. Phát hiện người và ngã đạt độ tin cậy 90%+. Nhịp thở khá chính xác khi nằm yên. Nhịp tim sai số ±10bpm — chỉ tham khảo, không dùng để chẩn đoán y tế."
+    }
   },
   "community": {
     "title": "🏆 Cộng đồng",

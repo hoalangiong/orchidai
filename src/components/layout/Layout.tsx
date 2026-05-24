@@ -67,6 +67,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <NavItem to="/propagation" icon="🌱" label={t('nav.propagation')} />
           <NavItem to="/costs"      icon="💰"  label={t('nav.costs')} />
           <NavItem to="/sensors"    icon="📡"  label={t('nav.sensors')} />
+          <NavItem to="/security"   icon="🛡️"  label={t('nav.security')} />
           {user?.email === ADMIN_EMAIL && <NavItem to="/admin" icon="⚙️" label={t('nav.admin')} />}
         </div>
       </nav>

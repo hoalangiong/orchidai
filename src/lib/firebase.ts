@@ -7,6 +7,7 @@ import { getDatabase } from 'firebase/database';
 const firebaseConfig = {
   apiKey: "AIzaSyBtPSr3Ky2_p3YqEqPEnxxW-vDfuNJrfJ4",
   authDomain: "orchids-44f86.firebaseapp.com",
+  databaseURL: "https://orchids-44f86-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "orchids-44f86",
   storageBucket: "orchids-44f86.firebasestorage.app",
   messagingSenderId: "456597052380",
