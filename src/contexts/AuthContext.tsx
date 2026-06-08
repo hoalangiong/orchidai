@@ -7,6 +7,7 @@ import { Capacitor } from '@capacitor/core';
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  error: string | null;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -16,13 +17,38 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    let unsubscribe: (() => void) | undefined;
+
+    try {
+      unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        setLoading(false);
+      }, (err) => {
+        console.error('[Auth] onAuthStateChanged error:', err);
+        setError(err.message);
+        setLoading(false);
+      });
+    } catch (err: any) {
+      console.error('[Auth] Firebase init error:', err);
+      setError(err.message || 'Firebase initialization failed');
       setLoading(false);
-    });
-    return unsubscribe;
+    }
+
+    // Timeout fallback: if loading takes more than 10s, stop waiting
+    const timeout = setTimeout(() => {
+      if (loading) {
+        console.warn('[Auth] Auth timeout - proceeding without auth');
+        setLoading(false);
+      }
+    }, 10000);
+
+    return () => {
+      unsubscribe?.();
+      clearTimeout(timeout);
+    };
   }, []);
 
   const signInWithGoogle = async () => {
@@ -47,7 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, loading, error, signInWithGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );
