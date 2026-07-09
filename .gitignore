@@ -33,3 +33,6 @@ android/*.keystore
 android/*.base64.txt
 android/app/release
 android/app/debug
+
+# Firmware chứa secret (WiFi pass, DB secret) — KHÔNG commit
+firmware/
