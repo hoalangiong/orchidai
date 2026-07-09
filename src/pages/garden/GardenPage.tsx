@@ -64,11 +64,18 @@ export default function GardenPage() {
   const [showGridConfig, setShowGridConfig] = useState<string | null>(null); // zoneId
   const nameInputRef = useRef<HTMLInputElement>(null);
 
+  // Chỉ tự mở modal MỘT LẦN khi profile load xong và chưa có vị trí.
+  // Sau đó để hành động của user (Bỏ qua / đặt vị trí) quyết định, tránh
+  // effect chạy lại mỗi render (hasGardenLocation là hàm tạo mới mỗi render)
+  // khiến bấm "Bỏ qua" xong modal bật lại ngay.
+  const autoDecidedRef = useRef(false);
   useEffect(() => {
-    if (!profileLoading && !hasGardenLocation()) {
+    if (profileLoading || autoDecidedRef.current) return;
+    autoDecidedRef.current = true;
+    if (!hasGardenLocation()) {
       setShowLocationSetup(true);
     }
-  }, [profileLoading, hasGardenLocation]);
+  }, [profileLoading]);
 
   const handleMapClick = (latlng: LatLng) => {
     setDraftPoints(prev => [...prev, latlng]);
