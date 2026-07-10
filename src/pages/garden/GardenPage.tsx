@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, Polygon, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Polygon, Marker, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useTranslation } from 'react-i18next';
-import { useGarden, LatLng, GardenZone } from '../../hooks/useGarden';
+import { useGarden, calcArea, LatLng, GardenZone } from '../../hooks/useGarden';
 import { useUserProfile } from '../../hooks/useUserProfile';
 import { useOrchids } from '../../hooks/useOrchids';
-import LocationSetupModal from '../../components/garden/LocationSetupModal';
 import GridOverlay, { CellDetailPanel } from '../../components/garden/GardenGrid';
+import { geocodeAddress } from '../../utils/geocoding';
 import type { Orchid } from '../../types/index';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -35,6 +35,16 @@ function MapClickHandler({ onMapClick, drawing }: { onMapClick: (latlng: LatLng)
   return null;
 }
 
+// Bay bản đồ tới vị trí mới khi tọa độ đổi (react-leaflet chỉ dùng center ở
+// lần render đầu, nên khi cập nhật GPS phải chủ động gọi setView).
+function RecenterMap({ lat, lng }: { lat: number; lng: number }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView([lat, lng], map.getZoom(), { animate: true });
+  }, [lat, lng, map]);
+  return null;
+}
+
 interface CellInfo {
   zoneId: string;
   row: number;
@@ -44,9 +54,16 @@ interface CellInfo {
 
 export default function GardenPage() {
   const { t } = useTranslation();
-  const { profile, loading: profileLoading, updateGardenLocation, hasGardenLocation } = useUserProfile();
-  const [showLocationSetup, setShowLocationSetup] = useState(false);
+  const { profile, updateGardenLocation } = useUserProfile();
   const { orchids, updateOrchid } = useOrchids();
+
+  // Đặt vị trí vườn: chạm bản đồ để đặt ghim
+  const [settingLocation, setSettingLocation] = useState(false);
+  // Tìm theo tên địa điểm
+  const [placeQuery, setPlaceQuery] = useState('');
+  const [placeSearching, setPlaceSearching] = useState(false);
+  const [placeError, setPlaceError] = useState<string | null>(null);
+  const [gpsLoading, setGpsLoading] = useState(false);
 
   const initialCenter = profile?.gardenLocation || { lat: 10.8231, lng: 106.6297 };
   const { zones, addZone, deleteZone, updateZone } = useGarden(initialCenter);
@@ -64,26 +81,53 @@ export default function GardenPage() {
   const [showGridConfig, setShowGridConfig] = useState<string | null>(null); // zoneId
   const nameInputRef = useRef<HTMLInputElement>(null);
 
-  // Chỉ tự mở modal MỘT LẦN khi profile load xong và chưa có vị trí.
-  // Sau đó để hành động của user (Bỏ qua / đặt vị trí) quyết định, tránh
-  // effect chạy lại mỗi render (hasGardenLocation là hàm tạo mới mỗi render)
-  // khiến bấm "Bỏ qua" xong modal bật lại ngay.
-  const autoDecidedRef = useRef(false);
-  useEffect(() => {
-    if (profileLoading || autoDecidedRef.current) return;
-    autoDecidedRef.current = true;
-    if (!hasGardenLocation()) {
-      setShowLocationSetup(true);
-    }
-  }, [profileLoading]);
-
+  // Chạm bản đồ: đang đặt vị trí -> ghim vị trí vườn; đang vẽ -> thêm điểm vùng
   const handleMapClick = (latlng: LatLng) => {
-    setDraftPoints(prev => [...prev, latlng]);
+    if (settingLocation) {
+      updateGardenLocation({ lat: latlng.lat, lng: latlng.lng });
+      setSettingLocation(false);
+      return;
+    }
+    if (drawing) setDraftPoints(prev => [...prev, latlng]);
   };
 
-  const handleLocationSet = async (location: { lat: number; lng: number; address?: string }) => {
-    await updateGardenLocation(location);
-    setShowLocationSetup(false);
+  // Tìm vị trí theo tên địa điểm (dùng lại geocodeAddress)
+  const handleSearchPlace = async () => {
+    if (!placeQuery.trim()) return;
+    setPlaceSearching(true);
+    setPlaceError(null);
+    try {
+      const r = await geocodeAddress(placeQuery.trim());
+      await updateGardenLocation({ lat: r.lat, lng: r.lng, address: r.displayName });
+      setPlaceQuery('');
+      setSettingLocation(false);
+    } catch {
+      setPlaceError(t('garden.locationSetup.notFound'));
+    } finally {
+      setPlaceSearching(false);
+    }
+  };
+
+  // Dùng GPS thiết bị (chính xác trên điện thoại; trên web fallback navigator)
+  const handleUseGPS = async () => {
+    setGpsLoading(true);
+    setPlaceError(null);
+    try {
+      const pos = await new Promise<{ lat: number; lng: number }>((resolve, reject) => {
+        if (!navigator.geolocation) { reject(new Error('no geolocation')); return; }
+        navigator.geolocation.getCurrentPosition(
+          p => resolve({ lat: p.coords.latitude, lng: p.coords.longitude }),
+          err => reject(err),
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+        );
+      });
+      await updateGardenLocation(pos);
+      setSettingLocation(false);
+    } catch {
+      setPlaceError(t('garden.locationSetup.gpsError'));
+    } finally {
+      setGpsLoading(false);
+    }
   };
 
   const startDrawing = () => {
@@ -153,10 +197,7 @@ export default function GardenPage() {
   };
 
   const draftColor = '#22c55e';
-
-  if (showLocationSetup) {
-    return <LocationSetupModal onLocationSet={handleLocationSet} onSkip={() => setShowLocationSetup(false)} />;
-  }
+  const gardenLoc = profile?.gardenLocation;
 
   const configZone = showGridConfig ? zones.find(z => z.id === showGridConfig) : null;
 
@@ -168,15 +209,59 @@ export default function GardenPage() {
           <h1 className="text-xl font-bold text-gray-900">{t('garden.title')}</h1>
           <p className="text-xs text-gray-400">{t('garden.zonesDrawn', { count: zones.length })}</p>
         </div>
-        {!drawing && !showForm && (
-          <button
-            onClick={startDrawing}
-            className="bg-gradient-to-r from-green-600 to-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm"
-          >
-            ✏️ {t('garden.drawZone')}
-          </button>
+        {!drawing && !showForm && !settingLocation && (
+          <div className="flex gap-2">
+            <button
+              onClick={() => { setSettingLocation(true); setPlaceError(null); }}
+              className="border-2 border-green-500 text-green-700 px-3 py-2 rounded-xl text-sm font-semibold"
+            >
+              📍 {gardenLoc ? 'Đổi vị trí' : 'Đặt vị trí'}
+            </button>
+            <button
+              onClick={startDrawing}
+              className="bg-gradient-to-r from-green-600 to-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm"
+            >
+              ✏️ {t('garden.drawZone')}
+            </button>
+          </div>
         )}
       </div>
+
+      {/* Thanh đặt vị trí vườn */}
+      {settingLocation && (
+        <div className="mb-2 shrink-0 bg-white border border-green-200 rounded-xl p-3 space-y-2.5 shadow-sm">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-semibold text-green-700">📍 Xác định vị trí vườn</p>
+            <button onClick={() => { setSettingLocation(false); setPlaceQuery(''); setPlaceError(null); }} className="text-gray-400 text-lg leading-none">×</button>
+          </div>
+          <p className="text-xs text-gray-500">Chạm lên bản đồ để đặt vị trí, hoặc tìm theo tên/địa chỉ, hoặc dùng GPS.</p>
+          <div className="flex gap-2">
+            <input
+              value={placeQuery}
+              onChange={e => setPlaceQuery(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleSearchPlace()}
+              placeholder="VD: Chợ Lách, Bến Tre"
+              className="input flex-1"
+              disabled={placeSearching}
+            />
+            <button
+              onClick={handleSearchPlace}
+              disabled={!placeQuery.trim() || placeSearching}
+              className="bg-green-600 text-white rounded-xl px-4 text-sm font-semibold disabled:opacity-50"
+            >
+              {placeSearching ? '...' : '🔍 Tìm'}
+            </button>
+          </div>
+          <button
+            onClick={handleUseGPS}
+            disabled={gpsLoading}
+            className="w-full border border-green-200 bg-green-50 text-green-700 rounded-xl py-2 text-sm font-medium disabled:opacity-50"
+          >
+            {gpsLoading ? 'Đang lấy vị trí...' : '📡 Dùng GPS thiết bị'}
+          </button>
+          {placeError && <p className="text-xs text-red-500">{placeError}</p>}
+        </div>
+      )}
 
       {/* Drawing instructions */}
       {drawing && (
@@ -276,7 +361,10 @@ export default function GardenPage() {
           <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" attribution="Tiles © Esri" maxZoom={19} />
           <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" attribution="" maxZoom={19} opacity={0.6} />
 
-          <MapClickHandler onMapClick={handleMapClick} drawing={drawing} />
+          <RecenterMap lat={initialCenter.lat} lng={initialCenter.lng} />
+          <MapClickHandler onMapClick={handleMapClick} drawing={drawing || settingLocation} />
+
+          {gardenLoc && <Marker position={[gardenLoc.lat, gardenLoc.lng]} />}
 
           {zones.map(zone => (
             <Polygon
@@ -332,7 +420,8 @@ export default function GardenPage() {
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-gray-800 truncate">{zone.name}</p>
                   <p className="text-xs text-gray-400">
-                    {zone.quantity ? `🌱 ${zone.quantity} cây` : t('garden.points', { count: zone.points.length })}
+                    📐 {Math.round(calcArea(zone.points))} m²
+                    {zone.quantity ? ` · 🌱 ${zone.quantity} cây` : ` · ${t('garden.points', { count: zone.points.length })}`}
                     {stats.total > 0 && ` · 🌺 ${stats.total - stats.sold} còn · 🏷️ ${stats.sold} đã bán`}
                   </p>
                 </div>
