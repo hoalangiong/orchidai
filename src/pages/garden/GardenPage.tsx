@@ -160,8 +160,10 @@ export default function GardenPage() {
 
       await updateGardenLocation(pos);
       setSettingLocation(false);
-    } catch {
-      setPlaceError(t('garden.locationSetup.gpsError'));
+    } catch (err: any) {
+      // Hiện lỗi gốc để chẩn đoán (thay vì câu chung chung)
+      const msg = err?.message || err?.errorMessage || String(err) || 'không rõ';
+      setPlaceError('Lỗi GPS: ' + msg + '. Thử "🔍 Tìm địa điểm" hoặc chạm thẳng lên bản đồ.');
     } finally {
       setGpsLoading(false);
     }
