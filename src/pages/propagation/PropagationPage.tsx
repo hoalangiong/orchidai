@@ -4,6 +4,35 @@ import { usePropagation, PropagationBatch } from '../../hooks/usePropagation';
 import { useOrchids } from '../../hooks/useOrchids';
 import { useCosts } from '../../hooks/useCosts';
 import { fetchWeather } from '../../services/weatherService';
+import { Geolocation } from '@capacitor/geolocation';
+import { Capacitor } from '@capacitor/core';
+
+// Lấy tọa độ: native dùng plugin Capacitor (navigator.geolocation không chạy
+// trong WebView); web fallback navigator.
+async function getPropCoords(): Promise<{ lat: number; lng: number }> {
+  if (Capacitor.isNativePlatform()) {
+    const perm = await Geolocation.checkPermissions();
+    if (perm.location !== 'granted' && perm.coarseLocation !== 'granted') {
+      const req = await Geolocation.requestPermissions();
+      if (req.location !== 'granted' && req.coarseLocation !== 'granted') throw new Error('permission denied');
+    }
+    try {
+      const p = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 12000, maximumAge: 0 });
+      return { lat: p.coords.latitude, lng: p.coords.longitude };
+    } catch {
+      const p = await Geolocation.getCurrentPosition({ enableHighAccuracy: false, timeout: 20000, maximumAge: 60000 });
+      return { lat: p.coords.latitude, lng: p.coords.longitude };
+    }
+  }
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) { reject(new Error('no geolocation')); return; }
+    navigator.geolocation.getCurrentPosition(
+      p => resolve({ lat: p.coords.latitude, lng: p.coords.longitude }),
+      err => reject(err),
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+    );
+  });
+}
 
 type Method = 'split' | 'keiki' | 'stem';
 type Tab = 'calc' | 'journal' | 'advisor';
@@ -456,27 +485,21 @@ function AdvisorTab() {
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        try {
-          const forecast = await fetchWeather(pos.coords.latitude, pos.coords.longitude);
-          const today = forecast.days[0];
-          const next3 = forecast.days.slice(0, 3);
-          const rainDays = next3.filter(d => d.rain > 5).length;
-          setWeatherSummary(
-            `Hôm nay: ${today.tempMin}–${today.tempMax}°C, độ ẩm ${today.humidity}%, mưa ${today.rain}mm. ` +
-            `3 ngày tới: ${rainDays} ngày mưa > 5mm.`
-          );
-        } catch { /* ignore */ }
-      },
-      () => {
-        fetchWeather(10.7769, 106.7009).then(forecast => {
-          const today = forecast.days[0];
-          setWeatherSummary(`Hôm nay: ${today.tempMin}–${today.tempMax}°C, độ ẩm ${today.humidity}%, mưa ${today.rain}mm.`);
-        }).catch(() => {});
-      },
-      { timeout: 6000 }
-    );
+    const summarize = (forecast: any, withNext3: boolean) => {
+      const today = forecast.days[0];
+      if (withNext3) {
+        const rainDays = forecast.days.slice(0, 3).filter((d: any) => d.rain > 5).length;
+        setWeatherSummary(
+          `Hôm nay: ${today.tempMin}–${today.tempMax}°C, độ ẩm ${today.humidity}%, mưa ${today.rain}mm. ` +
+          `3 ngày tới: ${rainDays} ngày mưa > 5mm.`
+        );
+      } else {
+        setWeatherSummary(`Hôm nay: ${today.tempMin}–${today.tempMax}°C, độ ẩm ${today.humidity}%, mưa ${today.rain}mm.`);
+      }
+    };
+    getPropCoords()
+      .then(c => fetchWeather(c.lat, c.lng).then(f => summarize(f, true)))
+      .catch(() => fetchWeather(10.7769, 106.7009).then(f => summarize(f, false)).catch(() => {}));
   }, []);
 
   const month = new Date().getMonth() + 1;
