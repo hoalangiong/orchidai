@@ -8,6 +8,8 @@ import { useUserProfile } from '../../hooks/useUserProfile';
 import { useOrchids } from '../../hooks/useOrchids';
 import GridOverlay, { CellDetailPanel } from '../../components/garden/GardenGrid';
 import { geocodeAddress } from '../../utils/geocoding';
+import { Geolocation } from '@capacitor/geolocation';
+import { Capacitor } from '@capacitor/core';
 import type { Orchid } from '../../types/index';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -108,19 +110,43 @@ export default function GardenPage() {
     }
   };
 
-  // Dùng GPS thiết bị (chính xác trên điện thoại; trên web fallback navigator)
+  // Dùng GPS thiết bị. Trên native (APK) dùng plugin Capacitor để xin quyền
+  // và lấy vị trí đúng cách; navigator.geolocation không hoạt động trong
+  // WebView. Trên web thì fallback navigator.geolocation.
   const handleUseGPS = async () => {
     setGpsLoading(true);
     setPlaceError(null);
     try {
-      const pos = await new Promise<{ lat: number; lng: number }>((resolve, reject) => {
-        if (!navigator.geolocation) { reject(new Error('no geolocation')); return; }
-        navigator.geolocation.getCurrentPosition(
-          p => resolve({ lat: p.coords.latitude, lng: p.coords.longitude }),
-          err => reject(err),
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-        );
-      });
+      let pos: { lat: number; lng: number };
+
+      if (Capacitor.isNativePlatform()) {
+        // Xin quyền native trước
+        const perm = await Geolocation.checkPermissions();
+        if (perm.location !== 'granted' && perm.coarseLocation !== 'granted') {
+          const req = await Geolocation.requestPermissions();
+          if (req.location !== 'granted' && req.coarseLocation !== 'granted') {
+            setPlaceError(t('garden.locationSetup.gpsPermissionDenied'));
+            setGpsLoading(false);
+            return;
+          }
+        }
+        const p = await Geolocation.getCurrentPosition({
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 0,
+        });
+        pos = { lat: p.coords.latitude, lng: p.coords.longitude };
+      } else {
+        pos = await new Promise<{ lat: number; lng: number }>((resolve, reject) => {
+          if (!navigator.geolocation) { reject(new Error('no geolocation')); return; }
+          navigator.geolocation.getCurrentPosition(
+            p => resolve({ lat: p.coords.latitude, lng: p.coords.longitude }),
+            err => reject(err),
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+          );
+        });
+      }
+
       await updateGardenLocation(pos);
       setSettingLocation(false);
     } catch {
