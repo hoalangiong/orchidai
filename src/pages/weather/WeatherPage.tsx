@@ -2,6 +2,37 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { fetchWeather, getWeatherIcon, getWeatherLabel } from '../../services/weatherService';
 import { generateAdvice, DayAdvice, Severity } from '../../services/orchidAdvice';
+import { Geolocation } from '@capacitor/geolocation';
+import { Capacitor } from '@capacitor/core';
+
+// Lấy tọa độ: native dùng plugin Capacitor (navigator.geolocation không chạy
+// trong WebView); web fallback navigator. Ném lỗi nếu không lấy được.
+async function getCoords(): Promise<{ lat: number; lng: number }> {
+  if (Capacitor.isNativePlatform()) {
+    const perm = await Geolocation.checkPermissions();
+    if (perm.location !== 'granted' && perm.coarseLocation !== 'granted') {
+      const req = await Geolocation.requestPermissions();
+      if (req.location !== 'granted' && req.coarseLocation !== 'granted') {
+        throw new Error('permission denied');
+      }
+    }
+    try {
+      const p = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 12000, maximumAge: 0 });
+      return { lat: p.coords.latitude, lng: p.coords.longitude };
+    } catch {
+      const p = await Geolocation.getCurrentPosition({ enableHighAccuracy: false, timeout: 20000, maximumAge: 60000 });
+      return { lat: p.coords.latitude, lng: p.coords.longitude };
+    }
+  }
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) { reject(new Error('no geolocation')); return; }
+    navigator.geolocation.getCurrentPosition(
+      p => resolve({ lat: p.coords.latitude, lng: p.coords.longitude }),
+      err => reject(err),
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+    );
+  });
+}
 
 type DayWeatherFull = {
   date: string;
@@ -54,30 +85,20 @@ export default function WeatherPage() {
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        try {
-          const forecast = await fetchWeather(pos.coords.latitude, pos.coords.longitude);
-          setDays(forecast.days);
-          setAdvices(generateAdvice(forecast.days));
-        } catch {
-          setError(t('weather.errors.loadFailed'));
-        } finally {
-          setLoading(false);
-        }
-      },
-      () => {
-        // fallback: Ho Chi Minh City
-        fetchWeather(10.7769, 106.7009)
-          .then((forecast) => {
-            setDays(forecast.days);
-            setAdvices(generateAdvice(forecast.days));
-          })
-          .catch(() => setError(t('weather.errors.loadFailed')))
-          .finally(() => setLoading(false));
-      },
-      { timeout: 8000 }
-    );
+    const load = async (lat: number, lng: number) => {
+      try {
+        const forecast = await fetchWeather(lat, lng);
+        setDays(forecast.days);
+        setAdvices(generateAdvice(forecast.days));
+      } catch {
+        setError(t('weather.errors.loadFailed'));
+      } finally {
+        setLoading(false);
+      }
+    };
+    getCoords()
+      .then(c => load(c.lat, c.lng))
+      .catch(() => load(10.7769, 106.7009)); // fallback: TP.HCM nếu không lấy được vị trí
   }, [t]);
 
   if (loading) return (
