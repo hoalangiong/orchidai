@@ -125,17 +125,28 @@ export default function GardenPage() {
         if (perm.location !== 'granted' && perm.coarseLocation !== 'granted') {
           const req = await Geolocation.requestPermissions();
           if (req.location !== 'granted' && req.coarseLocation !== 'granted') {
-            setPlaceError(t('garden.locationSetup.gpsPermissionDenied'));
+            setPlaceError('Chưa được cấp quyền vị trí. Vào Cài đặt > Ứng dụng > Orchid AI > Quyền > Vị trí để bật.');
             setGpsLoading(false);
             return;
           }
         }
-        const p = await Geolocation.getCurrentPosition({
-          enableHighAccuracy: true,
-          timeout: 15000,
-          maximumAge: 0,
-        });
-        pos = { lat: p.coords.latitude, lng: p.coords.longitude };
+        // Thử độ chính xác cao trước; nếu timeout thì hạ xuống dùng wifi/mạng
+        // (chạy được cả trong nhà, nơi GPS vệ tinh yếu).
+        try {
+          const p = await Geolocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 12000,
+            maximumAge: 0,
+          });
+          pos = { lat: p.coords.latitude, lng: p.coords.longitude };
+        } catch (e1: any) {
+          const p = await Geolocation.getCurrentPosition({
+            enableHighAccuracy: false,
+            timeout: 20000,
+            maximumAge: 60000,
+          });
+          pos = { lat: p.coords.latitude, lng: p.coords.longitude };
+        }
       } else {
         pos = await new Promise<{ lat: number; lng: number }>((resolve, reject) => {
           if (!navigator.geolocation) { reject(new Error('no geolocation')); return; }
