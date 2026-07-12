@@ -3,6 +3,50 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import DiagnoseModal from './DiagnoseModal';
 import { useProducts } from '../../hooks/useProducts';
+import { useActiveCrop } from '../../crops';
+import type { CropDisease, CropPest } from '../../crops';
+
+// Chuyển bệnh/sâu từ crop config (text tiếng Việt sẵn) sang item hiển thị.
+// Không có SVG riêng cho cây khác lan → dùng ảnh thật trong public/diseases-<crop>/
+// với fallback emoji (DiseaseImage/DiseaseGallery tự xử lý ảnh thiếu).
+const CROP_TAG_STYLES = [
+  { tagColor: 'bg-red-100 text-red-700', headerBg: 'from-red-50 to-red-100', accentColor: 'text-red-700', borderColor: 'border-red-200' },
+  { tagColor: 'bg-orange-100 text-orange-700', headerBg: 'from-orange-50 to-orange-100', accentColor: 'text-orange-700', borderColor: 'border-orange-200' },
+  { tagColor: 'bg-amber-100 text-amber-700', headerBg: 'from-amber-50 to-amber-100', accentColor: 'text-amber-700', borderColor: 'border-amber-200' },
+  { tagColor: 'bg-lime-100 text-lime-700', headerBg: 'from-lime-50 to-lime-100', accentColor: 'text-lime-700', borderColor: 'border-lime-200' },
+];
+
+function EmojiLeaf({ emoji }: { emoji: string }) {
+  return (
+    <div className="w-full h-full flex items-center justify-center text-5xl">{emoji}</div>
+  );
+}
+
+function cropDiseasesToItems(diseases: CropDisease[], cropId: string, emoji: string) {
+  return diseases.map((d, i) => ({
+    id: `${cropId}-${d.id}`,
+    Illustration: () => <EmojiLeaf emoji={emoji} />,
+    nameVi: d.nameVi, name: d.name,
+    ...CROP_TAG_STYLES[i % CROP_TAG_STYLES.length],
+    symptoms: d.symptoms,
+    causes: d.causes,
+    treatment: d.treatment,
+    prevention: d.prevention,
+  }));
+}
+
+function cropPestsToItems(pests: CropPest[], cropId: string, emoji: string) {
+  return pests.map((p, i) => ({
+    id: `${cropId}-${p.id}`,
+    Illustration: () => <EmojiLeaf emoji={emoji} />,
+    nameVi: p.nameVi, name: p.name,
+    ...CROP_TAG_STYLES[i % CROP_TAG_STYLES.length],
+    description: '',
+    symptoms: p.symptoms,
+    treatment: p.treatment,
+    prevention: p.prevention,
+  }));
+}
 
 // ─── SVG minh họa lá Dendrobium ──────────────────────────────────────────────
 
@@ -956,8 +1000,11 @@ export default function DiseasesPage() {
   const [selected, setSelected] = useState<Item | null>(null);
   const [showDiagnose, setShowDiagnose] = useState(false);
   const { products } = useProducts();
-  const diseases = getDiseases(t);
-  const pests = getPests(t);
+  const crop = useActiveCrop();
+  // Lan: dùng data cũ (SVG + i18n). Cây khác: dùng data trong crop config.
+  const useCropData = crop.id !== 'orchid' && crop.diseases.length > 0;
+  const diseases = useCropData ? cropDiseasesToItems(crop.diseases, crop.id, crop.emoji) : getDiseases(t);
+  const pests = useCropData ? cropPestsToItems(crop.pests, crop.id, crop.emoji) : getPests(t);
   const SECTIONS = getSections(t);
   const items = tab === 'disease' ? diseases : pests;
 

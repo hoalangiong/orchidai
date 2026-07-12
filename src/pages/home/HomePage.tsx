@@ -5,6 +5,8 @@ import { useCare } from '../../hooks/useCare';
 import { useNotifications } from '../../hooks/useNotifications';
 import { useSmartReminders } from '../../hooks/useSmartReminders';
 import NotificationBanner from '../../components/NotificationBanner';
+import { CROP_LIST, useActiveCrop } from '../../crops';
+import { useUserProfile } from '../../hooks/useUserProfile';
 
 export default function HomePage() {
   const { orchids } = useOrchids();
@@ -13,6 +15,8 @@ export default function HomePage() {
   const reminders = useSmartReminders(orchids);
   const needsAttention = orchids.filter(o => o.healthStatus !== 'healthy').length;
   const { t, i18n } = useTranslation();
+  const crop = useActiveCrop();
+  const { updateActiveCrop } = useUserProfile();
 
   const today = new Date().toLocaleDateString(i18n.language === 'vi' ? 'vi-VN' : i18n.language === 'zh' ? 'zh-CN' : i18n.language === 'id' ? 'id-ID' : i18n.language === 'th' ? 'th-TH' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long' });
   const overdueReminders = reminders.filter(r => r.daysOverdue >= 0);
@@ -21,6 +25,25 @@ export default function HomePage() {
     <div className="space-y-4">
       <NotificationBanner />
 
+      {/* Chọn loại cây trồng */}
+      {CROP_LIST.length > 1 && (
+        <div className="flex gap-2">
+          {CROP_LIST.map(c => (
+            <button
+              key={c.id}
+              onClick={() => { if (c.id !== crop.id) updateActiveCrop(c.id); }}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-semibold transition-all ${
+                c.id === crop.id
+                  ? 'bg-gradient-to-r from-green-600 to-emerald-500 text-white shadow-sm'
+                  : 'bg-white text-gray-500 border border-gray-200'
+              }`}
+            >
+              <span>{c.emoji}</span> {c.name}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Hero */}
       <div className="relative rounded-3xl overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #5db53c 0%, #3d9e20 55%, #2d7d18 100%)', minHeight: 140 }}>
@@ -28,9 +51,9 @@ export default function HomePage() {
         <div className="absolute right-6 bottom-0 w-20 h-20 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }} />
         <div className="relative p-5">
           <p className="text-lime-200 text-xs font-semibold uppercase tracking-widest">{today}</p>
-          <h2 className="text-2xl font-extrabold text-white mt-1 leading-tight">{t('app.tagline')}</h2>
+          <h2 className="text-2xl font-extrabold text-white mt-1 leading-tight">Vườn {crop.name} của bạn</h2>
           <p className="text-lime-100 text-sm mt-1">
-            {orchids.length === 0 ? t('home.getStarted') : t('home.orchidsBeingCared', { count: orchids.length })}
+            {orchids.length === 0 ? t('home.getStarted') : `${orchids.length} cây đang được chăm sóc ${crop.emoji}`}
           </p>
           {overdueReminders.length > 0 && (
             <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
@@ -39,7 +62,7 @@ export default function HomePage() {
             </div>
           )}
         </div>
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 text-6xl opacity-70 select-none">🌸</div>
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 text-6xl opacity-70 select-none">{crop.emoji}</div>
       </div>
 
       {/* Stats */}

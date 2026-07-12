@@ -12,6 +12,7 @@ export interface GardenLocation {
 export interface UserProfile {
   gardenLocation?: GardenLocation;
   gardenLocationSetup: boolean;
+  activeCrop?: string; // 'orchid' | 'durian' | ... (mặc định 'orchid' cho user cũ)
 }
 
 export function useUserProfile() {
@@ -73,10 +74,23 @@ export function useUserProfile() {
     return profile?.gardenLocationSetup === true && !!profile?.gardenLocation;
   };
 
+  const updateActiveCrop = async (cropId: string) => {
+    if (!user) return;
+    try {
+      const docRef = doc(db, 'users', user.uid, 'profile', 'data');
+      await setDoc(docRef, { activeCrop: cropId }, { merge: true });
+      setProfile(prev => ({ ...(prev ?? { gardenLocationSetup: false }), activeCrop: cropId }));
+    } catch (error) {
+      console.error('Error updating active crop:', error);
+      throw error;
+    }
+  };
+
   return {
     profile,
     loading,
     updateGardenLocation,
     hasGardenLocation,
+    updateActiveCrop,
   };
 }

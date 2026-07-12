@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useActiveCrop } from '../../crops';
 
 interface DiagnoseResult {
   disease: string;
@@ -10,7 +11,7 @@ interface DiagnoseResult {
   urgency: 'cao' | 'trung bình' | 'thấp';
 }
 
-async function callDiagnose(base64Image: string, attempt = 0): Promise<DiagnoseResult> {
+async function callDiagnose(base64Image: string, expertPrompt: string, plantName: string, attempt = 0): Promise<DiagnoseResult> {
   const body = {
     model: 'claude-sonnet-4-6',
     max_tokens: 1024,
@@ -28,9 +29,9 @@ async function callDiagnose(base64Image: string, attempt = 0): Promise<DiagnoseR
           },
           {
             type: 'text',
-            text: `Bạn là chuyên gia hoa lan Dendrobium (Hoàng Thảo) với 20 năm kinh nghiệm tại Việt Nam.
+            text: `${expertPrompt}
 
-Hãy quan sát kỹ hình ảnh lá/cây lan này và chẩn đoán theo định dạng JSON sau (chỉ trả về JSON, không thêm text khác):
+Hãy quan sát kỹ hình ảnh lá/cây ${plantName} này và chẩn đoán theo định dạng JSON sau (chỉ trả về JSON, không thêm text khác):
 
 {
   "disease": "Tên bệnh/sâu hại bằng tiếng Việt",
@@ -41,8 +42,8 @@ Hãy quan sát kỹ hình ảnh lá/cây lan này và chẩn đoán theo định
   "urgency": "cao | trung bình | thấp"
 }
 
-Nếu ảnh không phải lan hoặc không đủ rõ để chẩn đoán, trả về:
-{"disease": "Không xác định", "confidence": "Thấp", "symptoms": "Ảnh không đủ rõ hoặc không phải lá lan.", "treatment": "Vui lòng chụp ảnh rõ hơn, gần hơn vào vùng bị bệnh.", "prevention": "", "urgency": "thấp"}`,
+Nếu ảnh không phải ${plantName} hoặc không đủ rõ để chẩn đoán, trả về:
+{"disease": "Không xác định", "confidence": "Thấp", "symptoms": "Ảnh không đủ rõ hoặc không phải lá ${plantName}.", "treatment": "Vui lòng chụp ảnh rõ hơn, gần hơn vào vùng bị bệnh.", "prevention": "", "urgency": "thấp"}`,
           },
         ],
       },
@@ -109,6 +110,7 @@ export default function DiagnoseModal({ onClose }: { onClose: () => void }) {
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
+  const crop = useActiveCrop();
 
   const handleFile = async (file: File) => {
     setResult(null);
@@ -124,7 +126,7 @@ export default function DiagnoseModal({ onClose }: { onClose: () => void }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await callDiagnose(base64);
+      const res = await callDiagnose(base64, crop.diagnosePrompt, crop.name);
       setResult(res);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));

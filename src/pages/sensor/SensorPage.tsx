@@ -3,22 +3,16 @@ import { useTranslation } from 'react-i18next';
 import { useSensor, SensorReading } from '../../hooks/useSensor';
 import { useOrchids } from '../../hooks/useOrchids';
 import { useAuth } from '../../contexts/AuthContext';
+import { useActiveCrop } from '../../crops';
+import type { CropConfig } from '../../crops';
 
-const THRESHOLDS: Record<keyof Omit<SensorReading, 'ts'>, [number, number, number, number]> = {
-  temp:     [18, 30, 15, 35],
-  humidity: [50, 80, 40, 90],
-  moisture: [40, 70, 30, 85],
-  ph:       [5.5, 6.5, 5.0, 7.0],
-  ec:       [0.8, 2.0, 0.5, 2.5],
-  n:        [20, 60, 10, 80],
-  p:        [15, 50, 10, 70],
-  k:        [20, 50, 10, 70],
-};
+type MetricKey = keyof Omit<SensorReading, 'ts'>;
+type Thresholds = Record<MetricKey, [number, number, number, number]>;
 
 type Status = 'good' | 'warning' | 'danger';
 
-function getStatus(value: number, key: keyof Omit<SensorReading, 'ts'>): Status {
-  const [min, max, warnMin, warnMax] = THRESHOLDS[key];
+function getStatus(value: number, key: MetricKey, thresholds: Thresholds): Status {
+  const [min, max, warnMin, warnMax] = thresholds[key];
   if (value < warnMin || value > warnMax) return 'danger';
   if (value < min || value > max) return 'warning';
   return 'good';
@@ -76,8 +70,8 @@ function Sparkline({ data, width = 200, height = 48, noDataText }: { data: numbe
   );
 }
 
-function MetricCard({ metric, value, t }: { metric: MetricConfig; value: number; t: any }) {
-  const status = getStatus(value, metric.key);
+function MetricCard({ metric, value, t, thresholds }: { metric: MetricConfig; value: number; t: any; thresholds: Thresholds }) {
+  const status = getStatus(value, metric.key, thresholds);
   const sc = STATUS_COLOR[status];
   const pct = Math.min(100, Math.max(0, (value / metric.max) * 100));
   const displayVal = metric.key === 'ph' || metric.key === 'ec' ? value.toFixed(1) : Math.round(value);
@@ -99,7 +93,7 @@ function MetricCard({ metric, value, t }: { metric: MetricConfig; value: number;
       </div>
       <p className="text-xs mt-1.5 opacity-60">
         {status === 'good' ? t('sensor.status.good') : status === 'warning' ? t('sensor.status.warning') : t('sensor.status.danger')}
-        {' · '}{t('sensor.threshold')} {THRESHOLDS[metric.key][0]}–{THRESHOLDS[metric.key][1]} {metric.unit}
+        {' · '}{t('sensor.threshold')} {thresholds[metric.key][0]}–{thresholds[metric.key][1]} {metric.unit}
       </p>
     </div>
   );
@@ -113,9 +107,11 @@ interface AiAdvisorProps {
   healthBreakdown: { good: number; warning: number; danger: number };
   t: any;
   metrics: MetricConfig[];
+  crop: CropConfig;
+  thresholds: Thresholds;
 }
 
-function AiAdvisor({ latest, orchidCount, healthBreakdown, t, metrics }: AiAdvisorProps) {
+function AiAdvisor({ latest, orchidCount, healthBreakdown, t, metrics, crop, thresholds }: AiAdvisorProps) {
   const [advice, setAdvice] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -123,29 +119,18 @@ function AiAdvisor({ latest, orchidCount, healthBreakdown, t, metrics }: AiAdvis
 
   const sensorSummary = metrics.map(m => {
     const val = latest[m.key] as number;
-    const status = getStatus(val, m.key);
+    const status = getStatus(val, m.key, thresholds);
     const displayVal = m.key === 'ph' || m.key === 'ec' ? val.toFixed(1) : Math.round(val);
     const statusVi = status === 'good' ? 'bình thường' : status === 'warning' ? 'cần chú ý' : 'cảnh báo';
-    return `- ${m.label}: ${displayVal}${m.unit} (${statusVi}, ngưỡng tốt: ${THRESHOLDS[m.key][0]}–${THRESHOLDS[m.key][1]}${m.unit})`;
+    return `- ${m.label}: ${displayVal}${m.unit} (${statusVi}, ngưỡng tốt: ${thresholds[m.key][0]}–${thresholds[m.key][1]}${m.unit})`;
   }).join('\n');
 
-  const prompt = `Bạn là chuyên gia trồng lan lâu năm tại Việt Nam, chuyên sâu về Dendrobium (Hoàng Thảo), Phalaenopsis (Hồ Điệp), Mokara và các giống lan phổ biến. Kinh nghiệm thực tiễn trên 20 năm.
-
-Dữ liệu cảm biến vườn lan hiện tại (đo lúc ${new Date(latest.ts).toLocaleString('vi-VN')}):
-${sensorSummary}
-
-Thông tin vườn:
-- Tổng số cây: ${orchidCount} chậu
-- Tình trạng: ${healthBreakdown.good} cây khỏe, ${healthBreakdown.warning} cần chú ý, ${healthBreakdown.danger} cảnh báo
-
-Hãy phân tích toàn diện và đưa ra lời khuyên chăm sóc cụ thể, thực tế cho vườn lan này. Tập trung vào:
-1. Đánh giá tổng thể môi trường vườn (nhiệt độ, độ ẩm, ánh sáng)
-2. Tình trạng dinh dưỡng trong giá thể (NPK, pH, EC) — cần bổ sung gì không
-3. Kế hoạch tưới nước và bón phân cụ thể cho giai đoạn này
-4. Cảnh báo nguy cơ bệnh dịch dựa trên điều kiện hiện tại
-5. Hành động ưu tiên cần làm ngay hôm nay
-
-Trả lời bằng tiếng Việt, ngắn gọn súc tích, dùng emoji để dễ đọc. Xưng là "tôi" và nói chuyện thân thiện như đang tư vấn trực tiếp.`;
+  const prompt = crop.buildAdvisorPrompt({
+    sensorSummary,
+    measuredAt: new Date(latest.ts).toLocaleString('vi-VN'),
+    plantCount: orchidCount,
+    healthBreakdown,
+  });
 
   async function analyze() {
     if (loading) {
@@ -270,6 +255,8 @@ export default function SensorPage() {
   const { latest, history, connected } = useSensor();
   const { orchids } = useOrchids();
   const { user } = useAuth();
+  const crop = useActiveCrop();
+  const thresholds = crop.thresholds as Thresholds;
   const [chartKey, setChartKey] = useState<keyof Omit<SensorReading, 'ts'>>('temp');
 
   const METRICS = getMetrics(t);
@@ -278,10 +265,10 @@ export default function SensorPage() {
   const chartMetric = METRICS.find(m => m.key === chartKey)!;
 
   const alertCount = latest
-    ? METRICS.filter(m => getStatus(latest[m.key] as number, m.key) === 'danger').length
+    ? METRICS.filter(m => getStatus(latest[m.key] as number, m.key, thresholds) === 'danger').length
     : 0;
   const warnCount = latest
-    ? METRICS.filter(m => getStatus(latest[m.key] as number, m.key) === 'warning').length
+    ? METRICS.filter(m => getStatus(latest[m.key] as number, m.key, thresholds) === 'warning').length
     : 0;
 
   const healthBreakdown = useMemo(() => ({
@@ -367,7 +354,7 @@ export default function SensorPage() {
           {/* Grid 8 metric cards */}
           <div className="grid grid-cols-2 gap-3">
             {METRICS.map(metric => (
-              <MetricCard key={metric.key} metric={metric} value={latest[metric.key] as number} t={t} />
+              <MetricCard key={metric.key} metric={metric} value={latest[metric.key] as number} t={t} thresholds={thresholds} />
             ))}
           </div>
 
@@ -378,6 +365,8 @@ export default function SensorPage() {
             healthBreakdown={healthBreakdown}
             t={t}
             metrics={METRICS}
+            crop={crop}
+            thresholds={thresholds}
           />
 
           {/* Biểu đồ lịch sử */}
