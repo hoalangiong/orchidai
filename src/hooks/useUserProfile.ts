@@ -13,6 +13,7 @@ export interface UserProfile {
   gardenLocation?: GardenLocation;
   gardenLocationSetup: boolean;
   activeCrop?: string; // 'orchid' | 'durian' | ... (mặc định 'orchid' cho user cũ)
+  activeStage?: string; // giai đoạn sinh trưởng đang chọn (chỉ cây có stages)
 }
 
 export function useUserProfile() {
@@ -86,11 +87,24 @@ export function useUserProfile() {
     }
   };
 
+  const updateActiveStage = async (stageId: string) => {
+    if (!user) return;
+    try {
+      const docRef = doc(db, 'users', user.uid, 'profile', 'data');
+      await setDoc(docRef, { activeStage: stageId }, { merge: true });
+      setProfile(prev => ({ ...(prev ?? { gardenLocationSetup: false }), activeStage: stageId }));
+    } catch (error) {
+      console.error('Error updating active stage:', error);
+      throw error;
+    }
+  };
+
   return {
     profile,
     loading,
     updateGardenLocation,
     hasGardenLocation,
     updateActiveCrop,
+    updateActiveStage,
   };
 }

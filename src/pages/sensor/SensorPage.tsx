@@ -5,6 +5,7 @@ import { useOrchids } from '../../hooks/useOrchids';
 import { useAuth } from '../../contexts/AuthContext';
 import { useActiveCrop } from '../../crops';
 import type { CropConfig } from '../../crops';
+import { useUserProfile } from '../../hooks/useUserProfile';
 
 type MetricKey = keyof Omit<SensorReading, 'ts'>;
 type Thresholds = Record<MetricKey, [number, number, number, number]>;
@@ -109,9 +110,11 @@ interface AiAdvisorProps {
   metrics: MetricConfig[];
   crop: CropConfig;
   thresholds: Thresholds;
+  stageName?: string;
+  stageNote?: string;
 }
 
-function AiAdvisor({ latest, orchidCount, healthBreakdown, t, metrics, crop, thresholds }: AiAdvisorProps) {
+function AiAdvisor({ latest, orchidCount, healthBreakdown, t, metrics, crop, thresholds, stageName, stageNote }: AiAdvisorProps) {
   const [advice, setAdvice] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -130,6 +133,8 @@ function AiAdvisor({ latest, orchidCount, healthBreakdown, t, metrics, crop, thr
     measuredAt: new Date(latest.ts).toLocaleString('vi-VN'),
     plantCount: orchidCount,
     healthBreakdown,
+    stageName,
+    stageNote,
   });
 
   async function analyze() {
@@ -256,7 +261,13 @@ export default function SensorPage() {
   const { orchids } = useOrchids();
   const { user } = useAuth();
   const crop = useActiveCrop();
-  const thresholds = crop.thresholds as Thresholds;
+  const { profile, updateActiveStage } = useUserProfile();
+  // Giai đoạn đang chọn (chỉ cây có stages). Nếu chưa chọn, lấy giai đoạn đầu.
+  const stages = crop.stages;
+  const activeStage = stages
+    ? (stages.find(s => s.id === profile?.activeStage) ?? stages[0])
+    : undefined;
+  const thresholds = (activeStage?.thresholds ?? crop.thresholds) as Thresholds;
   const [chartKey, setChartKey] = useState<keyof Omit<SensorReading, 'ts'>>('temp');
 
   const METRICS = getMetrics(t);
@@ -290,6 +301,26 @@ export default function SensorPage() {
           {connected ? t('sensor.connected') : t('sensor.notConnected')}
         </span>
       </div>
+
+      {/* Chọn giai đoạn sinh trưởng (chỉ cây có stages, VD sầu riêng) */}
+      {stages && stages.length > 0 && (
+        <div>
+          <p className="text-xs text-gray-500 font-medium mb-1.5">🌱 Giai đoạn sinh trưởng</p>
+          <div className="flex gap-1.5 overflow-x-auto pb-1">
+            {stages.map(s => (
+              <button
+                key={s.id}
+                onClick={() => { if (s.id !== activeStage?.id) updateActiveStage(s.id); }}
+                className={`shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                  s.id === activeStage?.id ? 'bg-green-500 text-white shadow-sm' : 'bg-gray-100 text-gray-500'
+                }`}
+              >
+                {s.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {!latest ? (
         <div className="bg-white rounded-2xl shadow-sm p-5 space-y-4">
@@ -367,6 +398,8 @@ export default function SensorPage() {
             metrics={METRICS}
             crop={crop}
             thresholds={thresholds}
+            stageName={activeStage?.name}
+            stageNote={activeStage?.promptNote}
           />
 
           {/* Biểu đồ lịch sử */}

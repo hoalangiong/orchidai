@@ -19,9 +19,58 @@ export const durianCrop: CropConfig = {
     k:        [50, 120, 30, 160],   // mg/kg — kali rất quan trọng giai đoạn nuôi trái
   },
 
+  // Ngưỡng theo giai đoạn sinh trưởng — nhu cầu dinh dưỡng đổi rõ rệt
+  stages: [
+    {
+      id: 'kien-thiet',
+      name: 'Kiến thiết cơ bản',
+      promptNote: 'Giai đoạn kiến thiết cơ bản (cây non): ưu tiên ĐẠM (N) cao để phát triển thân lá, bộ rễ và tán. Cần đủ ẩm, chưa cần nhiều kali.',
+      thresholds: {
+        temp:     [24, 32, 20, 38],
+        humidity: [60, 85, 50, 95],
+        moisture: [55, 78, 40, 88],   // giữ ẩm tốt cho cây non
+        ph:       [5.5, 6.5, 5.0, 7.0],
+        ec:       [0.8, 2.0, 0.4, 2.5],
+        n:        [60, 120, 35, 160],  // N cao nhất
+        p:        [15, 45, 8, 70],
+        k:        [30, 80, 20, 110],
+      },
+    },
+    {
+      id: 'ra-hoa',
+      name: 'Ra hoa',
+      promptNote: 'Giai đoạn ra hoa: cần LÂN (P) và KALI (K) cao, GIẢM đạm để không ra đọt cạnh tranh với hoa. Giữ khô hạn nhẹ (ẩm đất thấp hơn) để kích thích phân hóa mầm hoa.',
+      thresholds: {
+        temp:     [24, 32, 20, 38],
+        humidity: [55, 80, 45, 92],
+        moisture: [35, 60, 25, 72],   // giữ khô nhẹ để kích hoa
+        ph:       [5.5, 6.5, 5.0, 7.0],
+        ec:       [1.0, 2.5, 0.5, 3.0],
+        n:        [25, 60, 15, 90],    // giảm đạm
+        p:        [35, 80, 20, 110],   // lân cao
+        k:        [60, 130, 40, 170],  // kali cao
+      },
+    },
+    {
+      id: 'nuoi-trai',
+      name: 'Nuôi trái',
+      promptNote: 'Giai đoạn nuôi trái: KALI (K) rất cao để trái to, chắc, ngọt và tăng chất lượng cơm. Cần đủ ẩm ổn định (tránh nứt trái do khô-ẩm thất thường), đạm vừa phải.',
+      thresholds: {
+        temp:     [24, 32, 20, 38],
+        humidity: [60, 85, 50, 95],
+        moisture: [50, 75, 40, 85],   // ẩm ổn định
+        ph:       [5.5, 6.5, 5.0, 7.0],
+        ec:       [1.2, 3.0, 0.6, 3.5],
+        n:        [35, 80, 20, 110],   // đạm vừa
+        p:        [20, 55, 12, 80],
+        k:        [80, 160, 50, 200],  // kali rất cao
+      },
+    },
+  ],
+
   buildAdvisorPrompt: (ctx) =>
     `Bạn là kỹ sư nông nghiệp chuyên canh tác sầu riêng tại Việt Nam (Ri6, Monthong/Dona, Musang King), am hiểu vùng ĐBSCL, Đông Nam Bộ và Tây Nguyên. Kinh nghiệm thực tiễn trên 20 năm về dinh dưỡng, tưới tiêu và phòng bệnh xì mủ (Phytophthora).
-
+${ctx.stageName ? `\nGiai đoạn cây hiện tại: ${ctx.stageName}. ${ctx.stageNote ?? ''}\n` : ''}
 Dữ liệu cảm biến vườn sầu riêng hiện tại (đo lúc ${ctx.measuredAt}):
 ${ctx.sensorSummary}
 
