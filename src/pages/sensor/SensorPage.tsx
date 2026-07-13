@@ -71,7 +71,9 @@ function Sparkline({ data, width = 200, height = 48, noDataText }: { data: numbe
   );
 }
 
-function MetricCard({ metric, value, t, thresholds }: { metric: MetricConfig; value: number; t: any; thresholds: Thresholds }) {
+function MetricCard({ metric, value, t, thresholds }: { metric: MetricConfig; value: number | undefined; t: any; thresholds: Thresholds }) {
+  // Field không có trong bản ghi (VD chưa lắp DHT22 → thiếu temp/humidity) → ẩn ô
+  if (value === undefined || value === null) return null;
   const status = getStatus(value, metric.key, thresholds);
   const sc = STATUS_COLOR[status];
   const pct = Math.min(100, Math.max(0, (value / metric.max) * 100));
@@ -275,11 +277,12 @@ export default function SensorPage() {
   const chartData = useMemo(() => history.map(h => h[chartKey] as number), [history, chartKey]);
   const chartMetric = METRICS.find(m => m.key === chartKey)!;
 
+  const hasVal = (m: MetricConfig) => latest != null && latest[m.key] != null;
   const alertCount = latest
-    ? METRICS.filter(m => getStatus(latest[m.key] as number, m.key, thresholds) === 'danger').length
+    ? METRICS.filter(m => hasVal(m) && getStatus(latest[m.key] as number, m.key, thresholds) === 'danger').length
     : 0;
   const warnCount = latest
-    ? METRICS.filter(m => getStatus(latest[m.key] as number, m.key, thresholds) === 'warning').length
+    ? METRICS.filter(m => hasVal(m) && getStatus(latest[m.key] as number, m.key, thresholds) === 'warning').length
     : 0;
 
   const healthBreakdown = useMemo(() => ({
